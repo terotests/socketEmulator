@@ -6,7 +6,7 @@ Example http://jsfiddle.net/36egd9pt/
 
 ## Requirements
 
-- requires indexedDB
+- requires [IndexedDB](https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API)
 
 The IndexedDB will be filled with temporary databases, the system clears the data from indexedDB client disconnect() is called.
 
