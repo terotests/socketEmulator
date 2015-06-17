@@ -40,6 +40,15 @@ or
 socket.delegateToRoom("room", "msgname", data); // <room>, <msg>, <data>
 ```
 
+Responding to client message (if client expects a callback)
+
+```
+    socket.on("message", function(data, responseFn) {
+        // repond to client
+        responseFn( "this goes to client ");
+    })
+```
+
 Disconnecting
 
 ```
@@ -55,6 +64,23 @@ socket.disconnect();
              console.log(data);
         });
     });
+```
+
+Ask server to confirm data sendin or to respond: 
+
+```
+    client.emit("message", payload, function(resp) {
+         // server returned resp
+    })
+```
+
+The server code looks like this:
+
+```
+    socket.on("message", function(data, responseFn) {
+        // repond to client
+        responseFn( "this goes to client ");
+    })
 ```
 
 Disconnecting
