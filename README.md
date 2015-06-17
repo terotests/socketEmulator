@@ -7,7 +7,7 @@
 
 ## Creating server socket:
 
-```
+```javascript
 var server = _serverSocket("localhost", 1234);  
 server.on("connect", function(socket) {
     socket.join("all"); // room for the sockets
@@ -24,7 +24,7 @@ socket.delegateToRoom("all", "hello", data); // <room>, <msg>, <data>
 ```
 
 ## Client socket
-```
+```javascript
     var client = _clientSocket("localhost", 1234);  
     client.on("connect", function() {
         client.emit("hello", "there");
@@ -39,7 +39,7 @@ socket.delegateToRoom("all", "hello", data); // <room>, <msg>, <data>
 Because IndexedDB does not maintain table information, the system implements clearDatabases to
 clear up all the temporary databases for the channels.
 
-```
+```javascript
 _localDB().clearDatabases( function(data) {
     if(data.name.indexOf("tcp://")>=0) return true;
     // or just return "true"
