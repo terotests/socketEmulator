@@ -921,6 +921,9 @@ var _socketEmu_prototype = function() {
       _myTrait_.emit = function(t) {
 
       }
+      _myTrait_.getPrefix = function(t) {
+        return this._ip + ":" + this._port;
+      }
       if (_myTrait_.__traitInit && !_myTrait_.hasOwnProperty("__traitInit"))
         _myTrait_.__traitInit = _myTrait_.__traitInit.slice();
       if (!_myTrait_.__traitInit) _myTrait_.__traitInit = []
@@ -942,6 +945,9 @@ io.on('connection', function(socket){
 
         var sockets = [];
         var me = this;
+
+        this._ip = ip;
+        this._port = port;
 
         var openConnection = _tcpEmu(ip, port, "openConnection", "server");
 
@@ -1791,9 +1797,11 @@ io.on('connection', function(socket){
       var _socketRooms;
       _myTrait_.delegateToRoom = function(roomName, name, data) {
 
-        if (_rooms && _rooms[roomName]) {
+        var realRoomName = this._roomPrefix + ":" + roomName;
+
+        if (_rooms && _rooms[realRoomName]) {
           var me = this;
-          _rooms[roomName].forEach(function(socket) {
+          _rooms[realRoomName].forEach(function(socket) {
             if (socket != me) {
               socket.emit(name, data);
             }
@@ -1832,6 +1840,7 @@ io.on('connection', function(socket){
       _myTrait_.__traitInit.push(function(tcpEmu, server) {
 
         var me = this;
+        this._roomPrefix = server.getPrefix();
         this._tcp = tcpEmu;
         this._server = server;
         var disconnected = false;
@@ -1867,11 +1876,13 @@ socket.broadcast.to(_ctx.channelId).emit('ctxupd_'+_ctx.channelId, cObj);
       }
       _myTrait_.join = function(roomName) {
 
-        if (!_rooms) _rooms = {};
-        if (!_rooms[roomName]) _rooms[roomName] = [];
+        var realRoomName = this._roomPrefix + ":" + roomName;
 
-        if (_rooms[roomName].indexOf(this) < 0) {
-          _rooms[roomName].push(this);
+        if (!_rooms) _rooms = {};
+        if (!_rooms[realRoomName]) _rooms[realRoomName] = [];
+
+        if (_rooms[realRoomName].indexOf(this) < 0) {
+          _rooms[realRoomName].push(this);
           if (!_socketRooms) _socketRooms = {};
           if (!_socketRooms[this.getId()]) _socketRooms[this.getId()] = [];
 
@@ -1879,12 +1890,15 @@ socket.broadcast.to(_ctx.channelId).emit('ctxupd_'+_ctx.channelId, cObj);
         }
       }
       _myTrait_.leave = function(roomName) {
+
+        var realRoomName = this._roomPrefix + ":" + roomName;
+
         if (!_rooms) _rooms = {};
-        if (!_rooms[roomName]) _rooms[roomName] = [];
+        if (!_rooms[realRoomName]) _rooms[realRoomName] = [];
 
         var i;
-        if ((i = _rooms[roomName].indexOf(this)) >= 0) {
-          _rooms[roomName].splice(i, 1);
+        if ((i = _rooms[realRoomName].indexOf(this)) >= 0) {
+          _rooms[realRoomName].splice(i, 1);
           var id = this.getId();
 
           var i2 = _socketRooms[id].indexOf(roomName);
