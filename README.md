@@ -7,6 +7,7 @@ Example http://jsfiddle.net/36egd9pt/
 ## Requirements
 
 - requires indexedDB
+
 The IndexedDB will be filled with temporary databases, the system clears the data from indexedDB client disconnect() is called.
 
 ## Creating server socket:
