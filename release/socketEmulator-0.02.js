@@ -1157,7 +1157,7 @@ io.on('connection', function(socket){
           };
           request.onsuccess = function(event) {
             // Do something with the request.result!
-            prom.resolve(request.result.name);
+            prom.resolve(request.result);
           };
 
           return prom;
