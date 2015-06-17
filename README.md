@@ -28,7 +28,12 @@ socket.join("room");
 
 Sending to other sockets in room
 
+```javascript
+socket.broadcast.to("room").emit("msgname", data);
 ```
+
+or
+```javascript
 socket.delegateToRoom("room", "msgname", data); // <room>, <msg>, <data>
 ```
 
