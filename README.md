@@ -2,6 +2,8 @@
 
 Emulates some of the socket.io behaviours so that at least some of the behaviours of the standard socket.io algorithms can be emulated in-browser.
 
+Example http://jsfiddle.net/36egd9pt/
+
 ## Requirements
 
 - requires indexedDB
