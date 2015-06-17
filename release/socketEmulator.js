@@ -1417,25 +1417,6 @@ io.on('connection', function(socket){
             }]);
           })
           me._db = event.target.result;
-          /*
-  later().add( 
-      function() {
-            if(options && options.tables) {
-                for(var n in options.tables) {
-                    if(options.tables.hasOwnProperty(n)) {
-                        var opts = options.tables[n];
-                        // Create another object store called "names" with the autoIncrement flag set as true.    
-                        try {
-                            var objStore = me._db.createObjectStore(n, opts.createOptions);
-                        } catch(e) {
-                            
-                        }
-                    }
-                }
-            }  
-            me.resolve(true);
-      });
-  */
           me.resolve(true);
 
         };
@@ -1443,13 +1424,6 @@ io.on('connection', function(socket){
 
           var db = event.target.result;
           me._db = db;
-          /*
-    {
-        myTable : {
-            createOptions : { autoIncrement : true },
-        }
-    }
-    */
 
           if (options && options.tables) {
             for (var n in options.tables) {
