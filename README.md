@@ -1,5 +1,7 @@
 # Socket Emulator
 
+Emulates some of the socket.io behaviours so that at least some of the behaviours of the standard socket.io algorithms can be emulated in-browser.
+
 ## Requirements
 
 - requires indexedDB
