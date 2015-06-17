@@ -1232,7 +1232,7 @@ io.on('connection', function(socket){
         }
         _myTrait_.update = function(key, data) {
           var prom = _promise();
-
+          var me = this;
           var transaction = this._db.transaction([this._table]);
           var objectStore = transaction.objectStore(this._table);
           try {
