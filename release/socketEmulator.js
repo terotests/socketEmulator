@@ -1330,9 +1330,6 @@ io.on('connection', function(socket){
       }
     }(this));;
     (function(_myTrait_) {
-      var indexedDB;
-      var IDBTransaction;
-      var IDBKeyRange;
       var _initDone;
       var _dbList;
       var _db;
