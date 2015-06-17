@@ -1230,6 +1230,46 @@ io.on('connection', function(socket){
           return prom;
 
         }
+        _myTrait_.update = function(key, data) {
+          var prom = _promise();
+
+          var transaction = this._db.transaction([this._table]);
+          var objectStore = transaction.objectStore(this._table);
+          try {
+            var request = objectStore.get(key);
+            request.onerror = function(event) {
+              if (!request.result) {
+                me.addRows([data]).then(function() {
+                  prom.resolve(data);
+                });
+                return;
+              }
+              prom.fail(event.target.errorCode);
+            };
+            request.onsuccess = function(event) {
+              if (!request.result) {
+                me.addRows([data]).then(function() {
+                  prom.resolve(data);
+                });
+                return;
+              }
+              var requestUpdate = objectStore.put(data);
+              requestUpdate.onerror = function(event) {
+                // Do something with the error
+                prom.fail("update failed ");
+              };
+              requestUpdate.onsuccess = function(event) {
+                // Success - the data is updated!
+                prom.resolve(data);
+              };
+
+            };
+          } catch (e) {
+            return this.addRows([data]);
+          }
+
+          return prom;
+        }
       }(this));
     }
     var dbTable = function(a, b, c, d, e, f, g, h) {
