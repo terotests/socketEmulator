@@ -12,17 +12,26 @@ Emulates some of the socket.io behaviours so that at least some of the behaviour
 ```javascript
 var server = _serverSocket("localhost", 1234);  
 server.on("connect", function(socket) {
-    socket.join("all"); // room for the sockets
+    
+    socket.join("all"); // join room "all"
+    
+    // react to emitted messages "hello"
     socket.on("hello", function(data) {
-        socket.emit("response", "Hello to you too");
+        socket.emit("response", "Hello to you too"); // emit back to socket
     });
 });
+```
+
+Adding socket to room
+
+```javascript
+socket.join("roomname");
 ```
 
 Sending to other sockets in room
 
 ```
-socket.delegateToRoom("all", "hello", data); // <room>, <msg>, <data>
+socket.delegateToRoom("roomname", "msgname", data); // <room>, <msg>, <data>
 ```
 
 Disconnecting
