@@ -1335,9 +1335,9 @@ io.on('connection', function(socket){
       var _db;
       _myTrait_._initDB = function(t) {
 
-        if (_initDone) return;
+        if (_db) return;
         // In the following line, you should include the prefixes of implementations you want to test.
-        _db = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB;
+        _db = window.indexedDB; //  || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB;
 
         _initDone = true;
 
