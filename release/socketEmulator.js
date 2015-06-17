@@ -1337,7 +1337,12 @@ io.on('connection', function(socket){
 
         var objectStore = this._db.createObjectStore(name, options);
 
+        return this.table(name);
 
+
+      }
+      _myTrait_.getDB = function(t) {
+        return this._db;
       }
       _myTrait_.getStore = function(store_name, mode) {
         var tx = this._db.transaction(store_name, mode);
