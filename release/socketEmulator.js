@@ -770,6 +770,20 @@ var _socketEmu_prototype = function() {
 
         return this;
       }
+      _myTrait_.removeListener = function(name, fn) {
+        if (!this._ev) return;
+        if (!this._ev[name]) return;
+
+        var list = this._ev[name];
+
+        for (var i = 0; i < list.length; i++) {
+          if (list[i] == fn) {
+            list.splice(i, 1);
+            return;
+          }
+        }
+
+      }
       _myTrait_.trigger = function(en, data, fn) {
 
         if (!this._ev) return;
@@ -809,17 +823,30 @@ var _socketEmu_prototype = function() {
     (function(_myTrait_) {
       var _channelIndex;
       var _rootData;
+      var _callBacks;
       _myTrait_.disconnect = function(t) {
         this._socket.messageTo({
           disconnect: true
         });
       }
-      _myTrait_.emit = function(name, data) {
+      _myTrait_.emit = function(name, data, callBackFn) {
 
-        this._socket.messageTo({
+        var obj = {
           name: name,
           data: data
-        });
+        }
+
+        if (callBackFn) {
+          obj._callBackId = this.guid();
+          var me = this;
+          var handleCb = function(data) {
+            callBackFn(data);
+            me.removeListener(obj._callBackId, handleCb);
+          }
+          this.on(obj._callBackId, handleCb)
+        }
+
+        this._socket.messageTo(obj);
       }
       _myTrait_.getId = function(t) {
         return this.socketId;
@@ -855,9 +882,6 @@ var _socketEmu_prototype = function() {
 
 
       });
-      _myTrait_.removeListener = function(t) {
-
-      }
     }(this));
   }
   var _clientSocket = function(a, b, c, d, e, f, g, h) {
@@ -1852,7 +1876,13 @@ io.on('connection', function(socket){
             me.disconnect();
             return;
           }
-          me.trigger(v.name, v.data);
+          if (v._callBackId) {
+            me.trigger(v.name, v.data, function(data) {
+              me.emit(v._callBackId, data);
+            });
+          } else {
+            me.trigger(v.name, v.data);
+          }
         })
 
         this.broadcast = {
