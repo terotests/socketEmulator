@@ -957,7 +957,7 @@ io.on('connection', function(socket){
             //console.log("Trying to send msg to client ", v);
             var newSocket = _tcpEmu(ip, port, v.socketId, "server");
 
-            var socket = _serverSocketWrap(newSocket, this);
+            var socket = _serverSocketWrap(newSocket, me);
             _clients[v.socketId] = socket;
             me.trigger("connect", socket);
 
