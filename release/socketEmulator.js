@@ -1844,7 +1844,21 @@ io.on('connection', function(socket){
             return;
           }
           me.trigger(v.name, v.data);
-        });
+        })
+
+        this.broadcast = {
+          to: function(room) {
+            return {
+              emit: function(name, value) {
+                this.delegateToRoom(room, name, value);
+              }
+            }
+          }
+        }
+
+        /*
+socket.broadcast.to(_ctx.channelId).emit('ctxupd_'+_ctx.channelId, cObj);
+*/
 
       });
       _myTrait_.isConnected = function(t) {
