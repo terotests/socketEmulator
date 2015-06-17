@@ -1148,7 +1148,7 @@ io.on('connection', function(socket){
         _myTrait_.get = function(key) {
 
           var prom = _promise();
-          var transaction = db.transaction([this._table]);
+          var transaction = this._db.transaction([this._table]);
           var objectStore = transaction.objectStore(this._table);
           var request = objectStore.get(key);
           request.onerror = function(event) {
@@ -1335,15 +1335,12 @@ io.on('connection', function(socket){
       var IDBKeyRange;
       var _initDone;
       var _dbList;
+      var _db;
       _myTrait_._initDB = function(t) {
 
         if (_initDone) return;
         // In the following line, you should include the prefixes of implementations you want to test.
-        indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB;
-        // DON'T use "var indexedDB = ..." if you're not in a function.
-        // Moreover, you may need references to some window.IDB* objects:
-        IDBTransaction = window.IDBTransaction || window.webkitIDBTransaction || window.msIDBTransaction;
-        IDBKeyRange = window.IDBKeyRange || window.webkitIDBKeyRange || window.msIDBKeyRange;
+        _db = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB;
 
         _initDone = true;
 
@@ -1366,7 +1363,7 @@ io.on('connection', function(socket){
           dbs.forEach(function(data, cursor) {
             if (fn(data)) {
               // console.log("Trying to delete ", data.name);
-              indexedDB.deleteDatabase(data.name);
+              _db.deleteDatabase(data.name);
               cursor.delete();
             }
           });
@@ -1402,7 +1399,7 @@ io.on('connection', function(socket){
 
         var me = this;
 
-        var request = indexedDB.open(dbName, 4);
+        var request = _db.open(dbName, 4);
 
         request.onerror = function(event) {
           // Do something with request.errorCode!
