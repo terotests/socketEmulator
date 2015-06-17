@@ -1850,7 +1850,7 @@ io.on('connection', function(socket){
           to: function(room) {
             return {
               emit: function(name, value) {
-                this.delegateToRoom(room, name, value);
+                me.delegateToRoom(room, name, value);
               }
             }
           }
