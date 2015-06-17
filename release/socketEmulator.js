@@ -971,9 +971,6 @@ io.on('connection', function(socket){
       _myTrait_.removeListener = function(t) {
 
       }
-      _myTrait_.to = function(t) {
-
-      }
     }(this));
   }
   var _serverSocket = function(a, b, c, d, e, f, g, h) {

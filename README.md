@@ -23,6 +23,12 @@ Sending to other sockets in room
 socket.delegateToRoom("all", "hello", data); // <room>, <msg>, <data>
 ```
 
+Disconnecting
+
+```
+socket.disconnect();
+```
+
 ## Client socket
 ```javascript
     var client = _clientSocket("localhost", 1234);  
@@ -32,6 +38,12 @@ socket.delegateToRoom("all", "hello", data); // <room>, <msg>, <data>
              console.log(data);
         });
     });
+```
+
+Disconnecting
+
+```
+socket.disconnect();
 ```
 
 ## Manually clearing the IndexedDB cache
