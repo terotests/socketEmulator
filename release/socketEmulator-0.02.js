@@ -1156,10 +1156,6 @@ io.on('connection', function(socket){
             prom.fail(event.target.errorCode);
           };
           request.onsuccess = function(event) {
-            // Do something with the request.result!
-            console.log("onsuccess:");
-            console.log(request);
-            console.log(event);
             prom.resolve(request.result);
           };
 
