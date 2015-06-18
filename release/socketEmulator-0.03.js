@@ -216,7 +216,7 @@ io.on('connection', function(socket){
         var openConnection = _tcpEmu(ip, port, "openConnection", "server");
 
         openConnection.on("serverMessage", function(o, v) {
-          console.log("Server got message ", v);
+
           if (v.socketId) {
             //console.log("Trying to send msg to client ", v);
             var newSocket = _tcpEmu(ip, port, v.socketId, "server");
