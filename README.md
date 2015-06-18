@@ -2,7 +2,8 @@
 
 Emulates some of the socket.io behaviours so that at least some of the behaviours of the standard socket.io algorithms can be emulated in-browser.
 
-http://jsfiddle.net/7qfp7mru/
+Example:
+http://jsfiddle.net/8hyup32t/
 
 
 ## Creating server socket:
