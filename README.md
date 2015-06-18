@@ -4,11 +4,6 @@ Emulates some of the socket.io behaviours so that at least some of the behaviour
 
 Example http://jsfiddle.net/36egd9pt/
 
-## Requirements
-
-- requires [IndexedDB](https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API)
-
-The IndexedDB will be filled with temporary databases, the system clears the data from indexedDB client disconnect() is called.
 
 ## Creating server socket:
 
