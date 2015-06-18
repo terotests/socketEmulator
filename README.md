@@ -5,6 +5,9 @@ Emulates some of the socket.io behaviours so that at least some of the behaviour
 Example:
 http://jsfiddle.net/8hyup32t/
 
+Example with two servers:
+http://jsfiddle.net/2jwf1czz/
+
 
 ## Creating server socket:
 
