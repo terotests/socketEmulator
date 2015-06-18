@@ -2,7 +2,7 @@
 
 Emulates some of the socket.io behaviours so that at least some of the behaviours of the standard socket.io algorithms can be emulated in-browser.
 
-Example http://jsfiddle.net/36egd9pt/
+http://jsfiddle.net/7qfp7mru/
 
 
 ## Creating server socket:
@@ -84,17 +84,6 @@ Disconnecting
 socket.disconnect();
 ```
 
-## Manually clearing the IndexedDB cache
-
-Because IndexedDB does not maintain table information, the system implements clearDatabases to
-clear up all the temporary databases for the channels.
-
-```javascript
-_localDB().clearDatabases( function(data) {
-    if(data.name.indexOf("tcp://")>=0) return true;
-    // or just return "true"
-});
-```
 
 
 
