@@ -702,7 +702,7 @@ socket.broadcast.to(_ctx.channelId).emit('ctxupd_'+_ctx.channelId, cObj);
         return true;
       }
       _myTrait_.isInRoom = function(roomName) {
-
+        if (!_socketRooms) return false;
         return _socketRooms[this.getId()].indexOf(roomName) >= 0;
       }
       _myTrait_.join = function(roomName) {
