@@ -701,6 +701,10 @@ socket.broadcast.to(_ctx.channelId).emit('ctxupd_'+_ctx.channelId, cObj);
         if (this._disconnected) return false;
         return true;
       }
+      _myTrait_.isInRoom = function(roomName) {
+
+        return _socketRooms[this.getId()].indexOf(roomName) >= 0;
+      }
       _myTrait_.join = function(roomName) {
 
         var realRoomName = this._roomPrefix + ":" + roomName;
