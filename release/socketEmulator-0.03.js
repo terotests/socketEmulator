@@ -675,6 +675,14 @@ io.on('connection', function(socket){
       _myTrait_.getId = function(t) {
         return this._tcp._socketId;
       }
+      _myTrait_.getUserId = function(t) {
+
+        return this._userId;
+      }
+      _myTrait_.getUserRoles = function(t) {
+
+        return this._roles;
+      }
       if (_myTrait_.__traitInit && !_myTrait_.hasOwnProperty("__traitInit"))
         _myTrait_.__traitInit = _myTrait_.__traitInit.slice();
       if (!_myTrait_.__traitInit) _myTrait_.__traitInit = []
@@ -771,6 +779,11 @@ socket.broadcast.to(_ctx.channelId).emit('ctxupd_'+_ctx.channelId, cObj);
       }
       _myTrait_.removeListener = function(t) {
 
+      }
+      _myTrait_.setAuthInfo = function(userId, roles) {
+
+        this._userId = userId;
+        this._roles = roles;
       }
     }(this));
   }
