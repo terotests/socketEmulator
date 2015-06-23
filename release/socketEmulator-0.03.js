@@ -64,6 +64,8 @@ var _socketEmu_prototype = function() {
       var _channelIndex;
       var _rootData;
       var _callBacks;
+      var _socketIndex;
+      var _socketCnt;
       _myTrait_.disconnect = function(t) {
         this._socket.messageTo({
           disconnect: true
@@ -88,6 +90,14 @@ var _socketEmu_prototype = function() {
 
         this._socket.messageTo(obj);
       }
+      _myTrait_.getEnum = function(t) {
+        var myId = socketId || this.guid();
+
+        if (!_socketIndex[myId]) {
+          _socketIndex[myId] = _socketCnt++;
+        }
+        return _socketIndex[myId];
+      }
       _myTrait_.getId = function(t) {
         return this.socketId;
       }
@@ -98,7 +108,17 @@ var _socketEmu_prototype = function() {
 
         // The socket ID must be told to the server side too
 
+        if (!_socketIndex) {
+          _socketIndex = {};
+          _socketCnt = 1;
+        }
+
         var myId = socketId || this.guid();
+
+        if (!_socketIndex[myId]) {
+          _socketIndex[myId] = _socketCnt++;
+        }
+
         var me = this;
         var openConnection = _tcpEmu(ip, port, "openConnection", "client");
         var connection = _tcpEmu(ip, port, myId, "client");
