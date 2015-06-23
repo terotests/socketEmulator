@@ -91,7 +91,7 @@ var _socketEmu_prototype = function() {
         this._socket.messageTo(obj);
       }
       _myTrait_.getEnum = function(t) {
-        var myId = socketId || this.guid();
+        var myId = this.guid();
 
         if (!_socketIndex[myId]) {
           _socketIndex[myId] = _socketCnt++;
