@@ -142,6 +142,12 @@ var _socketEmu_prototype = function() {
 
 
       });
+      _myTrait_.send = function(name, data) {
+        var me = this;
+        return _promise(function(respFn) {
+          me.emit(name, data, respFn);
+        });
+      }
     }(this));
   }
   var _clientSocket = function(a, b, c, d, e, f, g, h) {
