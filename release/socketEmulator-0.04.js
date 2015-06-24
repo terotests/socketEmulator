@@ -374,11 +374,6 @@
         /**
          * @param float t
          */
-        _myTrait_.emit = function (t) {};
-
-        /**
-         * @param float t
-         */
         _myTrait_.getPrefix = function (t) {
           return this._ip + ':' + this._port;
         };
@@ -427,16 +422,6 @@
             }
           });
         });
-
-        /**
-         * @param float t
-         */
-        _myTrait_.join = function (t) {};
-
-        /**
-         * @param float t
-         */
-        _myTrait_.removeListener = function (t) {};
       })(this);
     };
 
@@ -1126,6 +1111,7 @@
         _myTrait_.removeListener = function (t) {};
 
         /**
+         * Each socket can have and in many implementations must have some userID and role, which can be used together with the ACL implementations.
          * @param float userId
          * @param float roles
          */

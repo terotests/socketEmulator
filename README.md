@@ -390,12 +390,6 @@ The class has following internal singleton variables:
 * _rooms
         
         
-### emit(t)
-```javascript
-
-```
-
-
 ### getPrefix(t)
 ```javascript
 return this._ip+":"+this._port;
@@ -405,18 +399,6 @@ return this._ip+":"+this._port;
 ### constructor( ip,port )
 
         
-### join(t)
-```javascript
-
-```
-
-
-### removeListener(t)
-```javascript
-
-```
-
-
 
 
    
@@ -858,7 +840,7 @@ _socketRooms[id].forEach( function(name) {
 this._userId = userId;
 this._roles = roles;
 ```
-
+Each socket can have and in many implementations must have some userID and role, which can be used together with the ACL implementations.
 
 
 
