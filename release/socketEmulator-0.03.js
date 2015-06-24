@@ -452,7 +452,6 @@
         module.exports = _clientSocket;
         _clientSocket._clientSocket = _clientSocket;
       } else {
-        console.log("Binding the _clientSocket to ", this);
         this._clientSocket = _clientSocket;
       }
     }).call((new Function('return this'))());
@@ -689,7 +688,6 @@ io.on('connection', function(socket){
         module.exports = _serverSocket;
         _serverSocket._serverSocket = _serverSocket;
       } else {
-        console.log("Binding the _serverSocket to ", this);
         this._serverSocket = _serverSocket;
       }
     }).call((new Function('return this'))());
