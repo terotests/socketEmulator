@@ -121,7 +121,7 @@ The class has following internal singleton variables:
 * _initDone
         
         
-### constructor( host, bUseReal )
+### socketEmulator::constructor( host, bUseReal )
 
 ```javascript
 
@@ -143,7 +143,7 @@ The class has following internal singleton variables:
 * _commands
         
         
-### guid(t)
+### _dataTrait::guid(t)
 
 
 ```javascript
@@ -153,21 +153,21 @@ return Math.random().toString(36).substring(2, 15) +
         
 ```
 
-### isArray(t)
+### _dataTrait::isArray(t)
 
 
 ```javascript
 return Object.prototype.toString.call( t ) === '[object Array]';
 ```
 
-### isFunction(fn)
+### _dataTrait::isFunction(fn)
 
 
 ```javascript
 return Object.prototype.toString.call(fn) == '[object Function]';
 ```
 
-### isObject(t)
+### _dataTrait::isObject(t)
 
 
 ```javascript
@@ -210,7 +210,7 @@ The class has following internal singleton variables:
 * _socketCnt
         
         
-### disconnect(t)
+### _clientSocket::disconnect(t)
 
 
 ```javascript
@@ -219,7 +219,7 @@ this._socket.messageTo( {
 });
 ```
 
-### emit(name, data, callBackFn)
+### _clientSocket::emit(name, data, callBackFn)
 `name` Message name
  
 `data` Data to be sent, Object or string
@@ -248,7 +248,7 @@ if( callBackFn ) {
 this._socket.messageTo(obj);
 ```
 
-### getEnum(t)
+### _clientSocket::getEnum(t)
 
 The enumerated socket, stating from 1
 ```javascript
@@ -260,14 +260,14 @@ if(!_socketIndex[myId]) {
 return _socketIndex[myId];
 ```
 
-### getId(t)
+### _clientSocket::getId(t)
 
 Returns GUID of the current socket.
 ```javascript
 return this.socketId;
 ```
 
-### constructor( ip, port, bUseReal )
+### _clientSocket::constructor( ip, port, bUseReal )
 Create new instance with _clientSocket(ip,port);
 ```javascript
 
@@ -308,7 +308,7 @@ openConnection.messageTo({
 
 ```
         
-### send(name, data)
+### _clientSocket::send(name, data)
 
 A promisified interface of the &quot;emit&quot; for the _clientSocket
 ```javascript
@@ -327,7 +327,7 @@ return _promise( function(respFn) {
 The class has following internal singleton variables:
         
         
-### on(en, ef)
+### ::on(en, ef)
 `en` Event name
  
 
@@ -341,7 +341,7 @@ this._ev[en].push(ef);
 return this;
 ```
 
-### removeListener(name, fn)
+### ::removeListener(name, fn)
 
 
 ```javascript
@@ -359,7 +359,7 @@ for(var i=0; i<list.length; i++) {
 
 ```
 
-### trigger(en, data, fn)
+### ::trigger(en, data, fn)
 
 triggers event with data and optional function
 ```javascript
@@ -384,7 +384,7 @@ The class has following internal singleton variables:
 * _commands
         
         
-### guid(t)
+### _dataTrait::guid(t)
 
 
 ```javascript
@@ -394,21 +394,21 @@ return Math.random().toString(36).substring(2, 15) +
 
 ```
 
-### isArray(t)
+### _dataTrait::isArray(t)
 
 
 ```javascript
 return Object.prototype.toString.call( t ) === '[object Array]';
 ```
 
-### isFunction(fn)
+### _dataTrait::isFunction(fn)
 
 
 ```javascript
 return Object.prototype.toString.call(fn) == '[object Function]';
 ```
 
-### isObject(t)
+### _dataTrait::isObject(t)
 
 
 ```javascript
@@ -446,14 +446,14 @@ The class has following internal singleton variables:
 * _rooms
         
         
-### getPrefix(t)
+### _serverSocket::getPrefix(t)
 
 
 ```javascript
 return this._ip+":"+this._port;
 ```
 
-### constructor( ip, port )
+### _serverSocket::constructor( ip, port )
 
 ```javascript
 /*
@@ -510,7 +510,7 @@ openConnection.on("serverMessage", function(o,v) {
 The class has following internal singleton variables:
         
         
-### on(en, ef)
+### ::on(en, ef)
 `en` Event name
  
 
@@ -524,7 +524,7 @@ this._ev[en].push(ef);
 return this;
 ```
 
-### trigger(en, data, fn)
+### ::trigger(en, data, fn)
 
 triggers event with data and optional function
 ```javascript
@@ -563,7 +563,7 @@ The class has following internal singleton variables:
 * _msgBuffer
         
         
-### constructor( server, port, socketId, role )
+### _tcpEmu::constructor( server, port, socketId, role )
 
 ```javascript
 
@@ -604,7 +604,7 @@ later().every( 1/10, function() {
 
 ```
         
-### messageFrom(msg)
+### _tcpEmu::messageFrom(msg)
 
 
 ```javascript
@@ -614,7 +614,7 @@ _msgBuffer[bn].push( msg );
 
 ```
 
-### messageTo(msg)
+### _tcpEmu::messageTo(msg)
 
 
 ```javascript
@@ -632,7 +632,7 @@ _msgBuffer[bn].push( msg );
 The class has following internal singleton variables:
         
         
-### on(en, ef)
+### ::on(en, ef)
 `en` Event name
  
 
@@ -646,7 +646,7 @@ this._ev[en].push(ef);
 return this;
 ```
 
-### trigger(en, data, fn)
+### ::trigger(en, data, fn)
 
 triggers event with data and optional function
 ```javascript
@@ -671,7 +671,7 @@ The class has following internal singleton variables:
 * _commands
         
         
-### guid(t)
+### _dataTrait::guid(t)
 
 
 ```javascript
@@ -681,21 +681,21 @@ return Math.random().toString(36).substring(2, 15) +
 
 ```
 
-### isArray(t)
+### _dataTrait::isArray(t)
 
 
 ```javascript
 return Object.prototype.toString.call( t ) === '[object Array]';
 ```
 
-### isFunction(fn)
+### _dataTrait::isFunction(fn)
 
 
 ```javascript
 return Object.prototype.toString.call(fn) == '[object Function]';
 ```
 
-### isObject(t)
+### _dataTrait::isObject(t)
 
 
 ```javascript
@@ -735,7 +735,7 @@ The class has following internal singleton variables:
 * _framers
         
         
-### add(fn, thisObj, args)
+### later::add(fn, thisObj, args)
 
 
 ```javascript
@@ -753,7 +753,7 @@ if(thisObj || args) {
 }
 ```
 
-### asap(fn)
+### later::asap(fn)
 
 
 ```javascript
@@ -761,7 +761,7 @@ this.add(fn);
 
 ```
 
-### every(seconds, fn, name)
+### later::every(seconds, fn, name)
 
 
 ```javascript
@@ -777,7 +777,7 @@ _everies[name] = {
 };
 ```
 
-### constructor( interval, fn )
+### later::constructor( interval, fn )
 
 ```javascript
 if(!_initDone) {
@@ -862,7 +862,7 @@ if(!_initDone) {
 }
 ```
         
-### once(key, fn, value)
+### later::once(key, fn, value)
 
 
 ```javascript
@@ -871,7 +871,7 @@ if(!_initDone) {
 _oneTimers[key] = [fn,value];
 ```
 
-### onFrame(fn)
+### later::onFrame(fn)
 
 
 ```javascript
@@ -879,14 +879,14 @@ _oneTimers[key] = [fn,value];
 _framers.push(fn);
 ```
 
-### polyfill(t)
+### later::polyfill(t)
 
 
 ```javascript
 // --- let's not ---
 ```
 
-### removeFrameFn(fn)
+### later::removeFrameFn(fn)
 
 
 ```javascript
@@ -930,7 +930,7 @@ The class has following internal singleton variables:
 * _socketRooms
         
         
-### delegateToRoom(roomName, name, data)
+### _serverSocketWrap::delegateToRoom(roomName, name, data)
 
 
 ```javascript
@@ -947,7 +947,7 @@ if(_rooms && _rooms[realRoomName]) {
 }
 ```
 
-### disconnect(t)
+### _serverSocketWrap::disconnect(t)
 
 
 ```javascript
@@ -967,7 +967,7 @@ _localDB().clearDatabases( function(d) {
 return;
 ```
 
-### emit(name, value)
+### _serverSocketWrap::emit(name, value)
 
 
 ```javascript
@@ -978,14 +978,14 @@ this._tcp.messageFrom({
 });
 ```
 
-### getId(t)
+### _serverSocketWrap::getId(t)
 
 
 ```javascript
 return this._tcp._socketId;
 ```
 
-### getUserId(t)
+### _serverSocketWrap::getUserId(t)
 
 
 ```javascript
@@ -993,7 +993,7 @@ return this._tcp._socketId;
 return this._userId;
 ```
 
-### getUserRoles(t)
+### _serverSocketWrap::getUserRoles(t)
 
 
 ```javascript
@@ -1001,7 +1001,7 @@ return this._userId;
 return this._roles;
 ```
 
-### constructor( tcpEmu, server )
+### _serverSocketWrap::constructor( tcpEmu, server )
 The _serverSocketWrap is wrapper for the real server side socket functionality.
 ```javascript
 
@@ -1043,7 +1043,7 @@ socket.broadcast.to(_ctx.channelId).emit('ctxupd_'+_ctx.channelId, cObj);
 
 ```
         
-### isConnected(t)
+### _serverSocketWrap::isConnected(t)
 
 
 ```javascript
@@ -1051,7 +1051,7 @@ if(this._disconnected) return false;
 return true;
 ```
 
-### isInRoom(roomName)
+### _serverSocketWrap::isInRoom(roomName)
 
 
 ```javascript
@@ -1059,7 +1059,7 @@ if(!_socketRooms) return false;
 return _socketRooms[this.getId()].indexOf(roomName) >= 0;
 ```
 
-### join(roomName)
+### _serverSocketWrap::join(roomName)
 
 Adds a new client to some room
 ```javascript
@@ -1078,7 +1078,7 @@ if(_rooms[realRoomName].indexOf(this) < 0 ) {
 }
 ```
 
-### leave(roomName)
+### _serverSocketWrap::leave(roomName)
 
 
 ```javascript
@@ -1100,7 +1100,7 @@ if( ( i = _rooms[realRoomName].indexOf(this) ) >= 0 ) {
 
 ```
 
-### leaveFromRooms(socket)
+### _serverSocketWrap::leaveFromRooms(socket)
 
 
 ```javascript
@@ -1115,14 +1115,14 @@ _socketRooms[id].forEach( function(name) {
 });
 ```
 
-### removeListener(t)
+### _serverSocketWrap::removeListener(t)
 
 
 ```javascript
 // TODO: not implemented yet
 ```
 
-### setAuthInfo(userId, roles)
+### _serverSocketWrap::setAuthInfo(userId, roles)
 
 Each socket can have and in many implementations must have some userID and role, which can be used together with the ACL implementations.
 ```javascript
@@ -1140,7 +1140,7 @@ this._roles = roles;
 The class has following internal singleton variables:
         
         
-### on(en, ef)
+### ::on(en, ef)
 `en` Event name
  
 
@@ -1154,7 +1154,7 @@ this._ev[en].push(ef);
 return this;
 ```
 
-### trigger(en, data, fn)
+### ::trigger(en, data, fn)
 
 triggers event with data and optional function
 ```javascript
