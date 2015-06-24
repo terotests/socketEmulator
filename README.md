@@ -170,9 +170,6 @@ return Object.prototype.toString.call(fn) == '[object Function]';
 ### isObject(t)
 
 ```javascript
-
-if(typeof(t)=="undefined") return this.__isO;
-
 return t === Object(t);
 ```
 
@@ -397,9 +394,6 @@ return Object.prototype.toString.call(fn) == '[object Function]';
 ### isObject(t)
 
 ```javascript
-
-if(typeof(t)=="undefined") return this.__isO;
-
 return t === Object(t);
 ```
 
@@ -675,9 +669,6 @@ return Object.prototype.toString.call(fn) == '[object Function]';
 ### isObject(t)
 
 ```javascript
-
-if(typeof(t)=="undefined") return this.__isO;
-
 return t === Object(t);
 ```
 

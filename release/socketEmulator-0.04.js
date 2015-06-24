@@ -46,9 +46,6 @@
        * @param float t
        */
       _myTrait_.isObject = function (t) {
-
-        if (typeof t == 'undefined') return this.__isO;
-
         return t === Object(t);
       };
     })(this);
@@ -152,9 +149,6 @@
          * @param float t
          */
         _myTrait_.isObject = function (t) {
-
-          if (typeof t == 'undefined') return this.__isO;
-
           return t === Object(t);
         };
       })(this);
@@ -549,9 +543,6 @@
          * @param float t
          */
         _myTrait_.isObject = function (t) {
-
-          if (typeof t == 'undefined') return this.__isO;
-
           return t === Object(t);
         };
       })(this);
