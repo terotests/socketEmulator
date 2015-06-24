@@ -19,9 +19,9 @@
         
 * _initDone
         
-        // Initialize static variables here...
         
 ### constructor( host,bUseReal )
+
         
 
 
@@ -35,7 +35,6 @@
         
 * _commands
         
-        // Initialize static variables here...
         
 ### guid(t)
 
@@ -68,7 +67,6 @@
       
     
       
-            // the subclass definition comes around here then
             
 ## Class _clientSocket
 
@@ -85,7 +83,6 @@
         
 * _socketCnt
         
-        // Initialize static variables here...
         
 ### disconnect(t)
 
@@ -94,12 +91,13 @@
 Emit data from client to server
 
 ### getEnum(t)
-
+The enumerated socket, stating from 1
 
 ### getId(t)
-
+Returns GUID of the current socket.
 
 ### constructor( ip,port,bUseReal )
+Create new instance with _clientSocket(ip,port);
         
 ### send(name,data)
 A promisified interface of the &quot;emit&quot; for the _clientSocket
@@ -112,7 +110,6 @@ A promisified interface of the &quot;emit&quot; for the _clientSocket
 
 ## Singleton variables
         
-        // Initialize static variables here...
         
 ### on(en,ef)
 Binds event name to event function
@@ -135,7 +132,6 @@ triggers event with data and optional function
         
 * _commands
         
-        // Initialize static variables here...
         
 ### guid(t)
 
@@ -165,7 +161,6 @@ triggers event with data and optional function
       
     
       
-            // the subclass definition comes around here then
             
 ## Class _serverSocket
 
@@ -180,7 +175,6 @@ triggers event with data and optional function
         
 * _rooms
         
-        // Initialize static variables here...
         
 ### emit(t)
 
@@ -189,6 +183,7 @@ triggers event with data and optional function
 
 
 ### constructor( ip,port )
+
         
 ### join(t)
 
@@ -204,7 +199,6 @@ triggers event with data and optional function
 
 ## Singleton variables
         
-        // Initialize static variables here...
         
 ### on(en,ef)
 Binds event name to event function
@@ -226,7 +220,6 @@ triggers event with data and optional function
       
     
       
-            // the subclass definition comes around here then
             
 ## Class _tcpEmu
 
@@ -239,9 +232,9 @@ triggers event with data and optional function
         
 * _msgBuffer
         
-        // Initialize static variables here...
         
 ### constructor( server,port,socketId,role )
+
         
 ### messageFrom(msg)
 
@@ -257,7 +250,6 @@ triggers event with data and optional function
 
 ## Singleton variables
         
-        // Initialize static variables here...
         
 ### on(en,ef)
 Binds event name to event function
@@ -277,7 +269,6 @@ triggers event with data and optional function
         
 * _commands
         
-        // Initialize static variables here...
         
 ### guid(t)
 
@@ -307,7 +298,6 @@ triggers event with data and optional function
       
     
       
-            // the subclass definition comes around here then
             
 ## Class later
 
@@ -324,7 +314,6 @@ triggers event with data and optional function
         
 * _framers
         
-        // Initialize static variables here...
         
 ### add(fn,thisObj,args)
 
@@ -336,6 +325,7 @@ triggers event with data and optional function
 
 
 ### constructor( interval,fn )
+
         
 ### once(key,fn,value)
 
@@ -361,7 +351,6 @@ triggers event with data and optional function
       
     
       
-            // the subclass definition comes around here then
             
 ## Class _serverSocketWrap
 
@@ -376,7 +365,6 @@ triggers event with data and optional function
         
 * _socketRooms
         
-        // Initialize static variables here...
         
 ### delegateToRoom(roomName,name,data)
 
@@ -397,6 +385,7 @@ triggers event with data and optional function
 
 
 ### constructor( tcpEmu,server )
+The _serverSocketWrap is wrapper for the real server side socket functionality.
         
 ### isConnected(t)
 
@@ -405,7 +394,7 @@ triggers event with data and optional function
 
 
 ### join(roomName)
-
+Adds a new client to some room
 
 ### leave(roomName)
 
@@ -427,7 +416,6 @@ triggers event with data and optional function
 
 ## Singleton variables
         
-        // Initialize static variables here...
         
 ### on(en,ef)
 Binds event name to event function
