@@ -1,4 +1,4 @@
-// Custom template is here
+// The code template begins here
 (function() {
 
 
