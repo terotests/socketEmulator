@@ -1,3 +1,104 @@
+# Socket Emulator
+
+Emulates some of the socket.io behaviours so that at least some of the behaviours of the standard socket.io algorithms can be emulated in-browser.
+
+Example:
+http://jsfiddle.net/8hyup32t/
+
+Example with two servers:
+http://jsfiddle.net/2jwf1czz/
+
+
+## Creating server socket:
+
+```javascript
+var server = _serverSocket("localhost", 1234);  
+server.on("connect", function(socket) {
+    socket.join("all"); // join room "all"
+    // react to emitted messages "hello"
+    socket.on("hello", function(data) {
+        socket.emit("response", "Hello to you too"); // emit back to socket
+    });
+});
+```
+
+Adding socket to room
+
+```javascript
+socket.join("room");
+```
+
+Sending to other sockets in room
+
+```javascript
+socket.broadcast.to("room").emit("msgname", data);
+```
+
+or
+```javascript
+socket.delegateToRoom("room", "msgname", data); // <room>, <msg>, <data>
+```
+
+Responding to client message (if client expects a callback)
+
+```
+    socket.on("message", function(data, responseFn) {
+        // repond to client
+        responseFn( "this goes to client ");
+    })
+```
+
+Disconnecting
+
+```
+socket.disconnect();
+```
+
+## Client socket
+```javascript
+    var client = _clientSocket("localhost", 1234);  
+    client.on("connect", function() {
+        client.emit("hello", "there");
+        client.on("response", function(data) {
+             console.log(data);
+        });
+    });
+```
+
+Ask server to confirm data sendin or to respond: 
+
+```
+    client.emit("message", payload, function(resp) {
+         // server returned resp
+    })
+```
+
+The server code looks like this:
+
+```
+    socket.on("message", function(data, responseFn) {
+        // repond to client
+        responseFn( "this goes to client ");
+    })
+```
+
+Disconnecting
+
+```
+socket.disconnect();
+```
+
+# Class Documentation
+
+{{classDocs}}
+
+
+
+
+
+
+
+
 
 
 
@@ -15,7 +116,7 @@
 ## Class socketEmulator
 
 
-## Singleton variables
+The class has following internal singleton variables:
         
 * _initDone
         
@@ -29,7 +130,7 @@
     
 # trait _dataTrait
 
-## Singleton variables
+The class has following internal singleton variables:
         
 * _eventOn
         
@@ -71,7 +172,7 @@
 ## Class _clientSocket
 
 
-## Singleton variables
+The class has following internal singleton variables:
         
 * _channelIndex
         
@@ -108,7 +209,7 @@ A promisified interface of the &quot;emit&quot; for the _clientSocket
     
 # trait events
 
-## Singleton variables
+The class has following internal singleton variables:
         
         
 ### on(en,ef)
@@ -126,7 +227,7 @@ triggers event with data and optional function
     
 # trait _dataTrait
 
-## Singleton variables
+The class has following internal singleton variables:
         
 * _eventOn
         
@@ -165,7 +266,7 @@ triggers event with data and optional function
 ## Class _serverSocket
 
 
-## Singleton variables
+The class has following internal singleton variables:
         
 * _channelIndex
         
@@ -197,7 +298,7 @@ triggers event with data and optional function
     
 # trait events
 
-## Singleton variables
+The class has following internal singleton variables:
         
         
 ### on(en,ef)
@@ -224,7 +325,7 @@ triggers event with data and optional function
 ## Class _tcpEmu
 
 
-## Singleton variables
+The class has following internal singleton variables:
         
 * _channelIndex
         
@@ -248,7 +349,7 @@ triggers event with data and optional function
     
 # trait events
 
-## Singleton variables
+The class has following internal singleton variables:
         
         
 ### on(en,ef)
@@ -263,7 +364,7 @@ triggers event with data and optional function
     
 # trait _dataTrait
 
-## Singleton variables
+The class has following internal singleton variables:
         
 * _eventOn
         
@@ -302,7 +403,7 @@ triggers event with data and optional function
 ## Class later
 
 
-## Singleton variables
+The class has following internal singleton variables:
         
 * _initDone
         
@@ -355,7 +456,7 @@ triggers event with data and optional function
 ## Class _serverSocketWrap
 
 
-## Singleton variables
+The class has following internal singleton variables:
         
 * _channelIndex
         
@@ -414,7 +515,7 @@ Adds a new client to some room
     
 # trait events
 
-## Singleton variables
+The class has following internal singleton variables:
         
         
 ### on(en,ef)
