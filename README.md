@@ -15,10 +15,9 @@
 ## Class socketEmulator
 
 
-    (function(_myTrait_) {
-## Singletons
+## Singleton variables
         
-          _initDone
+* _initDone
         
         // Initialize static variables here...
         
@@ -30,12 +29,11 @@
     
 # trait _dataTrait
 
-    (function(_myTrait_) {
-## Singletons
+## Singleton variables
         
-          _eventOn
+* _eventOn
         
-          _commands
+* _commands
         
         // Initialize static variables here...
         
@@ -75,18 +73,17 @@
 ## Class _clientSocket
 
 
-    (function(_myTrait_) {
-## Singletons
+## Singleton variables
         
-          _channelIndex
+* _channelIndex
         
-          _rootData
+* _rootData
         
-          _callBacks
+* _callBacks
         
-          _socketIndex
+* _socketIndex
         
-          _socketCnt
+* _socketCnt
         
         // Initialize static variables here...
         
@@ -113,8 +110,7 @@ A promisified interface of the &quot;emit&quot; for the _clientSocket
     
 # trait events
 
-    (function(_myTrait_) {
-## Singletons
+## Singleton variables
         
         // Initialize static variables here...
         
@@ -133,12 +129,11 @@ triggers event with data and optional function
     
 # trait _dataTrait
 
-    (function(_myTrait_) {
-## Singletons
+## Singleton variables
         
-          _eventOn
+* _eventOn
         
-          _commands
+* _commands
         
         // Initialize static variables here...
         
@@ -175,16 +170,15 @@ triggers event with data and optional function
 ## Class _serverSocket
 
 
-    (function(_myTrait_) {
-## Singletons
+## Singleton variables
         
-          _channelIndex
+* _channelIndex
         
-          _rootData
+* _rootData
         
-          _clients
+* _clients
         
-          _rooms
+* _rooms
         
         // Initialize static variables here...
         
@@ -208,8 +202,7 @@ triggers event with data and optional function
     
 # trait events
 
-    (function(_myTrait_) {
-## Singletons
+## Singleton variables
         
         // Initialize static variables here...
         
@@ -238,14 +231,13 @@ triggers event with data and optional function
 ## Class _tcpEmu
 
 
-    (function(_myTrait_) {
-## Singletons
+## Singleton variables
         
-          _channelIndex
+* _channelIndex
         
-          _rootData
+* _rootData
         
-          _msgBuffer
+* _msgBuffer
         
         // Initialize static variables here...
         
@@ -263,8 +255,7 @@ triggers event with data and optional function
     
 # trait events
 
-    (function(_myTrait_) {
-## Singletons
+## Singleton variables
         
         // Initialize static variables here...
         
@@ -280,12 +271,11 @@ triggers event with data and optional function
     
 # trait _dataTrait
 
-    (function(_myTrait_) {
-## Singletons
+## Singleton variables
         
-          _eventOn
+* _eventOn
         
-          _commands
+* _commands
         
         // Initialize static variables here...
         
@@ -322,18 +312,17 @@ triggers event with data and optional function
 ## Class later
 
 
-    (function(_myTrait_) {
-## Singletons
+## Singleton variables
         
-          _initDone
+* _initDone
         
-          _callers
+* _callers
         
-          _oneTimers
+* _oneTimers
         
-          _everies
+* _everies
         
-          _framers
+* _framers
         
         // Initialize static variables here...
         
@@ -377,16 +366,15 @@ triggers event with data and optional function
 ## Class _serverSocketWrap
 
 
-    (function(_myTrait_) {
-## Singletons
+## Singleton variables
         
-          _channelIndex
+* _channelIndex
         
-          _rootData
+* _rootData
         
-          _rooms
+* _rooms
         
-          _socketRooms
+* _socketRooms
         
         // Initialize static variables here...
         
@@ -437,8 +425,7 @@ triggers event with data and optional function
     
 # trait events
 
-    (function(_myTrait_) {
-## Singletons
+## Singleton variables
         
         // Initialize static variables here...
         
