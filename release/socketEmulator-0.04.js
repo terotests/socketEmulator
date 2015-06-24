@@ -29,9 +29,6 @@
        * @param float t
        */
       _myTrait_.isArray = function (t) {
-
-        if (typeof t == 'undefined') return this.__isA;
-
         return Object.prototype.toString.call(t) === '[object Array]';
       };
 
@@ -132,9 +129,6 @@
          * @param float t
          */
         _myTrait_.isArray = function (t) {
-
-          if (typeof t == 'undefined') return this.__isA;
-
           return Object.prototype.toString.call(t) === '[object Array]';
         };
 
@@ -526,9 +520,6 @@
          * @param float t
          */
         _myTrait_.isArray = function (t) {
-
-          if (typeof t == 'undefined') return this.__isA;
-
           return Object.prototype.toString.call(t) === '[object Array]';
         };
 

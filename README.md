@@ -155,9 +155,6 @@ return Math.random().toString(36).substring(2, 15) +
 ### isArray(t)
 
 ```javascript
-
-if(typeof(t)=="undefined") return this.__isA;
-
 return Object.prototype.toString.call( t ) === '[object Array]';
 ```
 
@@ -379,9 +376,6 @@ return Math.random().toString(36).substring(2, 15) +
 ### isArray(t)
 
 ```javascript
-
-if(typeof(t)=="undefined") return this.__isA;
-
 return Object.prototype.toString.call( t ) === '[object Array]';
 ```
 
@@ -654,9 +648,6 @@ return Math.random().toString(36).substring(2, 15) +
 ### isArray(t)
 
 ```javascript
-
-if(typeof(t)=="undefined") return this.__isA;
-
 return Object.prototype.toString.call( t ) === '[object Array]';
 ```
 
