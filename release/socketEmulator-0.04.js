@@ -1,6 +1,7 @@
 // The code template begins here
 (function() {
 
+  var __amdDefs__ = {};
 
 
   // The class definition is here...
@@ -364,9 +365,7 @@
     (function() {
       // The basic class export, this may not work for private classes
       if ((typeof define !== "undefined" && define !== null) && (define.amd != null)) {
-        define([], function() {
-          return _clientSocket;
-        });
+        __amdDefs__["_clientSocket"] = _clientSocket;
         this._clientSocket = _clientSocket;
       } else if ((typeof module !== "undefined" && module !== null) && (module.exports != null)) {
         module.exports["_clientSocket"] = _clientSocket;
@@ -569,9 +568,7 @@ io.on('connection', function(socket){
     (function() {
       // The basic class export, this may not work for private classes
       if ((typeof define !== "undefined" && define !== null) && (define.amd != null)) {
-        define([], function() {
-          return _serverSocket;
-        });
+        __amdDefs__["_serverSocket"] = _serverSocket;
         this._serverSocket = _serverSocket;
       } else if ((typeof module !== "undefined" && module !== null) && (module.exports != null)) {
         module.exports["_serverSocket"] = _serverSocket;
@@ -1437,4 +1434,7 @@ socket.broadcast.to(_ctx.channelId).emit('ctxupd_'+_ctx.channelId, cObj);
 
 
 
+  if ((typeof define !== "undefined" && define !== null) && (define.amd != null)) {
+    define(__amdDefs__);
+  }
 }).call((new Function('return this'))());
