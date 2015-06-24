@@ -167,9 +167,9 @@
 
         /**
          * Emit data from client to server
-         * @param String name
-         * @param Object data
-         * @param Function callBackFn
+         * @param String name  - Message name
+         * @param Object data  - Data to be sent, Object or string
+         * @param Function callBackFn  - Callback, message from the receiver
          */
         _myTrait_.emit = function (name, data, callBackFn) {
 
