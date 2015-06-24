@@ -21,11 +21,6 @@
        * @param float t
        */
       _myTrait_.guid = function(t) {
-        // add logging to the functions
-        if (typeof(callCord) != "undefined") callCord("main").record({
-          fn: "guid",
-          className: "_dataTrait"
-        });
 
         return Math.random().toString(36).substring(2, 15) +
           Math.random().toString(36).substring(2, 15);
@@ -36,11 +31,6 @@
        * @param float t
        */
       _myTrait_.isArray = function(t) {
-        // add logging to the functions
-        if (typeof(callCord) != "undefined") callCord("main").record({
-          fn: "isArray",
-          className: "_dataTrait"
-        });
 
         if (typeof(t) == "undefined") return this.__isA;
 
@@ -51,11 +41,6 @@
        * @param float fn
        */
       _myTrait_.isFunction = function(fn) {
-        // add logging to the functions
-        if (typeof(callCord) != "undefined") callCord("main").record({
-          fn: "isFunction",
-          className: "_dataTrait"
-        });
         return Object.prototype.toString.call(fn) == '[object Function]';
       }
 
@@ -63,11 +48,6 @@
        * @param float t
        */
       _myTrait_.isObject = function(t) {
-        // add logging to the functions
-        if (typeof(callCord) != "undefined") callCord("main").record({
-          fn: "isObject",
-          className: "_dataTrait"
-        });
 
         if (typeof(t) == "undefined") return this.__isO;
 
@@ -114,11 +94,6 @@
          * @param float ef
          */
         _myTrait_.on = function(en, ef) {
-          // add logging to the functions
-          if (typeof(callCord) != "undefined") callCord("main").record({
-            fn: "on",
-            className: ""
-          });
           if (!this._ev) this._ev = {};
           if (!this._ev[en]) this._ev[en] = [];
 
@@ -132,11 +107,6 @@
          * @param float fn
          */
         _myTrait_.removeListener = function(name, fn) {
-          // add logging to the functions
-          if (typeof(callCord) != "undefined") callCord("main").record({
-            fn: "removeListener",
-            className: ""
-          });
           if (!this._ev) return;
           if (!this._ev[name]) return;
 
@@ -158,11 +128,6 @@
          * @param float fn
          */
         _myTrait_.trigger = function(en, data, fn) {
-          // add logging to the functions
-          if (typeof(callCord) != "undefined") callCord("main").record({
-            fn: "trigger",
-            className: ""
-          });
 
           if (!this._ev) return;
           if (!this._ev[en]) return;
@@ -190,11 +155,6 @@
          * @param float t
          */
         _myTrait_.guid = function(t) {
-          // add logging to the functions
-          if (typeof(callCord) != "undefined") callCord("main").record({
-            fn: "guid",
-            className: "_dataTrait"
-          });
 
           return Math.random().toString(36).substring(2, 15) +
             Math.random().toString(36).substring(2, 15);
@@ -205,11 +165,6 @@
          * @param float t
          */
         _myTrait_.isArray = function(t) {
-          // add logging to the functions
-          if (typeof(callCord) != "undefined") callCord("main").record({
-            fn: "isArray",
-            className: "_dataTrait"
-          });
 
           if (typeof(t) == "undefined") return this.__isA;
 
@@ -220,11 +175,6 @@
          * @param float fn
          */
         _myTrait_.isFunction = function(fn) {
-          // add logging to the functions
-          if (typeof(callCord) != "undefined") callCord("main").record({
-            fn: "isFunction",
-            className: "_dataTrait"
-          });
           return Object.prototype.toString.call(fn) == '[object Function]';
         }
 
@@ -232,11 +182,6 @@
          * @param float t
          */
         _myTrait_.isObject = function(t) {
-          // add logging to the functions
-          if (typeof(callCord) != "undefined") callCord("main").record({
-            fn: "isObject",
-            className: "_dataTrait"
-          });
 
           if (typeof(t) == "undefined") return this.__isO;
 
@@ -269,11 +214,6 @@
          * @param float t
          */
         _myTrait_.disconnect = function(t) {
-          // add logging to the functions
-          if (typeof(callCord) != "undefined") callCord("main").record({
-            fn: "disconnect",
-            className: "_clientSocket"
-          });
           this._socket.messageTo({
             disconnect: true
           });
@@ -285,11 +225,6 @@
          * @param float callBackFn
          */
         _myTrait_.emit = function(name, data, callBackFn) {
-          // add logging to the functions
-          if (typeof(callCord) != "undefined") callCord("main").record({
-            fn: "emit",
-            className: "_clientSocket"
-          });
 
           var obj = {
             name: name,
@@ -313,11 +248,6 @@
          * @param float t
          */
         _myTrait_.getEnum = function(t) {
-          // add logging to the functions
-          if (typeof(callCord) != "undefined") callCord("main").record({
-            fn: "getEnum",
-            className: "_clientSocket"
-          });
           var myId = this.guid();
 
           if (!_socketIndex[myId]) {
@@ -330,11 +260,6 @@
          * @param float t
          */
         _myTrait_.getId = function(t) {
-          // add logging to the functions
-          if (typeof(callCord) != "undefined") callCord("main").record({
-            fn: "getId",
-            className: "_clientSocket"
-          });
           return this.socketId;
         }
 
@@ -388,11 +313,6 @@
          * @param float data
          */
         _myTrait_.send = function(name, data) {
-          // add logging to the functions
-          if (typeof(callCord) != "undefined") callCord("main").record({
-            fn: "send",
-            className: "_clientSocket"
-          });
           var me = this;
           return _promise(function(respFn) {
             me.emit(name, data, respFn);
@@ -481,11 +401,6 @@
          * @param float ef
          */
         _myTrait_.on = function(en, ef) {
-          // add logging to the functions
-          if (typeof(callCord) != "undefined") callCord("main").record({
-            fn: "on",
-            className: ""
-          });
           if (!this._ev) this._ev = {};
           if (!this._ev[en]) this._ev[en] = [];
 
@@ -501,11 +416,6 @@
          * @param float fn
          */
         _myTrait_.trigger = function(en, data, fn) {
-          // add logging to the functions
-          if (typeof(callCord) != "undefined") callCord("main").record({
-            fn: "trigger",
-            className: ""
-          });
 
           if (!this._ev) return;
           if (!this._ev[en]) return;
@@ -539,11 +449,6 @@
          * @param float t
          */
         _myTrait_.emit = function(t) {
-          // add logging to the functions
-          if (typeof(callCord) != "undefined") callCord("main").record({
-            fn: "emit",
-            className: "_serverSocket"
-          });
 
         }
 
@@ -551,11 +456,6 @@
          * @param float t
          */
         _myTrait_.getPrefix = function(t) {
-          // add logging to the functions
-          if (typeof(callCord) != "undefined") callCord("main").record({
-            fn: "getPrefix",
-            className: "_serverSocket"
-          });
           return this._ip + ":" + this._port;
         }
 
@@ -614,11 +514,6 @@ io.on('connection', function(socket){
          * @param float t
          */
         _myTrait_.join = function(t) {
-          // add logging to the functions
-          if (typeof(callCord) != "undefined") callCord("main").record({
-            fn: "join",
-            className: "_serverSocket"
-          });
 
         }
 
@@ -626,11 +521,6 @@ io.on('connection', function(socket){
          * @param float t
          */
         _myTrait_.removeListener = function(t) {
-          // add logging to the functions
-          if (typeof(callCord) != "undefined") callCord("main").record({
-            fn: "removeListener",
-            className: "_serverSocket"
-          });
 
         }
 
@@ -716,11 +606,6 @@ io.on('connection', function(socket){
          * @param float ef
          */
         _myTrait_.on = function(en, ef) {
-          // add logging to the functions
-          if (typeof(callCord) != "undefined") callCord("main").record({
-            fn: "on",
-            className: ""
-          });
           if (!this._ev) this._ev = {};
           if (!this._ev[en]) this._ev[en] = [];
 
@@ -736,11 +621,6 @@ io.on('connection', function(socket){
          * @param float fn
          */
         _myTrait_.trigger = function(en, data, fn) {
-          // add logging to the functions
-          if (typeof(callCord) != "undefined") callCord("main").record({
-            fn: "trigger",
-            className: ""
-          });
 
           if (!this._ev) return;
           if (!this._ev[en]) return;
@@ -768,11 +648,6 @@ io.on('connection', function(socket){
          * @param float t
          */
         _myTrait_.guid = function(t) {
-          // add logging to the functions
-          if (typeof(callCord) != "undefined") callCord("main").record({
-            fn: "guid",
-            className: "_dataTrait"
-          });
 
           return Math.random().toString(36).substring(2, 15) +
             Math.random().toString(36).substring(2, 15);
@@ -783,11 +658,6 @@ io.on('connection', function(socket){
          * @param float t
          */
         _myTrait_.isArray = function(t) {
-          // add logging to the functions
-          if (typeof(callCord) != "undefined") callCord("main").record({
-            fn: "isArray",
-            className: "_dataTrait"
-          });
 
           if (typeof(t) == "undefined") return this.__isA;
 
@@ -798,11 +668,6 @@ io.on('connection', function(socket){
          * @param float fn
          */
         _myTrait_.isFunction = function(fn) {
-          // add logging to the functions
-          if (typeof(callCord) != "undefined") callCord("main").record({
-            fn: "isFunction",
-            className: "_dataTrait"
-          });
           return Object.prototype.toString.call(fn) == '[object Function]';
         }
 
@@ -810,11 +675,6 @@ io.on('connection', function(socket){
          * @param float t
          */
         _myTrait_.isObject = function(t) {
-          // add logging to the functions
-          if (typeof(callCord) != "undefined") callCord("main").record({
-            fn: "isObject",
-            className: "_dataTrait"
-          });
 
           if (typeof(t) == "undefined") return this.__isO;
 
@@ -889,11 +749,6 @@ io.on('connection', function(socket){
          * @param float msg
          */
         _myTrait_.messageFrom = function(msg) {
-          // add logging to the functions
-          if (typeof(callCord) != "undefined") callCord("main").record({
-            fn: "messageFrom",
-            className: "_tcpEmu"
-          });
           var bn = this._dbName + ":from";
           _msgBuffer[bn].push(msg);
 
@@ -904,11 +759,6 @@ io.on('connection', function(socket){
          * @param float msg
          */
         _myTrait_.messageTo = function(msg) {
-          // add logging to the functions
-          if (typeof(callCord) != "undefined") callCord("main").record({
-            fn: "messageTo",
-            className: "_tcpEmu"
-          });
           var bn = this._dbName + ":to";
           _msgBuffer[bn].push(msg);
 
@@ -988,11 +838,6 @@ io.on('connection', function(socket){
          * @param float args
          */
         _myTrait_.add = function(fn, thisObj, args) {
-          // add logging to the functions
-          if (typeof(callCord) != "undefined") callCord("main").record({
-            fn: "add",
-            className: "later"
-          });
           if (thisObj || args) {
             var tArgs;
             if (Object.prototype.toString.call(args) === '[object Array]') {
@@ -1011,11 +856,6 @@ io.on('connection', function(socket){
          * @param function fn
          */
         _myTrait_.asap = function(fn) {
-          // add logging to the functions
-          if (typeof(callCord) != "undefined") callCord("main").record({
-            fn: "asap",
-            className: "later"
-          });
           this.add(fn);
 
         }
@@ -1026,11 +866,6 @@ io.on('connection', function(socket){
          * @param float name
          */
         _myTrait_.every = function(seconds, fn, name) {
-          // add logging to the functions
-          if (typeof(callCord) != "undefined") callCord("main").record({
-            fn: "every",
-            className: "later"
-          });
 
           if (!name) {
             name = "time" + (new Date()).getTime() + Math.random(10000000);
@@ -1136,11 +971,6 @@ io.on('connection', function(socket){
          * @param float value
          */
         _myTrait_.once = function(key, fn, value) {
-          // add logging to the functions
-          if (typeof(callCord) != "undefined") callCord("main").record({
-            fn: "once",
-            className: "later"
-          });
           // _oneTimers
 
           _oneTimers[key] = [fn, value];
@@ -1150,11 +980,6 @@ io.on('connection', function(socket){
          * @param function fn
          */
         _myTrait_.onFrame = function(fn) {
-          // add logging to the functions
-          if (typeof(callCord) != "undefined") callCord("main").record({
-            fn: "onFrame",
-            className: "later"
-          });
 
           _framers.push(fn);
         }
@@ -1163,11 +988,6 @@ io.on('connection', function(socket){
          * @param float t
          */
         _myTrait_.polyfill = function(t) {
-          // add logging to the functions
-          if (typeof(callCord) != "undefined") callCord("main").record({
-            fn: "polyfill",
-            className: "later"
-          });
           // --- let's not ---
         }
 
@@ -1175,11 +995,6 @@ io.on('connection', function(socket){
          * @param float fn
          */
         _myTrait_.removeFrameFn = function(fn) {
-          // add logging to the functions
-          if (typeof(callCord) != "undefined") callCord("main").record({
-            fn: "removeFrameFn",
-            className: "later"
-          });
 
           var i = _framers.indexOf(fn);
           if (i >= 0) {
@@ -1260,11 +1075,6 @@ io.on('connection', function(socket){
          * @param float ef
          */
         _myTrait_.on = function(en, ef) {
-          // add logging to the functions
-          if (typeof(callCord) != "undefined") callCord("main").record({
-            fn: "on",
-            className: ""
-          });
           if (!this._ev) this._ev = {};
           if (!this._ev[en]) this._ev[en] = [];
 
@@ -1280,11 +1090,6 @@ io.on('connection', function(socket){
          * @param float fn
          */
         _myTrait_.trigger = function(en, data, fn) {
-          // add logging to the functions
-          if (typeof(callCord) != "undefined") callCord("main").record({
-            fn: "trigger",
-            className: ""
-          });
 
           if (!this._ev) return;
           if (!this._ev[en]) return;
@@ -1320,11 +1125,6 @@ io.on('connection', function(socket){
          * @param float data
          */
         _myTrait_.delegateToRoom = function(roomName, name, data) {
-          // add logging to the functions
-          if (typeof(callCord) != "undefined") callCord("main").record({
-            fn: "delegateToRoom",
-            className: "_serverSocketWrap"
-          });
 
           var realRoomName = this._roomPrefix + ":" + roomName;
 
@@ -1342,11 +1142,6 @@ io.on('connection', function(socket){
          * @param float t
          */
         _myTrait_.disconnect = function(t) {
-          // add logging to the functions
-          if (typeof(callCord) != "undefined") callCord("main").record({
-            fn: "disconnect",
-            className: "_serverSocketWrap"
-          });
           var me = this;
           me._disconnected = true;
           me.leaveFromRooms();
@@ -1368,11 +1163,6 @@ io.on('connection', function(socket){
          * @param float value
          */
         _myTrait_.emit = function(name, value) {
-          // add logging to the functions
-          if (typeof(callCord) != "undefined") callCord("main").record({
-            fn: "emit",
-            className: "_serverSocketWrap"
-          });
 
           this._tcp.messageFrom({
             name: name,
@@ -1384,11 +1174,6 @@ io.on('connection', function(socket){
          * @param float t
          */
         _myTrait_.getId = function(t) {
-          // add logging to the functions
-          if (typeof(callCord) != "undefined") callCord("main").record({
-            fn: "getId",
-            className: "_serverSocketWrap"
-          });
           return this._tcp._socketId;
         }
 
@@ -1396,11 +1181,6 @@ io.on('connection', function(socket){
          * @param float t
          */
         _myTrait_.getUserId = function(t) {
-          // add logging to the functions
-          if (typeof(callCord) != "undefined") callCord("main").record({
-            fn: "getUserId",
-            className: "_serverSocketWrap"
-          });
 
           return this._userId;
         }
@@ -1409,11 +1189,6 @@ io.on('connection', function(socket){
          * @param float t
          */
         _myTrait_.getUserRoles = function(t) {
-          // add logging to the functions
-          if (typeof(callCord) != "undefined") callCord("main").record({
-            fn: "getUserRoles",
-            className: "_serverSocketWrap"
-          });
 
           return this._roles;
         }
@@ -1467,11 +1242,6 @@ socket.broadcast.to(_ctx.channelId).emit('ctxupd_'+_ctx.channelId, cObj);
          * @param float t
          */
         _myTrait_.isConnected = function(t) {
-          // add logging to the functions
-          if (typeof(callCord) != "undefined") callCord("main").record({
-            fn: "isConnected",
-            className: "_serverSocketWrap"
-          });
           if (this._disconnected) return false;
           return true;
         }
@@ -1480,11 +1250,6 @@ socket.broadcast.to(_ctx.channelId).emit('ctxupd_'+_ctx.channelId, cObj);
          * @param float roomName
          */
         _myTrait_.isInRoom = function(roomName) {
-          // add logging to the functions
-          if (typeof(callCord) != "undefined") callCord("main").record({
-            fn: "isInRoom",
-            className: "_serverSocketWrap"
-          });
           if (!_socketRooms) return false;
           return _socketRooms[this.getId()].indexOf(roomName) >= 0;
         }
@@ -1493,11 +1258,6 @@ socket.broadcast.to(_ctx.channelId).emit('ctxupd_'+_ctx.channelId, cObj);
          * @param String roomName
          */
         _myTrait_.join = function(roomName) {
-          // add logging to the functions
-          if (typeof(callCord) != "undefined") callCord("main").record({
-            fn: "join",
-            className: "_serverSocketWrap"
-          });
 
           var realRoomName = this._roomPrefix + ":" + roomName;
 
@@ -1517,11 +1277,6 @@ socket.broadcast.to(_ctx.channelId).emit('ctxupd_'+_ctx.channelId, cObj);
          * @param float roomName
          */
         _myTrait_.leave = function(roomName) {
-          // add logging to the functions
-          if (typeof(callCord) != "undefined") callCord("main").record({
-            fn: "leave",
-            className: "_serverSocketWrap"
-          });
 
           var realRoomName = this._roomPrefix + ":" + roomName;
 
@@ -1544,11 +1299,6 @@ socket.broadcast.to(_ctx.channelId).emit('ctxupd_'+_ctx.channelId, cObj);
          * @param float socket
          */
         _myTrait_.leaveFromRooms = function(socket) {
-          // add logging to the functions
-          if (typeof(callCord) != "undefined") callCord("main").record({
-            fn: "leaveFromRooms",
-            className: "_serverSocketWrap"
-          });
           var id = this.getId();
           var me = this;
 
@@ -1564,11 +1314,6 @@ socket.broadcast.to(_ctx.channelId).emit('ctxupd_'+_ctx.channelId, cObj);
          * @param float t
          */
         _myTrait_.removeListener = function(t) {
-          // add logging to the functions
-          if (typeof(callCord) != "undefined") callCord("main").record({
-            fn: "removeListener",
-            className: "_serverSocketWrap"
-          });
 
         }
 
@@ -1577,11 +1322,6 @@ socket.broadcast.to(_ctx.channelId).emit('ctxupd_'+_ctx.channelId, cObj);
          * @param float roles
          */
         _myTrait_.setAuthInfo = function(userId, roles) {
-          // add logging to the functions
-          if (typeof(callCord) != "undefined") callCord("main").record({
-            fn: "setAuthInfo",
-            className: "_serverSocketWrap"
-          });
 
           this._userId = userId;
           this._roles = roles;
