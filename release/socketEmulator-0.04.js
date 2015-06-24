@@ -305,7 +305,6 @@
         this._clientSocket = _clientSocket;
       }
     }).call(new Function('return this')());
-    // window["_clientSocket"] = _clientSocket;
 
     // the subclass definition comes around here then
 
@@ -454,7 +453,6 @@
         this._serverSocket = _serverSocket;
       }
     }).call(new Function('return this')());
-    // window["_serverSocket"] = _serverSocket;
 
     // the subclass definition comes around here then
 
