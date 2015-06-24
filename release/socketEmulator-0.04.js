@@ -303,10 +303,7 @@
     _clientSocket._classInfo = {
       name: '_clientSocket'
     };
-    // the static functions might be added here
     _clientSocket.prototype = new _clientSocket_prototype();
-
-    // publish the module to global
 
     (function () {
       // The basic class export, this may not work for private classes
@@ -471,10 +468,7 @@
     _serverSocket._classInfo = {
       name: '_serverSocket'
     };
-    // the static functions might be added here
     _serverSocket.prototype = new _serverSocket_prototype();
-
-    // publish the module to global
 
     (function () {
       // The basic class export, this may not work for private classes
@@ -669,10 +663,7 @@
     _tcpEmu._classInfo = {
       name: '_tcpEmu'
     };
-    // the static functions might be added here
     _tcpEmu.prototype = new _tcpEmu_prototype();
-
-    // publish the module to global
 
     // the subclass definition comes around here then
 
@@ -887,10 +878,7 @@
     later._classInfo = {
       name: 'later'
     };
-    // the static functions might be added here
     later.prototype = new later_prototype();
-
-    // publish the module to global
 
     // the subclass definition comes around here then
 
@@ -1177,10 +1165,7 @@
     _serverSocketWrap._classInfo = {
       name: '_serverSocketWrap'
     };
-    // the static functions might be added here
     _serverSocketWrap.prototype = new _serverSocketWrap_prototype();
-
-    // publish the module to global
 
     (function (_myTrait_) {
       var _initDone;
@@ -1222,10 +1207,7 @@
   socketEmulator._classInfo = {
     name: 'socketEmulator'
   };
-  // the static functions might be added here
   socketEmulator.prototype = new socketEmulator_prototype();
-
-  // publish the module to global
 
   if (typeof define !== 'undefined' && define !== null && define.amd != null) {
     define(__amdDefs__);
