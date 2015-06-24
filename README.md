@@ -88,6 +88,10 @@ Disconnecting
 socket.disconnect();
 ```
 
+# Class Documentation
+
+{{classDocs}}
+
 
 
 

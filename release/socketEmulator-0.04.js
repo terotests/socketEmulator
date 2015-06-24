@@ -261,7 +261,7 @@
         });
 
         /**
-         * A promisified interface for the _clientSocket
+         * A promisified interface of the &quot;emit&quot; for the _clientSocket
          * @param float name
          * @param float data
          */
@@ -306,7 +306,6 @@
     _clientSocket.prototype = new _clientSocket_prototype();
 
     (function () {
-      // The basic class export, this may not work for private classes
       if (typeof define !== 'undefined' && define !== null && define.amd != null) {
         __amdDefs__['_clientSocket'] = _clientSocket;
         this._clientSocket = _clientSocket;
@@ -471,7 +470,6 @@
     _serverSocket.prototype = new _serverSocket_prototype();
 
     (function () {
-      // The basic class export, this may not work for private classes
       if (typeof define !== 'undefined' && define !== null && define.amd != null) {
         __amdDefs__['_serverSocket'] = _serverSocket;
         this._serverSocket = _serverSocket;
