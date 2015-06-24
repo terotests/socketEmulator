@@ -1,17 +1,17 @@
 // The code template begins here
-(function() {
+'use strict';
 
+(function () {
 
+  var __amdDefs__ = {};
 
   // The class definition is here...
-  var socketEmulator_prototype = function() {
+  var socketEmulator_prototype = function socketEmulator_prototype() {
     // Then create the traits and subclasses for this class here...
-
-
 
     // trait comes here...
 
-    (function(_myTrait_) {
+    (function (_myTrait_) {
       var _eventOn;
       var _commands;
 
@@ -20,91 +20,48 @@
       /**
        * @param float t
        */
-      _myTrait_.guid = function(t) {
-        // add logging to the functions
-        if (typeof(callCord) != "undefined") callCord("main").record({
-          fn: "guid",
-          className: "_dataTrait"
-        });
+      _myTrait_.guid = function (t) {
 
-        return Math.random().toString(36).substring(2, 15) +
-          Math.random().toString(36).substring(2, 15);
-
-      }
+        return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+      };
 
       /**
        * @param float t
        */
-      _myTrait_.isArray = function(t) {
-        // add logging to the functions
-        if (typeof(callCord) != "undefined") callCord("main").record({
-          fn: "isArray",
-          className: "_dataTrait"
-        });
+      _myTrait_.isArray = function (t) {
 
-        if (typeof(t) == "undefined") return this.__isA;
+        if (typeof t == 'undefined') return this.__isA;
 
         return Object.prototype.toString.call(t) === '[object Array]';
-      }
+      };
 
       /**
        * @param float fn
        */
-      _myTrait_.isFunction = function(fn) {
-        // add logging to the functions
-        if (typeof(callCord) != "undefined") callCord("main").record({
-          fn: "isFunction",
-          className: "_dataTrait"
-        });
+      _myTrait_.isFunction = function (fn) {
         return Object.prototype.toString.call(fn) == '[object Function]';
-      }
+      };
 
       /**
        * @param float t
        */
-      _myTrait_.isObject = function(t) {
-        // add logging to the functions
-        if (typeof(callCord) != "undefined") callCord("main").record({
-          fn: "isObject",
-          className: "_dataTrait"
-        });
+      _myTrait_.isObject = function (t) {
 
-        if (typeof(t) == "undefined") return this.__isO;
+        if (typeof t == 'undefined') return this.__isO;
 
         return t === Object(t);
-      }
-
-    }(this));
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+      };
+    })(this);
 
     // the subclass definition comes around here then
 
     // The class definition is here...
-    var _clientSocket_prototype = function() {
+    var _clientSocket_prototype = function _clientSocket_prototype() {
       // Then create the traits and subclasses for this class here...
-
-
 
       // trait comes here...
 
-      (function(_myTrait_) {
+      (function (_myTrait_) {
 
         // Initialize static variables here...
 
@@ -113,30 +70,20 @@
          * @param string en  - Event name
          * @param float ef
          */
-        _myTrait_.on = function(en, ef) {
-          // add logging to the functions
-          if (typeof(callCord) != "undefined") callCord("main").record({
-            fn: "on",
-            className: ""
-          });
+        _myTrait_.on = function (en, ef) {
           if (!this._ev) this._ev = {};
           if (!this._ev[en]) this._ev[en] = [];
 
           this._ev[en].push(ef);
 
           return this;
-        }
+        };
 
         /**
          * @param float name
          * @param float fn
          */
-        _myTrait_.removeListener = function(name, fn) {
-          // add logging to the functions
-          if (typeof(callCord) != "undefined") callCord("main").record({
-            fn: "removeListener",
-            className: ""
-          });
+        _myTrait_.removeListener = function (name, fn) {
           if (!this._ev) return;
           if (!this._ev[name]) return;
 
@@ -148,8 +95,7 @@
               return;
             }
           }
-
-        }
+        };
 
         /**
          * triggers event with data and optional function
@@ -157,30 +103,21 @@
          * @param float data
          * @param float fn
          */
-        _myTrait_.trigger = function(en, data, fn) {
-          // add logging to the functions
-          if (typeof(callCord) != "undefined") callCord("main").record({
-            fn: "trigger",
-            className: ""
-          });
+        _myTrait_.trigger = function (en, data, fn) {
 
           if (!this._ev) return;
           if (!this._ev[en]) return;
           var me = this;
-          this._ev[en].forEach(function(cb) {
-            cb(data, fn)
+          this._ev[en].forEach(function (cb) {
+            cb(data, fn);
           });
           return this;
-        }
-
-      }(this));
-
-
-
+        };
+      })(this);
 
       // trait comes here...
 
-      (function(_myTrait_) {
+      (function (_myTrait_) {
         var _eventOn;
         var _commands;
 
@@ -189,74 +126,40 @@
         /**
          * @param float t
          */
-        _myTrait_.guid = function(t) {
-          // add logging to the functions
-          if (typeof(callCord) != "undefined") callCord("main").record({
-            fn: "guid",
-            className: "_dataTrait"
-          });
+        _myTrait_.guid = function (t) {
 
-          return Math.random().toString(36).substring(2, 15) +
-            Math.random().toString(36).substring(2, 15);
-
-        }
+          return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+        };
 
         /**
          * @param float t
          */
-        _myTrait_.isArray = function(t) {
-          // add logging to the functions
-          if (typeof(callCord) != "undefined") callCord("main").record({
-            fn: "isArray",
-            className: "_dataTrait"
-          });
+        _myTrait_.isArray = function (t) {
 
-          if (typeof(t) == "undefined") return this.__isA;
+          if (typeof t == 'undefined') return this.__isA;
 
           return Object.prototype.toString.call(t) === '[object Array]';
-        }
+        };
 
         /**
          * @param float fn
          */
-        _myTrait_.isFunction = function(fn) {
-          // add logging to the functions
-          if (typeof(callCord) != "undefined") callCord("main").record({
-            fn: "isFunction",
-            className: "_dataTrait"
-          });
+        _myTrait_.isFunction = function (fn) {
           return Object.prototype.toString.call(fn) == '[object Function]';
-        }
+        };
 
         /**
          * @param float t
          */
-        _myTrait_.isObject = function(t) {
-          // add logging to the functions
-          if (typeof(callCord) != "undefined") callCord("main").record({
-            fn: "isObject",
-            className: "_dataTrait"
-          });
+        _myTrait_.isObject = function (t) {
 
-          if (typeof(t) == "undefined") return this.__isO;
+          if (typeof t == 'undefined') return this.__isO;
 
           return t === Object(t);
-        }
+        };
+      })(this);
 
-      }(this));
-
-
-
-
-
-
-
-
-
-
-
-
-      (function(_myTrait_) {
+      (function (_myTrait_) {
         var _channelIndex;
         var _rootData;
         var _callBacks;
@@ -268,81 +171,59 @@
         /**
          * @param float t
          */
-        _myTrait_.disconnect = function(t) {
-          // add logging to the functions
-          if (typeof(callCord) != "undefined") callCord("main").record({
-            fn: "disconnect",
-            className: "_clientSocket"
-          });
+        _myTrait_.disconnect = function (t) {
           this._socket.messageTo({
             disconnect: true
           });
-        }
+        };
 
         /**
          * @param float name
          * @param float data
          * @param float callBackFn
          */
-        _myTrait_.emit = function(name, data, callBackFn) {
-          // add logging to the functions
-          if (typeof(callCord) != "undefined") callCord("main").record({
-            fn: "emit",
-            className: "_clientSocket"
-          });
+        _myTrait_.emit = function (name, data, callBackFn) {
 
           var obj = {
             name: name,
             data: data
-          }
+          };
 
           if (callBackFn) {
             obj._callBackId = this.guid();
             var me = this;
-            var handleCb = function(data) {
+            var handleCb = function handleCb(data) {
               callBackFn(data);
               me.removeListener(obj._callBackId, handleCb);
-            }
-            this.on(obj._callBackId, handleCb)
+            };
+            this.on(obj._callBackId, handleCb);
           }
 
           this._socket.messageTo(obj);
-        }
+        };
 
         /**
          * @param float t
          */
-        _myTrait_.getEnum = function(t) {
-          // add logging to the functions
-          if (typeof(callCord) != "undefined") callCord("main").record({
-            fn: "getEnum",
-            className: "_clientSocket"
-          });
+        _myTrait_.getEnum = function (t) {
           var myId = this.guid();
 
           if (!_socketIndex[myId]) {
             _socketIndex[myId] = _socketCnt++;
           }
           return _socketIndex[myId];
-        }
+        };
 
         /**
          * @param float t
          */
-        _myTrait_.getId = function(t) {
-          // add logging to the functions
-          if (typeof(callCord) != "undefined") callCord("main").record({
-            fn: "getId",
-            className: "_clientSocket"
-          });
+        _myTrait_.getId = function (t) {
           return this.socketId;
-        }
+        };
 
-
-        if (_myTrait_.__traitInit && !_myTrait_.hasOwnProperty("__traitInit"))
-          _myTrait_.__traitInit = _myTrait_.__traitInit.slice();
-        if (!_myTrait_.__traitInit) _myTrait_.__traitInit = []
-        _myTrait_.__traitInit.push(function(ip, port, bUseReal) {
+        if (_myTrait_.__traitInit && !_myTrait_.hasOwnProperty('__traitInit')) _myTrait_.__traitInit = _myTrait_.__traitInit.slice();
+        if (!_myTrait_.__traitInit) _myTrait_.__traitInit = [];
+        _myTrait_.__traitInit.push(function (ip, port, bUseReal) {
 
           // The socket ID must be told to the server side too
 
@@ -358,58 +239,47 @@
           }
 
           var me = this;
-          var openConnection = _tcpEmu(ip, port, "openConnection", "client");
-          var connection = _tcpEmu(ip, port, myId, "client");
+          var openConnection = _tcpEmu(ip, port, 'openConnection', 'client');
+          var connection = _tcpEmu(ip, port, myId, 'client');
 
           this.socketId = myId;
 
-          connection.on("clientMessage", function(o, v) {
+          connection.on('clientMessage', function (o, v) {
 
             if (v.connected) {
               me._socket = connection;
-              me.trigger("connect", connection);
+              me.trigger('connect', connection);
             } else {
               me.trigger(v.name, v.data);
             }
-
-          })
+          });
 
           openConnection.messageTo({
             socketId: myId
           });
-
-
         });
-
 
         /**
          * A promisified interface for the _clientSocket
          * @param float name
          * @param float data
          */
-        _myTrait_.send = function(name, data) {
-          // add logging to the functions
-          if (typeof(callCord) != "undefined") callCord("main").record({
-            fn: "send",
-            className: "_clientSocket"
-          });
+        _myTrait_.send = function (name, data) {
           var me = this;
-          return _promise(function(respFn) {
+          return _promise(function (respFn) {
             me.emit(name, data, respFn);
           });
-        }
+        };
+      })(this);
+    };
 
-      }(this));
-
-    }
-
-    var _clientSocket = function(a, b, c, d, e, f, g, h) {
+    var _clientSocket = function _clientSocket(a, b, c, d, e, f, g, h) {
       var m = this,
-        res;
+          res;
       if (m instanceof _clientSocket) {
         var args = [a, b, c, d, e, f, g, h];
         if (m.__factoryClass) {
-          m.__factoryClass.forEach(function(initF) {
+          m.__factoryClass.forEach(function (initF) {
             res = initF.apply(m, args);
           });
           if (typeof res == 'function') {
@@ -419,16 +289,15 @@
           }
         }
         if (m.__traitInit) {
-          m.__traitInit.forEach(function(initF) {
+          m.__traitInit.forEach(function (initF) {
             initF.apply(m, args);
-          })
+          });
         } else {
-          if (typeof m.init == 'function')
-            m.init.apply(m, args);
+          if (typeof m.init == 'function') m.init.apply(m, args);
         }
       } else return new _clientSocket(a, b, c, d, e, f, g, h);
     };
-    // inheritance is here 
+    // inheritance is here
 
     _clientSocket._classInfo = {
       name: '_clientSocket'
@@ -438,40 +307,28 @@
 
     // publish the module to global
 
-
-
-
-    (function() {
+    (function () {
       // The basic class export, this may not work for private classes
-      if ((typeof define !== "undefined" && define !== null) && (define.amd != null)) {
-        define([], function() {
-          return _clientSocket;
-        });
+      if (typeof define !== 'undefined' && define !== null && define.amd != null) {
+        __amdDefs__['_clientSocket'] = _clientSocket;
         this._clientSocket = _clientSocket;
-      } else if ((typeof module !== "undefined" && module !== null) && (module.exports != null)) {
-        module.exports["_clientSocket"] = _clientSocket;
+      } else if (typeof module !== 'undefined' && module !== null && module.exports != null) {
+        module.exports['_clientSocket'] = _clientSocket;
       } else {
         this._clientSocket = _clientSocket;
       }
-    }).call((new Function('return this'))());
+    }).call(new Function('return this')());
     // window["_clientSocket"] = _clientSocket;
-
-
-
-
-
 
     // the subclass definition comes around here then
 
     // The class definition is here...
-    var _serverSocket_prototype = function() {
+    var _serverSocket_prototype = function _serverSocket_prototype() {
       // Then create the traits and subclasses for this class here...
-
-
 
       // trait comes here...
 
-      (function(_myTrait_) {
+      (function (_myTrait_) {
 
         // Initialize static variables here...
 
@@ -480,19 +337,14 @@
          * @param string en  - Event name
          * @param float ef
          */
-        _myTrait_.on = function(en, ef) {
-          // add logging to the functions
-          if (typeof(callCord) != "undefined") callCord("main").record({
-            fn: "on",
-            className: ""
-          });
+        _myTrait_.on = function (en, ef) {
           if (!this._ev) this._ev = {};
           if (!this._ev[en]) this._ev[en] = [];
 
           this._ev[en].push(ef);
 
           return this;
-        }
+        };
 
         /**
          * triggers event with data and optional function
@@ -500,34 +352,19 @@
          * @param float data
          * @param float fn
          */
-        _myTrait_.trigger = function(en, data, fn) {
-          // add logging to the functions
-          if (typeof(callCord) != "undefined") callCord("main").record({
-            fn: "trigger",
-            className: ""
-          });
+        _myTrait_.trigger = function (en, data, fn) {
 
           if (!this._ev) return;
           if (!this._ev[en]) return;
           var me = this;
-          this._ev[en].forEach(function(cb) {
-            cb(data, fn)
+          this._ev[en].forEach(function (cb) {
+            cb(data, fn);
           });
           return this;
-        }
+        };
+      })(this);
 
-      }(this));
-
-
-
-
-
-
-
-
-
-
-      (function(_myTrait_) {
+      (function (_myTrait_) {
         var _channelIndex;
         var _rootData;
         var _clients;
@@ -538,41 +375,25 @@
         /**
          * @param float t
          */
-        _myTrait_.emit = function(t) {
-          // add logging to the functions
-          if (typeof(callCord) != "undefined") callCord("main").record({
-            fn: "emit",
-            className: "_serverSocket"
-          });
-
-        }
+        _myTrait_.emit = function (t) {};
 
         /**
          * @param float t
          */
-        _myTrait_.getPrefix = function(t) {
-          // add logging to the functions
-          if (typeof(callCord) != "undefined") callCord("main").record({
-            fn: "getPrefix",
-            className: "_serverSocket"
-          });
-          return this._ip + ":" + this._port;
-        }
+        _myTrait_.getPrefix = function (t) {
+          return this._ip + ':' + this._port;
+        };
 
-
-        if (_myTrait_.__traitInit && !_myTrait_.hasOwnProperty("__traitInit"))
-          _myTrait_.__traitInit = _myTrait_.__traitInit.slice();
-        if (!_myTrait_.__traitInit) _myTrait_.__traitInit = []
-        _myTrait_.__traitInit.push(function(ip, port) {
+        if (_myTrait_.__traitInit && !_myTrait_.hasOwnProperty('__traitInit')) _myTrait_.__traitInit = _myTrait_.__traitInit.slice();
+        if (!_myTrait_.__traitInit) _myTrait_.__traitInit = [];
+        _myTrait_.__traitInit.push(function (ip, port) {
           /*
-
-// This is how the server side should be operating...
-var io = require('socket.io')();
-io.on('connection', function(socket){
-  socket.emit('an event', { some: 'data' });
-});
-
-*/
+          // This is how the server side should be operating...
+          var io = require('socket.io')();
+          io.on('connection', function(socket){
+          socket.emit('an event', { some: 'data' });
+          });
+          */
 
           if (!_rooms) {
             _rooms = {};
@@ -585,17 +406,17 @@ io.on('connection', function(socket){
           this._ip = ip;
           this._port = port;
 
-          var openConnection = _tcpEmu(ip, port, "openConnection", "server");
+          var openConnection = _tcpEmu(ip, port, 'openConnection', 'server');
 
-          openConnection.on("serverMessage", function(o, v) {
+          openConnection.on('serverMessage', function (o, v) {
 
             if (v.socketId) {
               //console.log("Trying to send msg to client ", v);
-              var newSocket = _tcpEmu(ip, port, v.socketId, "server");
+              var newSocket = _tcpEmu(ip, port, v.socketId, 'server');
 
               var socket = _serverSocketWrap(newSocket, me);
               _clients[v.socketId] = socket;
-              me.trigger("connect", socket);
+              me.trigger('connect', socket);
 
               if (socket.isConnected()) {
 
@@ -605,46 +426,28 @@ io.on('connection', function(socket){
                 });
               }
             }
-          })
-
+          });
         });
 
+        /**
+         * @param float t
+         */
+        _myTrait_.join = function (t) {};
 
         /**
          * @param float t
          */
-        _myTrait_.join = function(t) {
-          // add logging to the functions
-          if (typeof(callCord) != "undefined") callCord("main").record({
-            fn: "join",
-            className: "_serverSocket"
-          });
+        _myTrait_.removeListener = function (t) {};
+      })(this);
+    };
 
-        }
-
-        /**
-         * @param float t
-         */
-        _myTrait_.removeListener = function(t) {
-          // add logging to the functions
-          if (typeof(callCord) != "undefined") callCord("main").record({
-            fn: "removeListener",
-            className: "_serverSocket"
-          });
-
-        }
-
-      }(this));
-
-    }
-
-    var _serverSocket = function(a, b, c, d, e, f, g, h) {
+    var _serverSocket = function _serverSocket(a, b, c, d, e, f, g, h) {
       var m = this,
-        res;
+          res;
       if (m instanceof _serverSocket) {
         var args = [a, b, c, d, e, f, g, h];
         if (m.__factoryClass) {
-          m.__factoryClass.forEach(function(initF) {
+          m.__factoryClass.forEach(function (initF) {
             res = initF.apply(m, args);
           });
           if (typeof res == 'function') {
@@ -654,16 +457,15 @@ io.on('connection', function(socket){
           }
         }
         if (m.__traitInit) {
-          m.__traitInit.forEach(function(initF) {
+          m.__traitInit.forEach(function (initF) {
             initF.apply(m, args);
-          })
+          });
         } else {
-          if (typeof m.init == 'function')
-            m.init.apply(m, args);
+          if (typeof m.init == 'function') m.init.apply(m, args);
         }
       } else return new _serverSocket(a, b, c, d, e, f, g, h);
     };
-    // inheritance is here 
+    // inheritance is here
 
     _serverSocket._classInfo = {
       name: '_serverSocket'
@@ -673,40 +475,28 @@ io.on('connection', function(socket){
 
     // publish the module to global
 
-
-
-
-    (function() {
+    (function () {
       // The basic class export, this may not work for private classes
-      if ((typeof define !== "undefined" && define !== null) && (define.amd != null)) {
-        define([], function() {
-          return _serverSocket;
-        });
+      if (typeof define !== 'undefined' && define !== null && define.amd != null) {
+        __amdDefs__['_serverSocket'] = _serverSocket;
         this._serverSocket = _serverSocket;
-      } else if ((typeof module !== "undefined" && module !== null) && (module.exports != null)) {
-        module.exports["_serverSocket"] = _serverSocket;
+      } else if (typeof module !== 'undefined' && module !== null && module.exports != null) {
+        module.exports['_serverSocket'] = _serverSocket;
       } else {
         this._serverSocket = _serverSocket;
       }
-    }).call((new Function('return this'))());
+    }).call(new Function('return this')());
     // window["_serverSocket"] = _serverSocket;
-
-
-
-
-
 
     // the subclass definition comes around here then
 
     // The class definition is here...
-    var _tcpEmu_prototype = function() {
+    var _tcpEmu_prototype = function _tcpEmu_prototype() {
       // Then create the traits and subclasses for this class here...
-
-
 
       // trait comes here...
 
-      (function(_myTrait_) {
+      (function (_myTrait_) {
 
         // Initialize static variables here...
 
@@ -715,19 +505,14 @@ io.on('connection', function(socket){
          * @param string en  - Event name
          * @param float ef
          */
-        _myTrait_.on = function(en, ef) {
-          // add logging to the functions
-          if (typeof(callCord) != "undefined") callCord("main").record({
-            fn: "on",
-            className: ""
-          });
+        _myTrait_.on = function (en, ef) {
           if (!this._ev) this._ev = {};
           if (!this._ev[en]) this._ev[en] = [];
 
           this._ev[en].push(ef);
 
           return this;
-        }
+        };
 
         /**
          * triggers event with data and optional function
@@ -735,30 +520,21 @@ io.on('connection', function(socket){
          * @param float data
          * @param float fn
          */
-        _myTrait_.trigger = function(en, data, fn) {
-          // add logging to the functions
-          if (typeof(callCord) != "undefined") callCord("main").record({
-            fn: "trigger",
-            className: ""
-          });
+        _myTrait_.trigger = function (en, data, fn) {
 
           if (!this._ev) return;
           if (!this._ev[en]) return;
           var me = this;
-          this._ev[en].forEach(function(cb) {
-            cb(me, data, fn)
+          this._ev[en].forEach(function (cb) {
+            cb(me, data, fn);
           });
           return this;
-        }
-
-      }(this));
-
-
-
+        };
+      })(this);
 
       // trait comes here...
 
-      (function(_myTrait_) {
+      (function (_myTrait_) {
         var _eventOn;
         var _commands;
 
@@ -767,164 +543,109 @@ io.on('connection', function(socket){
         /**
          * @param float t
          */
-        _myTrait_.guid = function(t) {
-          // add logging to the functions
-          if (typeof(callCord) != "undefined") callCord("main").record({
-            fn: "guid",
-            className: "_dataTrait"
-          });
+        _myTrait_.guid = function (t) {
 
-          return Math.random().toString(36).substring(2, 15) +
-            Math.random().toString(36).substring(2, 15);
-
-        }
+          return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+        };
 
         /**
          * @param float t
          */
-        _myTrait_.isArray = function(t) {
-          // add logging to the functions
-          if (typeof(callCord) != "undefined") callCord("main").record({
-            fn: "isArray",
-            className: "_dataTrait"
-          });
+        _myTrait_.isArray = function (t) {
 
-          if (typeof(t) == "undefined") return this.__isA;
+          if (typeof t == 'undefined') return this.__isA;
 
           return Object.prototype.toString.call(t) === '[object Array]';
-        }
+        };
 
         /**
          * @param float fn
          */
-        _myTrait_.isFunction = function(fn) {
-          // add logging to the functions
-          if (typeof(callCord) != "undefined") callCord("main").record({
-            fn: "isFunction",
-            className: "_dataTrait"
-          });
+        _myTrait_.isFunction = function (fn) {
           return Object.prototype.toString.call(fn) == '[object Function]';
-        }
+        };
 
         /**
          * @param float t
          */
-        _myTrait_.isObject = function(t) {
-          // add logging to the functions
-          if (typeof(callCord) != "undefined") callCord("main").record({
-            fn: "isObject",
-            className: "_dataTrait"
-          });
+        _myTrait_.isObject = function (t) {
 
-          if (typeof(t) == "undefined") return this.__isO;
+          if (typeof t == 'undefined') return this.__isO;
 
           return t === Object(t);
-        }
+        };
+      })(this);
 
-      }(this));
-
-
-
-
-
-
-
-
-
-
-
-
-      (function(_myTrait_) {
+      (function (_myTrait_) {
         var _channelIndex;
         var _rootData;
         var _msgBuffer;
 
         // Initialize static variables here...
 
-
-        if (_myTrait_.__traitInit && !_myTrait_.hasOwnProperty("__traitInit"))
-          _myTrait_.__traitInit = _myTrait_.__traitInit.slice();
-        if (!_myTrait_.__traitInit) _myTrait_.__traitInit = []
-        _myTrait_.__traitInit.push(function(server, port, socketId, role) {
+        if (_myTrait_.__traitInit && !_myTrait_.hasOwnProperty('__traitInit')) _myTrait_.__traitInit = _myTrait_.__traitInit.slice();
+        if (!_myTrait_.__traitInit) _myTrait_.__traitInit = [];
+        _myTrait_.__traitInit.push(function (server, port, socketId, role) {
 
           var me = this;
           this._server = server;
           this._port = port;
           this._socketId = socketId;
-          this._dbName = "tcp://" + this._server + ":" + this._port + ":" + this._socketId;
+          this._dbName = 'tcp://' + this._server + ':' + this._port + ':' + this._socketId;
 
-          var bnTo = this._dbName + ":to";
-          var bnFrom = this._dbName + ":from";
+          var bnTo = this._dbName + ':to';
+          var bnFrom = this._dbName + ':from';
 
           if (!_msgBuffer) _msgBuffer = {};
           if (!_msgBuffer[bnTo]) _msgBuffer[bnTo] = [];
           if (!_msgBuffer[bnFrom]) _msgBuffer[bnFrom] = [];
 
           // Check for new messages to the client or server
-          later().every(1 / 10, function() {
+          later().every(1 / 10, function () {
 
-            if (role == "server") {
+            if (role == 'server') {
 
               var list = _msgBuffer[bnTo].slice();
-              list.forEach(function(msg) {
-                me.trigger("serverMessage", msg);
+              list.forEach(function (msg) {
+                me.trigger('serverMessage', msg);
                 _msgBuffer[bnTo].shift();
               });
-
             }
-            if (role == "client") {
+            if (role == 'client') {
               var list = _msgBuffer[bnFrom].slice();
-              list.forEach(function(msg) {
-                me.trigger("clientMessage", msg);
+              list.forEach(function (msg) {
+                me.trigger('clientMessage', msg);
                 _msgBuffer[bnFrom].shift();
               });
             }
-
           });
-
         });
 
+        /**
+         * @param float msg
+         */
+        _myTrait_.messageFrom = function (msg) {
+          var bn = this._dbName + ':from';
+          _msgBuffer[bn].push(msg);
+        };
 
         /**
          * @param float msg
          */
-        _myTrait_.messageFrom = function(msg) {
-          // add logging to the functions
-          if (typeof(callCord) != "undefined") callCord("main").record({
-            fn: "messageFrom",
-            className: "_tcpEmu"
-          });
-          var bn = this._dbName + ":from";
+        _myTrait_.messageTo = function (msg) {
+          var bn = this._dbName + ':to';
           _msgBuffer[bn].push(msg);
+        };
+      })(this);
+    };
 
-
-        }
-
-        /**
-         * @param float msg
-         */
-        _myTrait_.messageTo = function(msg) {
-          // add logging to the functions
-          if (typeof(callCord) != "undefined") callCord("main").record({
-            fn: "messageTo",
-            className: "_tcpEmu"
-          });
-          var bn = this._dbName + ":to";
-          _msgBuffer[bn].push(msg);
-
-        }
-
-      }(this));
-
-    }
-
-    var _tcpEmu = function(a, b, c, d, e, f, g, h) {
+    var _tcpEmu = function _tcpEmu(a, b, c, d, e, f, g, h) {
       var m = this,
-        res;
+          res;
       if (m instanceof _tcpEmu) {
         var args = [a, b, c, d, e, f, g, h];
         if (m.__factoryClass) {
-          m.__factoryClass.forEach(function(initF) {
+          m.__factoryClass.forEach(function (initF) {
             res = initF.apply(m, args);
           });
           if (typeof res == 'function') {
@@ -934,16 +655,15 @@ io.on('connection', function(socket){
           }
         }
         if (m.__traitInit) {
-          m.__traitInit.forEach(function(initF) {
+          m.__traitInit.forEach(function (initF) {
             initF.apply(m, args);
-          })
+          });
         } else {
-          if (typeof m.init == 'function')
-            m.init.apply(m, args);
+          if (typeof m.init == 'function') m.init.apply(m, args);
         }
       } else return new _tcpEmu(a, b, c, d, e, f, g, h);
     };
-    // inheritance is here 
+    // inheritance is here
 
     _tcpEmu._classInfo = {
       name: '_tcpEmu'
@@ -953,27 +673,13 @@ io.on('connection', function(socket){
 
     // publish the module to global
 
-
-
-
-
-
-
-
-
     // the subclass definition comes around here then
 
     // The class definition is here...
-    var later_prototype = function() {
+    var later_prototype = function later_prototype() {
       // Then create the traits and subclasses for this class here...
 
-
-
-
-
-
-
-      (function(_myTrait_) {
+      (function (_myTrait_) {
         var _initDone;
         var _callers;
         var _oneTimers;
@@ -987,12 +693,7 @@ io.on('connection', function(socket){
          * @param float thisObj
          * @param float args
          */
-        _myTrait_.add = function(fn, thisObj, args) {
-          // add logging to the functions
-          if (typeof(callCord) != "undefined") callCord("main").record({
-            fn: "add",
-            className: "later"
-          });
+        _myTrait_.add = function (fn, thisObj, args) {
           if (thisObj || args) {
             var tArgs;
             if (Object.prototype.toString.call(args) === '[object Array]') {
@@ -1005,35 +706,24 @@ io.on('connection', function(socket){
           } else {
             _callers.push(fn);
           }
-        }
+        };
 
         /**
          * @param function fn
          */
-        _myTrait_.asap = function(fn) {
-          // add logging to the functions
-          if (typeof(callCord) != "undefined") callCord("main").record({
-            fn: "asap",
-            className: "later"
-          });
+        _myTrait_.asap = function (fn) {
           this.add(fn);
-
-        }
+        };
 
         /**
          * @param float seconds
          * @param float fn
          * @param float name
          */
-        _myTrait_.every = function(seconds, fn, name) {
-          // add logging to the functions
-          if (typeof(callCord) != "undefined") callCord("main").record({
-            fn: "every",
-            className: "later"
-          });
+        _myTrait_.every = function (seconds, fn, name) {
 
           if (!name) {
-            name = "time" + (new Date()).getTime() + Math.random(10000000);
+            name = 'time' + new Date().getTime() + Math.random(10000000);
           }
 
           _everies[name] = {
@@ -1041,23 +731,21 @@ io.on('connection', function(socket){
             fn: fn,
             nextTime: 0
           };
-        }
+        };
 
-
-        if (_myTrait_.__traitInit && !_myTrait_.hasOwnProperty("__traitInit"))
-          _myTrait_.__traitInit = _myTrait_.__traitInit.slice();
-        if (!_myTrait_.__traitInit) _myTrait_.__traitInit = []
-        _myTrait_.__traitInit.push(function(interval, fn) {
+        if (_myTrait_.__traitInit && !_myTrait_.hasOwnProperty('__traitInit')) _myTrait_.__traitInit = _myTrait_.__traitInit.slice();
+        if (!_myTrait_.__traitInit) _myTrait_.__traitInit = [];
+        _myTrait_.__traitInit.push(function (interval, fn) {
           if (!_initDone) {
 
             var frame, cancelFrame;
 
             this.polyfill();
 
-            if (typeof(window) != "undefined") {
+            if (typeof window != 'undefined') {
               var frame = window['requestAnimationFrame'],
-                cancelFrame = window['cancelRequestAnimationFrame'];
-              ['', 'ms', 'moz', 'webkit', 'o'].forEach(function(x) {
+                  cancelFrame = window['cancelRequestAnimationFrame'];
+              ['', 'ms', 'moz', 'webkit', 'o'].forEach(function (x) {
                 if (!frame) {
                   frame = window[x + 'RequestAnimationFrame'];
                   cancelFrame = window[x + 'CancelAnimationFrame'] || window[x + 'CancelRequestAnimationFrame'];
@@ -1065,15 +753,13 @@ io.on('connection', function(socket){
               });
             }
 
-            if (!frame)
-              frame = function(cb) {
-                return setTimeout(cb, 16);
-              };
+            if (!frame) frame = function (cb) {
+              return setTimeout(cb, 16);
+            };
 
-            if (!cancelFrame)
-              cancelFrame = function(id) {
-                clearTimeout(id);
-              };
+            if (!cancelFrame) cancelFrame = function (id) {
+              clearTimeout(id);
+            };
 
             _callers = [];
             _oneTimers = {};
@@ -1081,8 +767,8 @@ io.on('connection', function(socket){
             _framers = [];
             var lastMs = 0;
 
-            var _callQueQue = function() {
-              var ms = (new Date()).getTime();
+            var _callQueQue = function _callQueQue() {
+              var ms = new Date().getTime();
               var fn;
               while (fn = _callers.shift()) {
                 if (Object.prototype.toString.call(fn) === '[object Array]') {
@@ -1090,7 +776,6 @@ io.on('connection', function(socket){
                 } else {
                   fn();
                 }
-
               }
 
               for (var i = 0; i < _framers.length; i++) {
@@ -1129,57 +814,34 @@ io.on('connection', function(socket){
           }
         });
 
-
         /**
          * @param  key
          * @param float fn
          * @param float value
          */
-        _myTrait_.once = function(key, fn, value) {
-          // add logging to the functions
-          if (typeof(callCord) != "undefined") callCord("main").record({
-            fn: "once",
-            className: "later"
-          });
+        _myTrait_.once = function (key, fn, value) {
           // _oneTimers
 
           _oneTimers[key] = [fn, value];
-        }
+        };
 
         /**
          * @param function fn
          */
-        _myTrait_.onFrame = function(fn) {
-          // add logging to the functions
-          if (typeof(callCord) != "undefined") callCord("main").record({
-            fn: "onFrame",
-            className: "later"
-          });
+        _myTrait_.onFrame = function (fn) {
 
           _framers.push(fn);
-        }
+        };
 
         /**
          * @param float t
          */
-        _myTrait_.polyfill = function(t) {
-          // add logging to the functions
-          if (typeof(callCord) != "undefined") callCord("main").record({
-            fn: "polyfill",
-            className: "later"
-          });
-          // --- let's not ---
-        }
+        _myTrait_.polyfill = function (t) {};
 
         /**
          * @param float fn
          */
-        _myTrait_.removeFrameFn = function(fn) {
-          // add logging to the functions
-          if (typeof(callCord) != "undefined") callCord("main").record({
-            fn: "removeFrameFn",
-            className: "later"
-          });
+        _myTrait_.removeFrameFn = function (fn) {
 
           var i = _framers.indexOf(fn);
           if (i >= 0) {
@@ -1191,19 +853,17 @@ io.on('connection', function(socket){
           } else {
             return false;
           }
-        }
+        };
+      })(this);
+    };
 
-      }(this));
-
-    }
-
-    var later = function(a, b, c, d, e, f, g, h) {
+    var later = function later(a, b, c, d, e, f, g, h) {
       var m = this,
-        res;
+          res;
       if (m instanceof later) {
         var args = [a, b, c, d, e, f, g, h];
         if (m.__factoryClass) {
-          m.__factoryClass.forEach(function(initF) {
+          m.__factoryClass.forEach(function (initF) {
             res = initF.apply(m, args);
           });
           if (typeof res == 'function') {
@@ -1213,16 +873,15 @@ io.on('connection', function(socket){
           }
         }
         if (m.__traitInit) {
-          m.__traitInit.forEach(function(initF) {
+          m.__traitInit.forEach(function (initF) {
             initF.apply(m, args);
-          })
+          });
         } else {
-          if (typeof m.init == 'function')
-            m.init.apply(m, args);
+          if (typeof m.init == 'function') m.init.apply(m, args);
         }
       } else return new later(a, b, c, d, e, f, g, h);
     };
-    // inheritance is here 
+    // inheritance is here
 
     later._classInfo = {
       name: 'later'
@@ -1232,25 +891,15 @@ io.on('connection', function(socket){
 
     // publish the module to global
 
-
-
-
-
-
-
-
-
     // the subclass definition comes around here then
 
     // The class definition is here...
-    var _serverSocketWrap_prototype = function() {
+    var _serverSocketWrap_prototype = function _serverSocketWrap_prototype() {
       // Then create the traits and subclasses for this class here...
-
-
 
       // trait comes here...
 
-      (function(_myTrait_) {
+      (function (_myTrait_) {
 
         // Initialize static variables here...
 
@@ -1259,19 +908,14 @@ io.on('connection', function(socket){
          * @param string en  - Event name
          * @param float ef
          */
-        _myTrait_.on = function(en, ef) {
-          // add logging to the functions
-          if (typeof(callCord) != "undefined") callCord("main").record({
-            fn: "on",
-            className: ""
-          });
+        _myTrait_.on = function (en, ef) {
           if (!this._ev) this._ev = {};
           if (!this._ev[en]) this._ev[en] = [];
 
           this._ev[en].push(ef);
 
           return this;
-        }
+        };
 
         /**
          * triggers event with data and optional function
@@ -1279,34 +923,19 @@ io.on('connection', function(socket){
          * @param float data
          * @param float fn
          */
-        _myTrait_.trigger = function(en, data, fn) {
-          // add logging to the functions
-          if (typeof(callCord) != "undefined") callCord("main").record({
-            fn: "trigger",
-            className: ""
-          });
+        _myTrait_.trigger = function (en, data, fn) {
 
           if (!this._ev) return;
           if (!this._ev[en]) return;
           var me = this;
-          this._ev[en].forEach(function(cb) {
-            cb(data, fn)
+          this._ev[en].forEach(function (cb) {
+            cb(data, fn);
           });
           return this;
-        }
+        };
+      })(this);
 
-      }(this));
-
-
-
-
-
-
-
-
-
-
-      (function(_myTrait_) {
+      (function (_myTrait_) {
         var _channelIndex;
         var _rootData;
         var _rooms;
@@ -1319,117 +948,85 @@ io.on('connection', function(socket){
          * @param float name
          * @param float data
          */
-        _myTrait_.delegateToRoom = function(roomName, name, data) {
-          // add logging to the functions
-          if (typeof(callCord) != "undefined") callCord("main").record({
-            fn: "delegateToRoom",
-            className: "_serverSocketWrap"
-          });
+        _myTrait_.delegateToRoom = function (roomName, name, data) {
 
-          var realRoomName = this._roomPrefix + ":" + roomName;
+          var realRoomName = this._roomPrefix + ':' + roomName;
 
           if (_rooms && _rooms[realRoomName]) {
             var me = this;
-            _rooms[realRoomName].forEach(function(socket) {
+            _rooms[realRoomName].forEach(function (socket) {
               if (socket != me) {
                 socket.emit(name, data);
               }
-            })
+            });
           }
-        }
+        };
 
         /**
          * @param float t
          */
-        _myTrait_.disconnect = function(t) {
-          // add logging to the functions
-          if (typeof(callCord) != "undefined") callCord("main").record({
-            fn: "disconnect",
-            className: "_serverSocketWrap"
-          });
+        _myTrait_.disconnect = function (t) {
           var me = this;
           me._disconnected = true;
           me.leaveFromRooms();
-          me.trigger("disconnect", me);
+          me.trigger('disconnect', me);
           // Then remove the socket from the listeners...
           me._disconnected = true;
 
           var dbName = this._tcp._dbName;
 
-          _localDB().clearDatabases(function(d) {
+          _localDB().clearDatabases(function (d) {
             if (d.name == dbName) return true;
           });
 
           return;
-        }
+        };
 
         /**
          * @param float name
          * @param float value
          */
-        _myTrait_.emit = function(name, value) {
-          // add logging to the functions
-          if (typeof(callCord) != "undefined") callCord("main").record({
-            fn: "emit",
-            className: "_serverSocketWrap"
-          });
+        _myTrait_.emit = function (name, value) {
 
           this._tcp.messageFrom({
             name: name,
             data: value
           });
-        }
+        };
 
         /**
          * @param float t
          */
-        _myTrait_.getId = function(t) {
-          // add logging to the functions
-          if (typeof(callCord) != "undefined") callCord("main").record({
-            fn: "getId",
-            className: "_serverSocketWrap"
-          });
+        _myTrait_.getId = function (t) {
           return this._tcp._socketId;
-        }
+        };
 
         /**
          * @param float t
          */
-        _myTrait_.getUserId = function(t) {
-          // add logging to the functions
-          if (typeof(callCord) != "undefined") callCord("main").record({
-            fn: "getUserId",
-            className: "_serverSocketWrap"
-          });
+        _myTrait_.getUserId = function (t) {
 
           return this._userId;
-        }
+        };
 
         /**
          * @param float t
          */
-        _myTrait_.getUserRoles = function(t) {
-          // add logging to the functions
-          if (typeof(callCord) != "undefined") callCord("main").record({
-            fn: "getUserRoles",
-            className: "_serverSocketWrap"
-          });
+        _myTrait_.getUserRoles = function (t) {
 
           return this._roles;
-        }
+        };
 
-
-        if (_myTrait_.__traitInit && !_myTrait_.hasOwnProperty("__traitInit"))
-          _myTrait_.__traitInit = _myTrait_.__traitInit.slice();
-        if (!_myTrait_.__traitInit) _myTrait_.__traitInit = []
-        _myTrait_.__traitInit.push(function(tcpEmu, server) {
+        if (_myTrait_.__traitInit && !_myTrait_.hasOwnProperty('__traitInit')) _myTrait_.__traitInit = _myTrait_.__traitInit.slice();
+        if (!_myTrait_.__traitInit) _myTrait_.__traitInit = [];
+        _myTrait_.__traitInit.push(function (tcpEmu, server) {
 
           var me = this;
           this._roomPrefix = server.getPrefix();
           this._tcp = tcpEmu;
           this._server = server;
           var disconnected = false;
-          tcpEmu.on("serverMessage", function(o, v) {
+          tcpEmu.on('serverMessage', function (o, v) {
 
             if (me._disconnected) return; // not good enough
 
@@ -1438,68 +1035,53 @@ io.on('connection', function(socket){
               return;
             }
             if (v._callBackId) {
-              me.trigger(v.name, v.data, function(data) {
+              me.trigger(v.name, v.data, function (data) {
                 me.emit(v._callBackId, data);
               });
             } else {
               me.trigger(v.name, v.data);
             }
-          })
+          });
 
           this.broadcast = {
-            to: function(room) {
+            to: function to(room) {
               return {
-                emit: function(name, value) {
+                emit: function emit(name, value) {
                   me.delegateToRoom(room, name, value);
                 }
-              }
+              };
             }
           }
 
           /*
-socket.broadcast.to(_ctx.channelId).emit('ctxupd_'+_ctx.channelId, cObj);
-*/
+          socket.broadcast.to(_ctx.channelId).emit('ctxupd_'+_ctx.channelId, cObj);
+          */
 
+          ;
         });
-
 
         /**
          * @param float t
          */
-        _myTrait_.isConnected = function(t) {
-          // add logging to the functions
-          if (typeof(callCord) != "undefined") callCord("main").record({
-            fn: "isConnected",
-            className: "_serverSocketWrap"
-          });
+        _myTrait_.isConnected = function (t) {
           if (this._disconnected) return false;
           return true;
-        }
+        };
 
         /**
          * @param float roomName
          */
-        _myTrait_.isInRoom = function(roomName) {
-          // add logging to the functions
-          if (typeof(callCord) != "undefined") callCord("main").record({
-            fn: "isInRoom",
-            className: "_serverSocketWrap"
-          });
+        _myTrait_.isInRoom = function (roomName) {
           if (!_socketRooms) return false;
           return _socketRooms[this.getId()].indexOf(roomName) >= 0;
-        }
+        };
 
         /**
          * @param String roomName
          */
-        _myTrait_.join = function(roomName) {
-          // add logging to the functions
-          if (typeof(callCord) != "undefined") callCord("main").record({
-            fn: "join",
-            className: "_serverSocketWrap"
-          });
+        _myTrait_.join = function (roomName) {
 
-          var realRoomName = this._roomPrefix + ":" + roomName;
+          var realRoomName = this._roomPrefix + ':' + roomName;
 
           if (!_rooms) _rooms = {};
           if (!_rooms[realRoomName]) _rooms[realRoomName] = [];
@@ -1511,19 +1093,14 @@ socket.broadcast.to(_ctx.channelId).emit('ctxupd_'+_ctx.channelId, cObj);
 
             _socketRooms[this.getId()].push(roomName);
           }
-        }
+        };
 
         /**
          * @param float roomName
          */
-        _myTrait_.leave = function(roomName) {
-          // add logging to the functions
-          if (typeof(callCord) != "undefined") callCord("main").record({
-            fn: "leave",
-            className: "_serverSocketWrap"
-          });
+        _myTrait_.leave = function (roomName) {
 
-          var realRoomName = this._roomPrefix + ":" + roomName;
+          var realRoomName = this._roomPrefix + ':' + roomName;
 
           if (!_rooms) _rooms = {};
           if (!_rooms[realRoomName]) _rooms[realRoomName] = [];
@@ -1536,68 +1113,47 @@ socket.broadcast.to(_ctx.channelId).emit('ctxupd_'+_ctx.channelId, cObj);
             var i2 = _socketRooms[id].indexOf(roomName);
             if (i2 >= 0) _socketRooms[id].splice(i2, 1);
           }
-
-
-        }
+        };
 
         /**
          * @param float socket
          */
-        _myTrait_.leaveFromRooms = function(socket) {
-          // add logging to the functions
-          if (typeof(callCord) != "undefined") callCord("main").record({
-            fn: "leaveFromRooms",
-            className: "_serverSocketWrap"
-          });
+        _myTrait_.leaveFromRooms = function (socket) {
           var id = this.getId();
           var me = this;
 
           if (!_socketRooms) return;
           if (!_socketRooms[id]) return;
 
-          _socketRooms[id].forEach(function(name) {
+          _socketRooms[id].forEach(function (name) {
             me.leave(name);
           });
-        }
+        };
 
         /**
          * @param float t
          */
-        _myTrait_.removeListener = function(t) {
-          // add logging to the functions
-          if (typeof(callCord) != "undefined") callCord("main").record({
-            fn: "removeListener",
-            className: "_serverSocketWrap"
-          });
-
-        }
+        _myTrait_.removeListener = function (t) {};
 
         /**
          * @param float userId
          * @param float roles
          */
-        _myTrait_.setAuthInfo = function(userId, roles) {
-          // add logging to the functions
-          if (typeof(callCord) != "undefined") callCord("main").record({
-            fn: "setAuthInfo",
-            className: "_serverSocketWrap"
-          });
+        _myTrait_.setAuthInfo = function (userId, roles) {
 
           this._userId = userId;
           this._roles = roles;
-        }
+        };
+      })(this);
+    };
 
-      }(this));
-
-    }
-
-    var _serverSocketWrap = function(a, b, c, d, e, f, g, h) {
+    var _serverSocketWrap = function _serverSocketWrap(a, b, c, d, e, f, g, h) {
       var m = this,
-        res;
+          res;
       if (m instanceof _serverSocketWrap) {
         var args = [a, b, c, d, e, f, g, h];
         if (m.__factoryClass) {
-          m.__factoryClass.forEach(function(initF) {
+          m.__factoryClass.forEach(function (initF) {
             res = initF.apply(m, args);
           });
           if (typeof res == 'function') {
@@ -1607,16 +1163,15 @@ socket.broadcast.to(_ctx.channelId).emit('ctxupd_'+_ctx.channelId, cObj);
           }
         }
         if (m.__traitInit) {
-          m.__traitInit.forEach(function(initF) {
+          m.__traitInit.forEach(function (initF) {
             initF.apply(m, args);
-          })
+          });
         } else {
-          if (typeof m.init == 'function')
-            m.init.apply(m, args);
+          if (typeof m.init == 'function') m.init.apply(m, args);
         }
       } else return new _serverSocketWrap(a, b, c, d, e, f, g, h);
     };
-    // inheritance is here 
+    // inheritance is here
 
     _serverSocketWrap._classInfo = {
       name: '_serverSocketWrap'
@@ -1626,43 +1181,24 @@ socket.broadcast.to(_ctx.channelId).emit('ctxupd_'+_ctx.channelId, cObj);
 
     // publish the module to global
 
-
-
-
-
-
-
-
-
-
-    (function(_myTrait_) {
+    (function (_myTrait_) {
       var _initDone;
 
       // Initialize static variables here...
 
+      if (_myTrait_.__traitInit && !_myTrait_.hasOwnProperty('__traitInit')) _myTrait_.__traitInit = _myTrait_.__traitInit.slice();
+      if (!_myTrait_.__traitInit) _myTrait_.__traitInit = [];
+      _myTrait_.__traitInit.push(function (host, bUseReal) {});
+    })(this);
+  };
 
-      if (_myTrait_.__traitInit && !_myTrait_.hasOwnProperty("__traitInit"))
-        _myTrait_.__traitInit = _myTrait_.__traitInit.slice();
-      if (!_myTrait_.__traitInit) _myTrait_.__traitInit = []
-      _myTrait_.__traitInit.push(function(host, bUseReal) {
-
-        // var socket = io('http://localhost');
-
-
-      });
-
-
-    }(this));
-
-  }
-
-  var socketEmulator = function(a, b, c, d, e, f, g, h) {
+  var socketEmulator = function socketEmulator(a, b, c, d, e, f, g, h) {
     var m = this,
-      res;
+        res;
     if (m instanceof socketEmulator) {
       var args = [a, b, c, d, e, f, g, h];
       if (m.__factoryClass) {
-        m.__factoryClass.forEach(function(initF) {
+        m.__factoryClass.forEach(function (initF) {
           res = initF.apply(m, args);
         });
         if (typeof res == 'function') {
@@ -1672,16 +1208,15 @@ socket.broadcast.to(_ctx.channelId).emit('ctxupd_'+_ctx.channelId, cObj);
         }
       }
       if (m.__traitInit) {
-        m.__traitInit.forEach(function(initF) {
+        m.__traitInit.forEach(function (initF) {
           initF.apply(m, args);
-        })
+        });
       } else {
-        if (typeof m.init == 'function')
-          m.init.apply(m, args);
+        if (typeof m.init == 'function') m.init.apply(m, args);
       }
     } else return new socketEmulator(a, b, c, d, e, f, g, h);
   };
-  // inheritance is here 
+  // inheritance is here
 
   socketEmulator._classInfo = {
     name: 'socketEmulator'
@@ -1691,10 +1226,11 @@ socket.broadcast.to(_ctx.channelId).emit('ctxupd_'+_ctx.channelId, cObj);
 
   // publish the module to global
 
+  if (typeof define !== 'undefined' && define !== null && define.amd != null) {
+    define(__amdDefs__);
+  }
+}).call(new Function('return this')());
 
+// --- let's not ---
 
-
-
-
-
-}).call((new Function('return this'))());
+// var socket = io('http://localhost');
