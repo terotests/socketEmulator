@@ -204,6 +204,7 @@
         };
 
         /**
+         * The enumerated socket, stating from 1
          * @param float t
          */
         _myTrait_.getEnum = function (t) {
@@ -216,6 +217,7 @@
         };
 
         /**
+         * Returns GUID of the current socket.
          * @param float t
          */
         _myTrait_.getId = function (t) {
@@ -1064,6 +1066,7 @@
         };
 
         /**
+         * Adds a new client to some room
          * @param String roomName
          */
         _myTrait_.join = function (roomName) {
