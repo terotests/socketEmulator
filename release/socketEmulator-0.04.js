@@ -178,6 +178,7 @@
         };
 
         /**
+         * Emit data from client to server
          * @param String name
          * @param Object data
          * @param Function callBackFn
