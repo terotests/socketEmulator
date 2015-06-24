@@ -221,11 +221,8 @@ this._socket.messageTo( {
 
 ### emit(name, data, callBackFn)
 `name` Message name 
-
 `data` Data to be sent, Object or string 
-
 `callBackFn` Callback, message from the receiver 
-
 
 Emit data from client to server
 ```javascript
@@ -329,7 +326,6 @@ The class has following internal singleton variables:
         
 ### on(en, ef)
 `en` Event name 
-
 
 Binds event name to event function
 ```javascript
@@ -513,7 +509,6 @@ The class has following internal singleton variables:
 ### on(en, ef)
 `en` Event name 
 
-
 Binds event name to event function
 ```javascript
 if(!this._ev) this._ev = {};
@@ -634,7 +629,6 @@ The class has following internal singleton variables:
         
 ### on(en, ef)
 `en` Event name 
-
 
 Binds event name to event function
 ```javascript
@@ -1142,7 +1136,6 @@ The class has following internal singleton variables:
         
 ### on(en, ef)
 `en` Event name 
-
 
 Binds event name to event function
 ```javascript
