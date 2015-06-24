@@ -121,7 +121,7 @@ The class has following internal singleton variables:
 * _initDone
         
         
-### constructor( host,bUseReal )
+### constructor( host , bUseReal )
 
 ```javascript
 
@@ -214,7 +214,7 @@ this._socket.messageTo( {
 });
 ```
 
-### emit(name,data,callBackFn)
+### emit(name , data , callBackFn)
 Emit data from client to server
 ```javascript
 
@@ -253,7 +253,7 @@ Returns GUID of the current socket.
 return this.socketId;
 ```
 
-### constructor( ip,port,bUseReal )
+### constructor( ip , port , bUseReal )
 Create new instance with _clientSocket(ip,port);
 ```javascript
 
@@ -294,7 +294,7 @@ openConnection.messageTo({
 
 ```
         
-### send(name,data)
+### send(name , data)
 A promisified interface of the &quot;emit&quot; for the _clientSocket
 ```javascript
 var me = this;
@@ -312,7 +312,7 @@ return _promise( function(respFn) {
 The class has following internal singleton variables:
         
         
-### on(en,ef)
+### on(en , ef)
 Binds event name to event function
 ```javascript
 if(!this._ev) this._ev = {};
@@ -323,7 +323,7 @@ this._ev[en].push(ef);
 return this;
 ```
 
-### removeListener(name,fn)
+### removeListener(name , fn)
 
 ```javascript
 if(!this._ev) return;
@@ -340,7 +340,7 @@ for(var i=0; i<list.length; i++) {
 
 ```
 
-### trigger(en,data,fn)
+### trigger(en , data , fn)
 triggers event with data and optional function
 ```javascript
 
@@ -428,7 +428,7 @@ The class has following internal singleton variables:
 return this._ip+":"+this._port;
 ```
 
-### constructor( ip,port )
+### constructor( ip , port )
 
 ```javascript
 /*
@@ -485,7 +485,7 @@ openConnection.on("serverMessage", function(o,v) {
 The class has following internal singleton variables:
         
         
-### on(en,ef)
+### on(en , ef)
 Binds event name to event function
 ```javascript
 if(!this._ev) this._ev = {};
@@ -496,7 +496,7 @@ this._ev[en].push(ef);
 return this;
 ```
 
-### trigger(en,data,fn)
+### trigger(en , data , fn)
 triggers event with data and optional function
 ```javascript
 
@@ -534,7 +534,7 @@ The class has following internal singleton variables:
 * _msgBuffer
         
         
-### constructor( server,port,socketId,role )
+### constructor( server , port , socketId , role )
 
 ```javascript
 
@@ -601,7 +601,7 @@ _msgBuffer[bn].push( msg );
 The class has following internal singleton variables:
         
         
-### on(en,ef)
+### on(en , ef)
 Binds event name to event function
 ```javascript
 if(!this._ev) this._ev = {};
@@ -612,7 +612,7 @@ this._ev[en].push(ef);
 return this;
 ```
 
-### trigger(en,data,fn)
+### trigger(en , data , fn)
 triggers event with data and optional function
 ```javascript
 
@@ -696,7 +696,7 @@ The class has following internal singleton variables:
 * _framers
         
         
-### add(fn,thisObj,args)
+### add(fn , thisObj , args)
 
 ```javascript
 if(thisObj || args) {
@@ -720,7 +720,7 @@ this.add(fn);
 
 ```
 
-### every(seconds,fn,name)
+### every(seconds , fn , name)
 
 ```javascript
 
@@ -735,7 +735,7 @@ _everies[name] = {
 };
 ```
 
-### constructor( interval,fn )
+### constructor( interval , fn )
 
 ```javascript
 if(!_initDone) {
@@ -820,7 +820,7 @@ if(!_initDone) {
 }
 ```
         
-### once(key,fn,value)
+### once(key , fn , value)
 
 ```javascript
 // _oneTimers
@@ -884,7 +884,7 @@ The class has following internal singleton variables:
 * _socketRooms
         
         
-### delegateToRoom(roomName,name,data)
+### delegateToRoom(roomName , name , data)
 
 ```javascript
 
@@ -919,7 +919,7 @@ _localDB().clearDatabases( function(d) {
 return;
 ```
 
-### emit(name,value)
+### emit(name , value)
 
 ```javascript
 
@@ -949,7 +949,7 @@ return this._userId;
 return this._roles;
 ```
 
-### constructor( tcpEmu,server )
+### constructor( tcpEmu , server )
 The _serverSocketWrap is wrapper for the real server side socket functionality.
 ```javascript
 
@@ -1064,7 +1064,7 @@ _socketRooms[id].forEach( function(name) {
 // TODO: not implemented yet
 ```
 
-### setAuthInfo(userId,roles)
+### setAuthInfo(userId , roles)
 Each socket can have and in many implementations must have some userID and role, which can be used together with the ACL implementations.
 ```javascript
 
@@ -1081,7 +1081,7 @@ this._roles = roles;
 The class has following internal singleton variables:
         
         
-### on(en,ef)
+### on(en , ef)
 Binds event name to event function
 ```javascript
 if(!this._ev) this._ev = {};
@@ -1092,7 +1092,7 @@ this._ev[en].push(ef);
 return this;
 ```
 
-### trigger(en,data,fn)
+### trigger(en , data , fn)
 triggers event with data and optional function
 ```javascript
 
