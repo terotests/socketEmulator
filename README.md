@@ -109,11 +109,243 @@ The following is automatically created class documentation.
 
 
 
+
+
+
+
+
+
+
+   
+
+ 
+
+
+   
+#### Class socketEmulator
+
+
+
+
+
+   
+    
+##### trait _dataTrait
+
+- [guid](README.md#_dataTrait_guid)
+- [isArray](README.md#_dataTrait_isArray)
+- [isFunction](README.md#_dataTrait_isFunction)
+- [isObject](README.md#_dataTrait_isObject)
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+
+   
+      
+    
+      
+            
+#### Class _clientSocket
+
+
+- [disconnect](README.md#_clientSocket_disconnect)
+- [emit](README.md#_clientSocket_emit)
+- [getEnum](README.md#_clientSocket_getEnum)
+- [getId](README.md#_clientSocket_getId)
+- [send](README.md#_clientSocket_send)
+
+
+
+   
+    
+##### trait events
+
+- [on](README.md#_on)
+- [removeListener](README.md#_removeListener)
+- [trigger](README.md#_trigger)
+
+
+    
+    
+    
+##### trait _dataTrait
+
+- [guid](README.md#_dataTrait_guid)
+- [isArray](README.md#_dataTrait_isArray)
+- [isFunction](README.md#_dataTrait_isFunction)
+- [isObject](README.md#_dataTrait_isObject)
+
+
+    
+    
+
+
+   
+      
+    
+      
+    
+
+
+
+      
+    
+      
+            
+#### Class _serverSocket
+
+
+- [getPrefix](README.md#_serverSocket_getPrefix)
+
+
+
+   
+    
+##### trait events
+
+- [on](README.md#_on)
+- [trigger](README.md#_trigger)
+
+
+    
+    
+
+
+   
+      
+    
+
+
+
+      
+    
+      
+            
+#### Class _tcpEmu
+
+
+- [messageFrom](README.md#_tcpEmu_messageFrom)
+- [messageTo](README.md#_tcpEmu_messageTo)
+
+
+
+   
+    
+##### trait events
+
+- [on](README.md#_on)
+- [trigger](README.md#_trigger)
+
+
+    
+    
+    
+##### trait _dataTrait
+
+- [guid](README.md#_dataTrait_guid)
+- [isArray](README.md#_dataTrait_isArray)
+- [isFunction](README.md#_dataTrait_isFunction)
+- [isObject](README.md#_dataTrait_isObject)
+
+
+    
+    
+
+
+   
+      
+    
+      
+    
+
+
+
+      
+    
+      
+            
+#### Class later
+
+
+- [add](README.md#later_add)
+- [asap](README.md#later_asap)
+- [every](README.md#later_every)
+- [once](README.md#later_once)
+- [onFrame](README.md#later_onFrame)
+- [polyfill](README.md#later_polyfill)
+- [removeFrameFn](README.md#later_removeFrameFn)
+
+
+
    
 
 
    
-## Class socketEmulator
+
+
+
+      
+    
+      
+            
+#### Class _serverSocketWrap
+
+
+- [delegateToRoom](README.md#_serverSocketWrap_delegateToRoom)
+- [disconnect](README.md#_serverSocketWrap_disconnect)
+- [emit](README.md#_serverSocketWrap_emit)
+- [getId](README.md#_serverSocketWrap_getId)
+- [getUserId](README.md#_serverSocketWrap_getUserId)
+- [getUserRoles](README.md#_serverSocketWrap_getUserRoles)
+- [isConnected](README.md#_serverSocketWrap_isConnected)
+- [isInRoom](README.md#_serverSocketWrap_isInRoom)
+- [join](README.md#_serverSocketWrap_join)
+- [leave](README.md#_serverSocketWrap_leave)
+- [leaveFromRooms](README.md#_serverSocketWrap_leaveFromRooms)
+- [removeListener](README.md#_serverSocketWrap_removeListener)
+- [setAuthInfo](README.md#_serverSocketWrap_setAuthInfo)
+
+
+
+   
+    
+##### trait events
+
+- [on](README.md#_on)
+- [trigger](README.md#_trigger)
+
+
+    
+    
+
+
+   
+      
+    
+
+
+
+      
+    
+
+
+
+
+
+   
+# Class socketEmulator
 
 
 The class has following internal singleton variables:
@@ -134,7 +366,7 @@ The class has following internal singleton variables:
 
    
     
-# trait _dataTrait
+## trait _dataTrait
 
 The class has following internal singleton variables:
         
@@ -143,7 +375,7 @@ The class has following internal singleton variables:
 * _commands
         
         
-### _dataTrait::guid(t)
+### <a name="_dataTrait_guid"></a>_dataTrait::guid(t)
 
 
 ```javascript
@@ -153,21 +385,21 @@ return Math.random().toString(36).substring(2, 15) +
         
 ```
 
-### _dataTrait::isArray(t)
+### <a name="_dataTrait_isArray"></a>_dataTrait::isArray(t)
 
 
 ```javascript
 return Object.prototype.toString.call( t ) === '[object Array]';
 ```
 
-### _dataTrait::isFunction(fn)
+### <a name="_dataTrait_isFunction"></a>_dataTrait::isFunction(fn)
 
 
 ```javascript
 return Object.prototype.toString.call(fn) == '[object Function]';
 ```
 
-### _dataTrait::isObject(t)
+### <a name="_dataTrait_isObject"></a>_dataTrait::isObject(t)
 
 
 ```javascript
@@ -194,7 +426,7 @@ return t === Object(t);
     
       
             
-## Class _clientSocket
+# Class _clientSocket
 
 
 The class has following internal singleton variables:
@@ -210,7 +442,7 @@ The class has following internal singleton variables:
 * _socketCnt
         
         
-### _clientSocket::disconnect(t)
+### <a name="_clientSocket_disconnect"></a>_clientSocket::disconnect(t)
 
 
 ```javascript
@@ -219,7 +451,7 @@ this._socket.messageTo( {
 });
 ```
 
-### _clientSocket::emit(name, data, callBackFn)
+### <a name="_clientSocket_emit"></a>_clientSocket::emit(name, data, callBackFn)
 `name` Message name
  
 `data` Data to be sent, Object or string
@@ -248,7 +480,7 @@ if( callBackFn ) {
 this._socket.messageTo(obj);
 ```
 
-### _clientSocket::getEnum(t)
+### <a name="_clientSocket_getEnum"></a>_clientSocket::getEnum(t)
 
 The enumerated socket, stating from 1
 ```javascript
@@ -260,7 +492,7 @@ if(!_socketIndex[myId]) {
 return _socketIndex[myId];
 ```
 
-### _clientSocket::getId(t)
+### <a name="_clientSocket_getId"></a>_clientSocket::getId(t)
 
 Returns GUID of the current socket.
 ```javascript
@@ -308,7 +540,7 @@ openConnection.messageTo({
 
 ```
         
-### _clientSocket::send(name, data)
+### <a name="_clientSocket_send"></a>_clientSocket::send(name, data)
 
 A promisified interface of the &quot;emit&quot; for the _clientSocket
 ```javascript
@@ -322,12 +554,12 @@ return _promise( function(respFn) {
 
    
     
-# trait events
+## trait events
 
 The class has following internal singleton variables:
         
         
-### ::on(en, ef)
+### <a name="_on"></a>::on(en, ef)
 `en` Event name
  
 
@@ -341,7 +573,7 @@ this._ev[en].push(ef);
 return this;
 ```
 
-### ::removeListener(name, fn)
+### <a name="_removeListener"></a>::removeListener(name, fn)
 
 
 ```javascript
@@ -359,7 +591,7 @@ for(var i=0; i<list.length; i++) {
 
 ```
 
-### ::trigger(en, data, fn)
+### <a name="_trigger"></a>::trigger(en, data, fn)
 
 triggers event with data and optional function
 ```javascript
@@ -375,7 +607,7 @@ return this;
     
     
     
-# trait _dataTrait
+## trait _dataTrait
 
 The class has following internal singleton variables:
         
@@ -384,7 +616,7 @@ The class has following internal singleton variables:
 * _commands
         
         
-### _dataTrait::guid(t)
+### <a name="_dataTrait_guid"></a>_dataTrait::guid(t)
 
 
 ```javascript
@@ -394,21 +626,21 @@ return Math.random().toString(36).substring(2, 15) +
 
 ```
 
-### _dataTrait::isArray(t)
+### <a name="_dataTrait_isArray"></a>_dataTrait::isArray(t)
 
 
 ```javascript
 return Object.prototype.toString.call( t ) === '[object Array]';
 ```
 
-### _dataTrait::isFunction(fn)
+### <a name="_dataTrait_isFunction"></a>_dataTrait::isFunction(fn)
 
 
 ```javascript
 return Object.prototype.toString.call(fn) == '[object Function]';
 ```
 
-### _dataTrait::isObject(t)
+### <a name="_dataTrait_isObject"></a>_dataTrait::isObject(t)
 
 
 ```javascript
@@ -432,7 +664,7 @@ return t === Object(t);
     
       
             
-## Class _serverSocket
+# Class _serverSocket
 
 
 The class has following internal singleton variables:
@@ -446,7 +678,7 @@ The class has following internal singleton variables:
 * _rooms
         
         
-### _serverSocket::getPrefix(t)
+### <a name="_serverSocket_getPrefix"></a>_serverSocket::getPrefix(t)
 
 
 ```javascript
@@ -505,12 +737,12 @@ openConnection.on("serverMessage", function(o,v) {
 
    
     
-# trait events
+## trait events
 
 The class has following internal singleton variables:
         
         
-### ::on(en, ef)
+### <a name="_on"></a>::on(en, ef)
 `en` Event name
  
 
@@ -524,7 +756,7 @@ this._ev[en].push(ef);
 return this;
 ```
 
-### ::trigger(en, data, fn)
+### <a name="_trigger"></a>::trigger(en, data, fn)
 
 triggers event with data and optional function
 ```javascript
@@ -551,7 +783,7 @@ return this;
     
       
             
-## Class _tcpEmu
+# Class _tcpEmu
 
 
 The class has following internal singleton variables:
@@ -604,7 +836,7 @@ later().every( 1/10, function() {
 
 ```
         
-### _tcpEmu::messageFrom(msg)
+### <a name="_tcpEmu_messageFrom"></a>_tcpEmu::messageFrom(msg)
 
 
 ```javascript
@@ -614,7 +846,7 @@ _msgBuffer[bn].push( msg );
 
 ```
 
-### _tcpEmu::messageTo(msg)
+### <a name="_tcpEmu_messageTo"></a>_tcpEmu::messageTo(msg)
 
 
 ```javascript
@@ -627,12 +859,12 @@ _msgBuffer[bn].push( msg );
 
    
     
-# trait events
+## trait events
 
 The class has following internal singleton variables:
         
         
-### ::on(en, ef)
+### <a name="_on"></a>::on(en, ef)
 `en` Event name
  
 
@@ -646,7 +878,7 @@ this._ev[en].push(ef);
 return this;
 ```
 
-### ::trigger(en, data, fn)
+### <a name="_trigger"></a>::trigger(en, data, fn)
 
 triggers event with data and optional function
 ```javascript
@@ -662,7 +894,7 @@ return this;
     
     
     
-# trait _dataTrait
+## trait _dataTrait
 
 The class has following internal singleton variables:
         
@@ -671,7 +903,7 @@ The class has following internal singleton variables:
 * _commands
         
         
-### _dataTrait::guid(t)
+### <a name="_dataTrait_guid"></a>_dataTrait::guid(t)
 
 
 ```javascript
@@ -681,21 +913,21 @@ return Math.random().toString(36).substring(2, 15) +
 
 ```
 
-### _dataTrait::isArray(t)
+### <a name="_dataTrait_isArray"></a>_dataTrait::isArray(t)
 
 
 ```javascript
 return Object.prototype.toString.call( t ) === '[object Array]';
 ```
 
-### _dataTrait::isFunction(fn)
+### <a name="_dataTrait_isFunction"></a>_dataTrait::isFunction(fn)
 
 
 ```javascript
 return Object.prototype.toString.call(fn) == '[object Function]';
 ```
 
-### _dataTrait::isObject(t)
+### <a name="_dataTrait_isObject"></a>_dataTrait::isObject(t)
 
 
 ```javascript
@@ -719,7 +951,7 @@ return t === Object(t);
     
       
             
-## Class later
+# Class later
 
 
 The class has following internal singleton variables:
@@ -735,7 +967,7 @@ The class has following internal singleton variables:
 * _framers
         
         
-### later::add(fn, thisObj, args)
+### <a name="later_add"></a>later::add(fn, thisObj, args)
 
 
 ```javascript
@@ -753,7 +985,7 @@ if(thisObj || args) {
 }
 ```
 
-### later::asap(fn)
+### <a name="later_asap"></a>later::asap(fn)
 
 
 ```javascript
@@ -761,7 +993,7 @@ this.add(fn);
 
 ```
 
-### later::every(seconds, fn, name)
+### <a name="later_every"></a>later::every(seconds, fn, name)
 
 
 ```javascript
@@ -862,7 +1094,7 @@ if(!_initDone) {
 }
 ```
         
-### later::once(key, fn, value)
+### <a name="later_once"></a>later::once(key, fn, value)
 
 
 ```javascript
@@ -871,7 +1103,7 @@ if(!_initDone) {
 _oneTimers[key] = [fn,value];
 ```
 
-### later::onFrame(fn)
+### <a name="later_onFrame"></a>later::onFrame(fn)
 
 
 ```javascript
@@ -879,14 +1111,14 @@ _oneTimers[key] = [fn,value];
 _framers.push(fn);
 ```
 
-### later::polyfill(t)
+### <a name="later_polyfill"></a>later::polyfill(t)
 
 
 ```javascript
 // --- let's not ---
 ```
 
-### later::removeFrameFn(fn)
+### <a name="later_removeFrameFn"></a>later::removeFrameFn(fn)
 
 
 ```javascript
@@ -916,7 +1148,7 @@ if(i>=0) {
     
       
             
-## Class _serverSocketWrap
+# Class _serverSocketWrap
 
 
 The class has following internal singleton variables:
@@ -930,7 +1162,7 @@ The class has following internal singleton variables:
 * _socketRooms
         
         
-### _serverSocketWrap::delegateToRoom(roomName, name, data)
+### <a name="_serverSocketWrap_delegateToRoom"></a>_serverSocketWrap::delegateToRoom(roomName, name, data)
 
 
 ```javascript
@@ -947,7 +1179,7 @@ if(_rooms && _rooms[realRoomName]) {
 }
 ```
 
-### _serverSocketWrap::disconnect(t)
+### <a name="_serverSocketWrap_disconnect"></a>_serverSocketWrap::disconnect(t)
 
 
 ```javascript
@@ -967,7 +1199,7 @@ _localDB().clearDatabases( function(d) {
 return;
 ```
 
-### _serverSocketWrap::emit(name, value)
+### <a name="_serverSocketWrap_emit"></a>_serverSocketWrap::emit(name, value)
 
 
 ```javascript
@@ -978,14 +1210,14 @@ this._tcp.messageFrom({
 });
 ```
 
-### _serverSocketWrap::getId(t)
+### <a name="_serverSocketWrap_getId"></a>_serverSocketWrap::getId(t)
 
 
 ```javascript
 return this._tcp._socketId;
 ```
 
-### _serverSocketWrap::getUserId(t)
+### <a name="_serverSocketWrap_getUserId"></a>_serverSocketWrap::getUserId(t)
 
 
 ```javascript
@@ -993,7 +1225,7 @@ return this._tcp._socketId;
 return this._userId;
 ```
 
-### _serverSocketWrap::getUserRoles(t)
+### <a name="_serverSocketWrap_getUserRoles"></a>_serverSocketWrap::getUserRoles(t)
 
 
 ```javascript
@@ -1043,7 +1275,7 @@ socket.broadcast.to(_ctx.channelId).emit('ctxupd_'+_ctx.channelId, cObj);
 
 ```
         
-### _serverSocketWrap::isConnected(t)
+### <a name="_serverSocketWrap_isConnected"></a>_serverSocketWrap::isConnected(t)
 
 
 ```javascript
@@ -1051,7 +1283,7 @@ if(this._disconnected) return false;
 return true;
 ```
 
-### _serverSocketWrap::isInRoom(roomName)
+### <a name="_serverSocketWrap_isInRoom"></a>_serverSocketWrap::isInRoom(roomName)
 
 
 ```javascript
@@ -1059,7 +1291,7 @@ if(!_socketRooms) return false;
 return _socketRooms[this.getId()].indexOf(roomName) >= 0;
 ```
 
-### _serverSocketWrap::join(roomName)
+### <a name="_serverSocketWrap_join"></a>_serverSocketWrap::join(roomName)
 
 Adds a new client to some room
 ```javascript
@@ -1078,7 +1310,7 @@ if(_rooms[realRoomName].indexOf(this) < 0 ) {
 }
 ```
 
-### _serverSocketWrap::leave(roomName)
+### <a name="_serverSocketWrap_leave"></a>_serverSocketWrap::leave(roomName)
 
 
 ```javascript
@@ -1100,7 +1332,7 @@ if( ( i = _rooms[realRoomName].indexOf(this) ) >= 0 ) {
 
 ```
 
-### _serverSocketWrap::leaveFromRooms(socket)
+### <a name="_serverSocketWrap_leaveFromRooms"></a>_serverSocketWrap::leaveFromRooms(socket)
 
 
 ```javascript
@@ -1115,14 +1347,14 @@ _socketRooms[id].forEach( function(name) {
 });
 ```
 
-### _serverSocketWrap::removeListener(t)
+### <a name="_serverSocketWrap_removeListener"></a>_serverSocketWrap::removeListener(t)
 
 
 ```javascript
 // TODO: not implemented yet
 ```
 
-### _serverSocketWrap::setAuthInfo(userId, roles)
+### <a name="_serverSocketWrap_setAuthInfo"></a>_serverSocketWrap::setAuthInfo(userId, roles)
 
 Each socket can have and in many implementations must have some userID and role, which can be used together with the ACL implementations.
 ```javascript
@@ -1135,12 +1367,12 @@ this._roles = roles;
 
    
     
-# trait events
+## trait events
 
 The class has following internal singleton variables:
         
         
-### ::on(en, ef)
+### <a name="_on"></a>::on(en, ef)
 `en` Event name
  
 
@@ -1154,7 +1386,7 @@ this._ev[en].push(ef);
 return this;
 ```
 
-### ::trigger(en, data, fn)
+### <a name="_trigger"></a>::trigger(en, data, fn)
 
 triggers event with data and optional function
 ```javascript
