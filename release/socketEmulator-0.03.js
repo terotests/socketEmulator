@@ -449,8 +449,7 @@
         });
         this._clientSocket = _clientSocket;
       } else if ((typeof module !== "undefined" && module !== null) && (module.exports != null)) {
-        module.exports = _clientSocket;
-        _clientSocket._clientSocket = _clientSocket;
+        module.exports["_clientSocket"] = _clientSocket;
       } else {
         this._clientSocket = _clientSocket;
       }
@@ -685,8 +684,7 @@ io.on('connection', function(socket){
         });
         this._serverSocket = _serverSocket;
       } else if ((typeof module !== "undefined" && module !== null) && (module.exports != null)) {
-        module.exports = _serverSocket;
-        _serverSocket._serverSocket = _serverSocket;
+        module.exports["_serverSocket"] = _serverSocket;
       } else {
         this._serverSocket = _serverSocket;
       }
