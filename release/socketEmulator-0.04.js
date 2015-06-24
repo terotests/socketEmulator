@@ -221,9 +221,9 @@
         }
 
         /**
-         * @param float name
-         * @param float data
-         * @param float callBackFn
+         * @param String name
+         * @param Object data
+         * @param Function callBackFn
          */
         _myTrait_.emit = function(name, data, callBackFn) {
 
