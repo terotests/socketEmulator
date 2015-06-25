@@ -1103,6 +1103,7 @@
               to: function to(room) {
                 return {
                   emit: function emit(name, value) {
+                    console.log('Broadcast ' + room + ' ' + name + value);
                     me._socket.broadcast.to(room).emit(name, value);
                   }
                 };
@@ -1187,6 +1188,7 @@
           }
 
           if (this._socket) {
+            console.log(this.getId() + ' joins ' + roomName);
             this._socket.join(roomName);
             return;
           }
