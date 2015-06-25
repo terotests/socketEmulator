@@ -1052,6 +1052,7 @@
         _myTrait_.emit = function (name, value) {
 
           if (this._socket) {
+            console.log('Socket emit ', name, value);
             this._socket.emit(name, value);
             return;
           }
