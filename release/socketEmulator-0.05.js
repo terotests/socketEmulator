@@ -101,12 +101,14 @@
          * @param float en
          */
         _myTrait_.delegateToSocket = function (en) {
-
           var me = this;
-          if (this._realSocket) {
-            this._realSocket.on(en, function (data, fn) {
+          if (this._socket) {
+            if (!this._doneDelegates) this._doneDelegates = {};
+            if (this._doneDelegates[en]) return;
+            this._socket.on(en, function (data, fn) {
               me.trigger(en, data, fn);
             });
+            this._doneDelegates[en] = true;
           }
           return this;
         };
@@ -931,12 +933,14 @@
          * @param float en
          */
         _myTrait_.delegateToSocket = function (en) {
-
           var me = this;
           if (this._socket) {
+            if (!this._doneDelegates) this._doneDelegates = {};
+            if (this._doneDelegates[en]) return;
             this._socket.on(en, function (data, fn) {
               me.trigger(en, data, fn);
             });
+            this._doneDelegates[en] = true;
           }
           return this;
         };
