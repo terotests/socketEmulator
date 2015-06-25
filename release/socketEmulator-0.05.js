@@ -116,7 +116,6 @@
          */
         _myTrait_.getEventNames = function (t) {
           if (!this._ev) this._ev = {};
-          if (!this._ev[en]) this._ev[en] = [];
 
           var list = [];
           for (var n in this._ev) {
@@ -246,10 +245,11 @@
             _socketCnt = 1;
           }
 
+          debugger;
           var me = this;
           if (bUseReal) {
 
-            this._realSocket = io.connect(options.url, options.ioOptions);
+            this._realSocket = io.connect(ip + ':' + port, {});
 
             this.socketId = this._realSocket.id || this.guid();
 
@@ -946,7 +946,6 @@
          */
         _myTrait_.getEventNames = function (t) {
           if (!this._ev) this._ev = {};
-          if (!this._ev[en]) this._ev[en] = [];
 
           var list = [];
           for (var n in this._ev) {
