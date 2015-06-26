@@ -12,12 +12,91 @@ For example, if you have one browser sending requests to socket.io, all the requ
 
 Furthermore, the requests originating from the server will all be sent back to all socket instances at the same browser session.
 
+# Limitations
+
+Not all the socket.io commands are supported, at the moment the supported commands are
+
+Client side socket:
+- emit(`name`, `data`, `callBack`)
+- on(`eventname`, `callBack`)
+- disconnect()
+
+Server side socket:
+- emit(`name`, `data`)
+- on(`eventname`, `callBack( responseFn )`)
+- join(`room`)
+- broadcast.to(`room`).emit(`name`, `data`)
+- disconnect()
+
+
+# In-browser Demos
 
 Example:
 http://jsfiddle.net/8hyup32t/
 
 Example with two servers:
 http://jsfiddle.net/2jwf1czz/
+
+# Real node.js setup with multiple virtual servers at one server
+
+In the example below we have two virtual servers
+
+1. http://localhost:1234
+2. http://localhost:5555
+
+The actual socket.io server is listening to port `7777` and it will be setup as follows:
+
+```javascript
+var app = require('express')();
+var http = require('http').Server(app);
+
+// and here... initialize the server socket environment.
+var ioLib = require('socket.io')(http);
+
+var s = require("./socketEmulator-0.05.js");
+
+// virtual server listening port 1234
+var sock = s._serverSocket("localhost", 1234, ioLib);
+sock.on("connect", function(socket) {
+   //  Then use socket like socket.io library (with some limitations)
+});
+
+// virtual server listening port 5555
+var sock = s._serverSocket("localhost", 5555, ioLib);
+sock.on("connect", function(socket) {
+   //  Then use socket like socket.io library (with some limitations)
+});
+
+app.get('/', function(req, res){
+    
+});
+
+// The 7777 is the real server port
+http.listen(7777, function(){
+   console.log('listening on *:7777');
+});
+
+```
+
+The client setup opens up first the connection to the port `7777` using socket.io and 
+after the server is connected, the virtual sockets can be created using _clientSocket
+
+```javascript
+    var realSocket = io.connect("http://<my_server_name>:7777");
+    realSocket.on("connect",
+        function() {
+            var socket1 = _clientSocket("localhost", 5555, realSocket); 
+            socket1.on("connect", function() {
+                socket1.emit("msg", "some data here");
+            });
+            var socket2 = _clientSocket("localhost", 1234, realSocket); 
+            socket2.on("connect", function() {
+                socket2.emit("msg", "some other data here");
+            });            
+        });
+```
+
+After that you can use the socket1 and socket2 like normal socket.io sockets (with some limitations)
 
 
 ## Creating server socket:
