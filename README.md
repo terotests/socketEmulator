@@ -25,6 +25,7 @@ Server side socket:
 - emit(`name`, `data`)
 - on(`eventname`, `callBack( responseFn )`)
 - join(`room`)
+- leave(`room`)
 - broadcast.to(`room`).emit(`name`, `data`)
 - disconnect()
 
