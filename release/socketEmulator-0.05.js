@@ -419,13 +419,13 @@
             return;
           }
 
-          var openConnection = _tcpEmu(ip, port, 'openConnection', 'server', realSocket);
+          var openConnection = _tcpEmu(ip, port, 'openConnection', 'server');
 
           openConnection.on('serverMessage', function (o, v) {
 
             if (v.socketId) {
               //console.log("Trying to send msg to client ", v);
-              var newSocket = _tcpEmu(ip, port, v.socketId, 'server', realSocket);
+              var newSocket = _tcpEmu(ip, port, v.socketId, 'server');
 
               var socket = _serverSocketWrap(newSocket, me);
               _clients[v.socketId] = socket;

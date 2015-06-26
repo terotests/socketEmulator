@@ -610,7 +610,6 @@ if(!_socketIndex[this.socketId]) {
     _socketIndex[this.socketId] = _socketCnt++;
 } 
 
-
 var openConnection = _tcpEmu(ip, port, "openConnection", "client", realSocket);
 var connection = _tcpEmu(ip, port, myId, "client", realSocket);
 
@@ -835,13 +834,13 @@ if(ioLib) {
 }
 
 
-var openConnection = _tcpEmu(ip, port, "openConnection", "server", realSocket);
+var openConnection = _tcpEmu(ip, port, "openConnection", "server");
 
 openConnection.on("serverMessage", function(o,v) {
 
     if(v.socketId) {
         //console.log("Trying to send msg to client ", v);
-        var newSocket = _tcpEmu(ip, port, v.socketId, "server", realSocket);
+        var newSocket = _tcpEmu(ip, port, v.socketId, "server");
 
         var socket = _serverSocketWrap( newSocket, me );
         _clients[v.socketId] = socket;
