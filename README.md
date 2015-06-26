@@ -99,7 +99,7 @@ after the server is connected, the virtual sockets can be created using _clientS
 After that you can use the socket1 and socket2 like normal socket.io sockets (with some limitations)
 
 
-## Creating server socket:
+## Creating server socket (in-Browser version)
 
 ```javascript
 var server = _serverSocket("localhost", 1234);  
@@ -144,7 +144,7 @@ Disconnecting
 socket.disconnect();
 ```
 
-## Client socket
+## Client socket (in-Browser version)
 ```javascript
     var client = _clientSocket("localhost", 1234);  
     client.on("connect", function() {
