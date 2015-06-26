@@ -170,22 +170,22 @@ The following is automatically created class documentation.
 
    
     
-##### trait events
-
-- [on](README.md#_on)
-- [removeListener](README.md#_removeListener)
-- [trigger](README.md#_trigger)
-
-
-    
-    
-    
 ##### trait _dataTrait
 
 - [guid](README.md#_dataTrait_guid)
 - [isArray](README.md#_dataTrait_isArray)
 - [isFunction](README.md#_dataTrait_isFunction)
 - [isObject](README.md#_dataTrait_isObject)
+
+
+    
+    
+    
+##### trait events
+
+- [on](README.md#_on)
+- [removeListener](README.md#_removeListener)
+- [trigger](README.md#_trigger)
 
 
     
@@ -236,8 +236,10 @@ The following is automatically created class documentation.
 #### Class _tcpEmu
 
 
+- [memoryPump](README.md#_tcpEmu_memoryPump)
 - [messageFrom](README.md#_tcpEmu_messageFrom)
 - [messageTo](README.md#_tcpEmu_messageTo)
+- [socketPump](README.md#_tcpEmu_socketPump)
 
 
 
@@ -499,7 +501,7 @@ Returns GUID of the current socket.
 return this.socketId;
 ```
 
-### _clientSocket::constructor( ip, port, bUseReal )
+### _clientSocket::constructor( ip, port, realSocket )
 Create new instance with _clientSocket(ip,port);
 ```javascript
 
@@ -510,15 +512,17 @@ if(!_socketIndex) {
     _socketCnt = 1;
 }
 
+var me = this;
 var myId = this.guid();
+this.socketId = myId;
 
-if(!_socketIndex[myId]) {
-    _socketIndex[myId] = _socketCnt++;
+if(!_socketIndex[this.socketId]) {
+    _socketIndex[this.socketId] = _socketCnt++;
 } 
 
-var me = this;
-var openConnection = _tcpEmu(ip, port, "openConnection", "client");
-var connection = _tcpEmu(ip, port, myId, "client");
+
+var openConnection = _tcpEmu(ip, port, "openConnection", "client", realSocket);
+var connection = _tcpEmu(ip, port, myId, "client", realSocket);
 
 this.socketId = myId;
 
@@ -553,6 +557,50 @@ return _promise( function(respFn) {
 
 
    
+    
+## trait _dataTrait
+
+The class has following internal singleton variables:
+        
+* _eventOn
+        
+* _commands
+        
+        
+### <a name="_dataTrait_guid"></a>_dataTrait::guid(t)
+
+
+```javascript
+
+return Math.random().toString(36).substring(2, 15) +
+        Math.random().toString(36).substring(2, 15);
+
+```
+
+### <a name="_dataTrait_isArray"></a>_dataTrait::isArray(t)
+
+
+```javascript
+return Object.prototype.toString.call( t ) === '[object Array]';
+```
+
+### <a name="_dataTrait_isFunction"></a>_dataTrait::isFunction(fn)
+
+
+```javascript
+return Object.prototype.toString.call(fn) == '[object Function]';
+```
+
+### <a name="_dataTrait_isObject"></a>_dataTrait::isObject(t)
+
+
+```javascript
+return t === Object(t);
+```
+
+
+    
+    
     
 ## trait events
 
@@ -606,50 +654,6 @@ return this;
 
     
     
-    
-## trait _dataTrait
-
-The class has following internal singleton variables:
-        
-* _eventOn
-        
-* _commands
-        
-        
-### <a name="_dataTrait_guid"></a>_dataTrait::guid(t)
-
-
-```javascript
-
-return Math.random().toString(36).substring(2, 15) +
-        Math.random().toString(36).substring(2, 15);
-
-```
-
-### <a name="_dataTrait_isArray"></a>_dataTrait::isArray(t)
-
-
-```javascript
-return Object.prototype.toString.call( t ) === '[object Array]';
-```
-
-### <a name="_dataTrait_isFunction"></a>_dataTrait::isFunction(fn)
-
-
-```javascript
-return Object.prototype.toString.call(fn) == '[object Function]';
-```
-
-### <a name="_dataTrait_isObject"></a>_dataTrait::isObject(t)
-
-
-```javascript
-return t === Object(t);
-```
-
-
-    
-    
 
 
    
@@ -685,7 +689,7 @@ The class has following internal singleton variables:
 return this._ip+":"+this._port;
 ```
 
-### _serverSocket::constructor( ip, port )
+### _serverSocket::constructor( ip, port, ioLib )
 
 ```javascript
 /*
@@ -703,23 +707,56 @@ if(!_rooms) {
     _clients = {};
 }
 
-var sockets = [];
 var me = this;
+
+var sockets = [];
 
 this._ip = ip;
 this._port = port;
 
-var openConnection = _tcpEmu(ip, port, "openConnection", "server");
+if(ioLib) {
+    ioLib.on('connection', function(socket){
+        
+        var openConnection = _tcpEmu(ip, port, "openConnection", "server", socket);
+      
+        openConnection.on("serverMessage", function(o,v) {
+            
+            if(v.socketId) {
+
+                var newSocket = _tcpEmu(ip, port, v.socketId, "server", socket);
+                
+                var wrappedSocket = _serverSocketWrap( newSocket, me );
+                _clients[v.socketId] = wrappedSocket;
+                me.trigger("connect",  wrappedSocket);
+                
+                if(wrappedSocket.isConnected()) {
+                    console.log("Trying to send the connected message back to client");
+                    newSocket.messageFrom({
+                        connected : true,
+                        socketId : v.socketId
+                    });        
+                } else {
+                    console.log("The socket was not connected");
+                }
+            }
+        })        
+    });    
+    return;
+}
+
+
+var openConnection = _tcpEmu(ip, port, "openConnection", "server", realSocket);
 
 openConnection.on("serverMessage", function(o,v) {
 
     if(v.socketId) {
         //console.log("Trying to send msg to client ", v);
-        var newSocket = _tcpEmu(ip, port, v.socketId, "server");
+        var newSocket = _tcpEmu(ip, port, v.socketId, "server", realSocket);
 
         var socket = _serverSocketWrap( newSocket, me );
         _clients[v.socketId] = socket;
         me.trigger("connect",  socket);
+        me.trigger("connection",  socket);
         
         if(socket.isConnected()) {
 
@@ -795,16 +832,32 @@ The class has following internal singleton variables:
 * _msgBuffer
         
         
-### _tcpEmu::constructor( server, port, socketId, role )
+### _tcpEmu::constructor( server, port, socketId, role, socket )
 
 ```javascript
 
 var me = this;
 this._server = server;
 this._port = port;
+this._role = role;
 this._socketId = socketId;
 this._dbName = "tcp://"+this._server+":"+this._port+":"+this._socketId;
 
+if(socket) {
+    // "this._dbName" is the message which is listened using socketPump
+    this._socket = socket;
+    this.socketPump(role);
+} else {
+    this.memoryPump(role);
+}
+
+```
+        
+### <a name="_tcpEmu_memoryPump"></a>_tcpEmu::memoryPump(role)
+
+
+```javascript
+var me = this;
 var bnTo   = this._dbName+":to";
 var bnFrom = this._dbName+":from";
 
@@ -812,17 +865,16 @@ if(!_msgBuffer) _msgBuffer = {};
 if(!_msgBuffer[bnTo]) _msgBuffer[bnTo] = [];
 if(!_msgBuffer[bnFrom]) _msgBuffer[bnFrom] = [];
 
-// Check for new messages to the client or server
-later().every( 1/10, function() {
-
+later().every(1/10,
+    function() {
         if(role=="server") {
-
+        
             var list = _msgBuffer[bnTo].slice();
             list.forEach( function(msg) {
                  me.trigger("serverMessage", msg);
                  _msgBuffer[bnTo].shift();
             });
-
+        
         }
         if(role=="client") {
             var list = _msgBuffer[bnFrom].slice();
@@ -831,15 +883,21 @@ later().every( 1/10, function() {
                 _msgBuffer[bnFrom].shift();
             });   
         }
-
-    });
-
+});
 ```
-        
+
 ### <a name="_tcpEmu_messageFrom"></a>_tcpEmu::messageFrom(msg)
 
 
 ```javascript
+var socket = this._socket;
+if(socket) {
+    //console.log("The socket should emit to "+this._dbName);
+    //console.log(msg);
+    socket.emit(this._dbName, msg);
+    return;
+}
+
 var bn = this._dbName+":from";
 _msgBuffer[bn].push( msg );
 
@@ -850,8 +908,35 @@ _msgBuffer[bn].push( msg );
 
 
 ```javascript
+
+var socket = this._socket;
+if(socket) {
+    socket.emit(this._dbName, msg);
+    return;
+}
+
 var bn = this._dbName+":to";
 _msgBuffer[bn].push( msg );
+
+```
+
+### <a name="_tcpEmu_socketPump"></a>_tcpEmu::socketPump(role)
+
+
+```javascript
+var me = this;
+
+var socket = this._socket;
+if(role=="server") {
+    socket.on(this._dbName, function(data) {
+        me.trigger("serverMessage", data);
+    });
+}
+if(role=="client") {
+    socket.on(this._dbName, function(data) {
+        me.trigger("clientMessage", data);
+    });
+}
 
 ```
 
@@ -1233,14 +1318,15 @@ return this._userId;
 return this._roles;
 ```
 
-### _serverSocketWrap::constructor( tcpEmu, server )
+### _serverSocketWrap::constructor( tcpEmu, server, isReal )
 The _serverSocketWrap is wrapper for the real server side socket functionality.
 ```javascript
 
 var me = this;
 this._roomPrefix = server.getPrefix();
-this._tcp = tcpEmu;
 this._server = server;
+this._tcp = tcpEmu;
+
 var disconnected = false;
 tcpEmu.on("serverMessage", function(o,v) {
     
@@ -1308,6 +1394,7 @@ if(_rooms[realRoomName].indexOf(this) < 0 ) {
     
     _socketRooms[this.getId()].push(roomName);
 }
+
 ```
 
 ### <a name="_serverSocketWrap_leave"></a>_serverSocketWrap::leave(roomName)
