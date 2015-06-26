@@ -98,35 +98,6 @@
         // Initialize static variables here...
 
         /**
-         * @param float en
-         */
-        _myTrait_.delegateToSocket = function (en) {
-          var me = this;
-          if (this._socket) {
-            if (!this._doneDelegates) this._doneDelegates = {};
-            if (this._doneDelegates[en]) return;
-            this._socket.on(en, function (data, fn) {
-              me.trigger(en, data, fn);
-            });
-            this._doneDelegates[en] = true;
-          }
-          return this;
-        };
-
-        /**
-         * @param float t
-         */
-        _myTrait_.getEventNames = function (t) {
-          if (!this._ev) this._ev = {};
-
-          var list = [];
-          for (var n in this._ev) {
-            if (this._ev.hasOwnProperty(n)) list.push(n);
-          }
-          return list;
-        };
-
-        /**
          * Binds event name to event function
          * @param string en  - Event name
          * @param float ef
@@ -136,8 +107,6 @@
           if (!this._ev[en]) this._ev[en] = [];
 
           this._ev[en].push(ef);
-
-          this.delegateToSocket(en);
 
           return this;
         };
@@ -173,12 +142,6 @@
          * @param float t
          */
         _myTrait_.disconnect = function (t) {
-
-          if (this._realSocket && this._realSocket.disconnect) {
-            this._realSocket.disconnect();
-            return;
-          }
-
           this._socket.messageTo({
             disconnect: true
           });
@@ -191,11 +154,6 @@
          * @param Function callBackFn  - Callback, message from the receiver
          */
         _myTrait_.emit = function (name, data, callBackFn) {
-
-          if (this._realSocket) {
-            this._realSocket.emit(name, data, callBackFn);
-            return;
-          }
 
           var obj = {
             name: name,
@@ -238,7 +196,7 @@
 
         if (_myTrait_.__traitInit && !_myTrait_.hasOwnProperty('__traitInit')) _myTrait_.__traitInit = _myTrait_.__traitInit.slice();
         if (!_myTrait_.__traitInit) _myTrait_.__traitInit = [];
-        _myTrait_.__traitInit.push(function (ip, port, bUseReal) {
+        _myTrait_.__traitInit.push(function (ip, port, realSocket) {
 
           // The socket ID must be told to the server side too
 
@@ -247,43 +205,16 @@
             _socketCnt = 1;
           }
 
-          debugger;
           var me = this;
-          if (bUseReal) {
-
-            this._realSocket = io.connect(ip + ':' + port, {});
-
-            this.socketId = this._realSocket.id || this.guid();
-
-            if (!_socketIndex[this.socketId]) {
-              _socketIndex[this.socketId] = _socketCnt++;
-            }
-
-            this._realSocket.on('disconnect', function () {
-              me._connected = false;
-              me.trigger('disconnect');
-            });
-
-            this._realSocket.on('connect', function () {
-              // Nothing real here... but
-              me._connected = true;
-              me.trigger('connect');
-            });
-
-            this.getEventNames().forEach(function (en) {
-              me.delegateToSocket(en);
-            });
-
-            return;
-          }
           var myId = this.guid();
+          this.socketId = myId;
 
-          if (!_socketIndex[myId]) {
-            _socketIndex[myId] = _socketCnt++;
+          if (!_socketIndex[this.socketId]) {
+            _socketIndex[this.socketId] = _socketCnt++;
           }
 
-          var openConnection = _tcpEmu(ip, port, 'openConnection', 'client');
-          var connection = _tcpEmu(ip, port, myId, 'client');
+          var openConnection = _tcpEmu(ip, port, 'openConnection', 'client', realSocket);
+          var connection = _tcpEmu(ip, port, myId, 'client', realSocket);
 
           this.socketId = myId;
 
@@ -419,7 +350,7 @@
 
         if (_myTrait_.__traitInit && !_myTrait_.hasOwnProperty('__traitInit')) _myTrait_.__traitInit = _myTrait_.__traitInit.slice();
         if (!_myTrait_.__traitInit) _myTrait_.__traitInit = [];
-        _myTrait_.__traitInit.push(function (ip, port, isReal) {
+        _myTrait_.__traitInit.push(function (ip, port, ioLib) {
           /*
           // This is how the server side should be operating...
           var io = require('socket.io')();
@@ -434,37 +365,47 @@
           }
 
           var me = this;
-          if (isReal) {
-
-            this._ip = 'real';
-            this._port = 'server';
-
-            this._real = true;
-            this._realSocket = require('socket.io')(ip);
-            this._realSocket.on('connection', function (socket) {
-
-              // create a socket wrapper for real socket interface...
-              var socketWrap = _serverSocketWrap(socket, me, true);
-
-              _clients[socket.id] = socketWrap;
-              me.trigger('connect', socketWrap);
-              me.trigger('connection', socketWrap);
-            });
-            return;
-          }
 
           var sockets = [];
 
           this._ip = ip;
           this._port = port;
 
-          var openConnection = _tcpEmu(ip, port, 'openConnection', 'server');
+          if (ioLib) {
+            ioLib.on('connection', function (socket) {
+
+              var openConnection = _tcpEmu(ip, port, 'openConnection', 'server', socket);
+
+              openConnection.on('serverMessage', function (o, v) {
+
+                if (v.socketId) {
+
+                  var newSocket = _tcpEmu(ip, port, v.socketId, 'server', socket);
+
+                  var socket = _serverSocketWrap(newSocket, me);
+                  _clients[v.socketId] = socket;
+                  me.trigger('connect', socket);
+
+                  if (socket.isConnected()) {
+
+                    newSocket.messageFrom({
+                      connected: true,
+                      socketId: v.socketId
+                    });
+                  }
+                }
+              });
+            });
+            return;
+          }
+
+          var openConnection = _tcpEmu(ip, port, 'openConnection', 'server', realSocket);
 
           openConnection.on('serverMessage', function (o, v) {
 
             if (v.socketId) {
               //console.log("Trying to send msg to client ", v);
-              var newSocket = _tcpEmu(ip, port, v.socketId, 'server');
+              var newSocket = _tcpEmu(ip, port, v.socketId, 'server', realSocket);
 
               var socket = _serverSocketWrap(newSocket, me);
               _clients[v.socketId] = socket;
@@ -617,14 +558,31 @@
 
         if (_myTrait_.__traitInit && !_myTrait_.hasOwnProperty('__traitInit')) _myTrait_.__traitInit = _myTrait_.__traitInit.slice();
         if (!_myTrait_.__traitInit) _myTrait_.__traitInit = [];
-        _myTrait_.__traitInit.push(function (server, port, socketId, role) {
+        _myTrait_.__traitInit.push(function (server, port, socketId, role, socket) {
 
           var me = this;
           this._server = server;
           this._port = port;
+          this._role = role;
           this._socketId = socketId;
           this._dbName = 'tcp://' + this._server + ':' + this._port + ':' + this._socketId;
 
+          if (socket) {
+            // socketId is the message we should be listening to with "real" sockets
+            // OR is it the "this._dbName" where the message goes into and out to...
+
+            this._socket = socket;
+            this.socketPump(role);
+          } else {
+            this.memoryPump(role);
+          }
+        });
+
+        /**
+         * @param float role
+         */
+        _myTrait_.memoryPump = function (role) {
+          var me = this;
           var bnTo = this._dbName + ':to';
           var bnFrom = this._dbName + ':from';
 
@@ -632,9 +590,7 @@
           if (!_msgBuffer[bnTo]) _msgBuffer[bnTo] = [];
           if (!_msgBuffer[bnFrom]) _msgBuffer[bnFrom] = [];
 
-          // Check for new messages to the client or server
           later().every(1 / 10, function () {
-
             if (role == 'server') {
 
               var list = _msgBuffer[bnTo].slice();
@@ -651,12 +607,18 @@
               });
             }
           });
-        });
+        };
 
         /**
          * @param float msg
          */
         _myTrait_.messageFrom = function (msg) {
+          var socket = this._socket;
+          if (socket) {
+            socket.emit(this._dbName, msg);
+            return;
+          }
+
           var bn = this._dbName + ':from';
           _msgBuffer[bn].push(msg);
         };
@@ -665,8 +627,53 @@
          * @param float msg
          */
         _myTrait_.messageTo = function (msg) {
+
+          var socket = this._socket;
+          if (socket) {
+            socket.emit(this._dbName, msg);
+            return;
+          }
+
           var bn = this._dbName + ':to';
           _msgBuffer[bn].push(msg);
+        };
+
+        /**
+         * @param float role
+         */
+        _myTrait_.socketPump = function (role) {
+          var me = this;
+
+          var socket = this._socket;
+          if (role == 'server') {
+            socket.on(this._dbName, function (data) {
+              me.trigger('serverMessage', data);
+            });
+          }
+          if (role == 'client') {
+            socket.on(this._dbName, function (data) {
+              me.trigger('clientMessage', data);
+            });
+          }
+          /*
+          later().every(1/60,
+          function() {
+          if(role=="server") {
+                     var list = _msgBuffer[bnTo].slice();
+            list.forEach( function(msg) {
+                 me.trigger("serverMessage", msg);
+                 _msgBuffer[bnTo].shift();
+            });
+                 }
+          if(role=="client") {
+            var list = _msgBuffer[bnFrom].slice();
+            list.forEach( function(msg) {
+                me.trigger("clientMessage", msg);
+                _msgBuffer[bnFrom].shift();
+            });   
+          }
+          });
+          */
         };
       })(this);
     };
@@ -930,35 +937,6 @@
         // Initialize static variables here...
 
         /**
-         * @param float en
-         */
-        _myTrait_.delegateToSocket = function (en) {
-          var me = this;
-          if (this._socket) {
-            if (!this._doneDelegates) this._doneDelegates = {};
-            if (this._doneDelegates[en]) return;
-            this._socket.on(en, function (data, fn) {
-              me.trigger(en, data, fn);
-            });
-            this._doneDelegates[en] = true;
-          }
-          return this;
-        };
-
-        /**
-         * @param float t
-         */
-        _myTrait_.getEventNames = function (t) {
-          if (!this._ev) this._ev = {};
-
-          var list = [];
-          for (var n in this._ev) {
-            if (this._ev.hasOwnProperty(n)) list.push(n);
-          }
-          return list;
-        };
-
-        /**
          * Binds event name to event function
          * @param string en  - Event name
          * @param float ef
@@ -968,8 +946,6 @@
           if (!this._ev[en]) this._ev[en] = [];
 
           this._ev[en].push(ef);
-
-          this.delegateToSocket(en);
 
           return this;
         };
@@ -1023,12 +999,6 @@
          * @param float t
          */
         _myTrait_.disconnect = function (t) {
-
-          if (this._socket) {
-            this._socket.disconnect();
-            return;
-          }
-
           var me = this;
           me._disconnected = true;
           me.leaveFromRooms();
@@ -1051,12 +1021,6 @@
          */
         _myTrait_.emit = function (name, value) {
 
-          if (this._socket) {
-            console.log('Socket emit ', name, value);
-            this._socket.emit(name, value);
-            return;
-          }
-
           this._tcp.messageFrom({
             name: name,
             data: value
@@ -1067,11 +1031,6 @@
          * @param float t
          */
         _myTrait_.getId = function (t) {
-
-          if (this._socket) {
-            return this._socket.id;
-          }
-
           return this._tcp._socketId;
         };
 
@@ -1098,24 +1057,6 @@
           var me = this;
           this._roomPrefix = server.getPrefix();
           this._server = server;
-          if (isReal) {
-            this._socket = tcpEmu;
-            this.broadcast = {
-              to: function to(room) {
-                return {
-                  emit: function emit(name, value) {
-                    console.log('Broadcast ' + room + ' ' + name + value);
-                    me._socket.broadcast.to(room).emit(name, value);
-                  }
-                };
-              }
-            };
-            this.getEventNames().forEach(function (en) {
-              me.delegateToSocket(en);
-            });
-            return;
-          }
-
           this._tcp = tcpEmu;
 
           var disconnected = false;
@@ -1187,12 +1128,6 @@
 
             _socketRooms[this.getId()].push(roomName);
           }
-
-          if (this._socket) {
-            console.log(this.getId() + ' joins ' + roomName);
-            this._socket.join(roomName);
-            return;
-          }
         };
 
         /**
@@ -1212,11 +1147,6 @@
 
             var i2 = _socketRooms[id].indexOf(roomName);
             if (i2 >= 0) _socketRooms[id].splice(i2, 1);
-          }
-
-          if (this._socket) {
-            this._socket.leave(roomName);
-            return;
           }
         };
 
