@@ -588,9 +588,7 @@
           this._dbName = 'tcp://' + this._server + ':' + this._port + ':' + this._socketId;
 
           if (socket) {
-            // socketId is the message we should be listening to with "real" sockets
-            // OR is it the "this._dbName" where the message goes into and out to...
-
+            // "this._dbName" is the message which is listened using socketPump
             this._socket = socket;
             this.socketPump(role);
           } else {
@@ -635,8 +633,8 @@
         _myTrait_.messageFrom = function (msg) {
           var socket = this._socket;
           if (socket) {
-            console.log('The socket should emit to ' + this._dbName);
-            console.log(msg);
+            //console.log("The socket should emit to "+this._dbName);
+            //console.log(msg);
             socket.emit(this._dbName, msg);
             return;
           }
@@ -677,25 +675,6 @@
               me.trigger('clientMessage', data);
             });
           }
-          /*
-          later().every(1/60,
-          function() {
-          if(role=="server") {
-                     var list = _msgBuffer[bnTo].slice();
-            list.forEach( function(msg) {
-                 me.trigger("serverMessage", msg);
-                 _msgBuffer[bnTo].shift();
-            });
-                 }
-          if(role=="client") {
-            var list = _msgBuffer[bnFrom].slice();
-            list.forEach( function(msg) {
-                me.trigger("clientMessage", msg);
-                _msgBuffer[bnFrom].shift();
-            });   
-          }
-          });
-          */
         };
       })(this);
     };
