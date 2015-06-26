@@ -41,10 +41,10 @@ http://jsfiddle.net/2jwf1czz/
 # The difference between in-browser and "real" modes
 
 At both client and server the socket is created using format
-
+```javascript
   var clientSocket = _clientSocket("localhost", 1234, <optionalRealSocket>);
   var serverSocket = _serverSocket("localhost", 1234, <optionalIoLib>);
-
+```
 The last parameter is optional and decides whether to use real socket.io library or not.
 
 At the server side you create the real connection like this:
