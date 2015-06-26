@@ -387,11 +387,13 @@
                   me.trigger('connect', socket);
 
                   if (socket.isConnected()) {
-
+                    console.log('Trying to send the connected message back to client');
                     newSocket.messageFrom({
                       connected: true,
                       socketId: v.socketId
                     });
+                  } else {
+                    console.log('The socket was not connected');
                   }
                 }
               });
@@ -615,6 +617,8 @@
         _myTrait_.messageFrom = function (msg) {
           var socket = this._socket;
           if (socket) {
+            console.log('The socket should emit to ' + this._dbName);
+            console.log(msg);
             socket.emit(this._dbName, msg);
             return;
           }
