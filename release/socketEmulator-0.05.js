@@ -231,13 +231,30 @@
             _socketIndex[this.socketId] = _socketCnt++;
           }
 
+          if (realSocket && !realSocket.connected) {
+            realSocket.on('connect', function () {
+              var openConnection = _tcpEmu(ip, port, 'openConnection', 'client', realSocket);
+              var connection = _tcpEmu(ip, port, myId, 'client', realSocket);
+
+              connection.on('clientMessage', function (o, v) {
+                if (v.connected) {
+                  me._socket = connection;
+                  me.trigger('connect', connection);
+                } else {
+                  me.trigger(v.name, v.data);
+                }
+              });
+              openConnection.messageTo({
+                socketId: myId
+              });
+            });
+            return;
+          }
+
           var openConnection = _tcpEmu(ip, port, 'openConnection', 'client', realSocket);
           var connection = _tcpEmu(ip, port, myId, 'client', realSocket);
 
-          this.socketId = myId;
-
           connection.on('clientMessage', function (o, v) {
-
             if (v.connected) {
               me._socket = connection;
               me.trigger('connect', connection);
@@ -245,7 +262,6 @@
               me.trigger(v.name, v.data);
             }
           });
-
           openConnection.messageTo({
             socketId: myId
           });
