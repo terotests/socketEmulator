@@ -28,7 +28,6 @@ Server side socket:
 - broadcast.to(`room`).emit(`name`, `data`)
 - disconnect()
 
-
 # In-browser Demos
 
 Example:
@@ -36,6 +35,48 @@ http://jsfiddle.net/8hyup32t/
 
 Example with two servers:
 http://jsfiddle.net/2jwf1czz/
+
+
+# The difference between in-browser and "real" modes
+
+At both client and server the socket is created using format
+
+  var clientSocket = _clientSocket("localhost", 1234, <optionalRealSocket>);
+  var serverSocket = _serverSocket("localhost", 1234, <optionalIoLib>);
+
+The last parameter is optional and decides whether to use real socket.io library or not.
+
+At the server side you create the real connection like this:
+
+```javascript
+var ioLib = require('socket.io')(http);
+var s = require("./socketEmulator-0.05.js");
+// virtual server listening port 1234
+var sock = s._serverSocket("localhost", 1234, ioLib);
+sock.on("connect", function(socket) {
+   //  and use the socket then...
+});
+```
+While the virtual setup only requires
+```javascript
+var s = require("./socketEmulator-0.05.js");
+// virtual server listening port 1234
+var sock = s._serverSocket("localhost", 1234);
+sock.on("connect", function(socket) {
+   //  and use the socket then...
+});
+```
+At the client the real setup require the socket as last parameter like this:
+
+```javascript
+    var realSocket = io.connect("http://<my_server_name>:7777");
+    var socket = _clientSocket("localhost", 5555, realSocket); 
+```
+
+While virtual setup can ignore the last parameter
+```javascript
+    var socket = _clientSocket("localhost", 5555); 
+```
 
 # Real node.js setup with multiple virtual servers at one server
 
@@ -83,17 +124,16 @@ after the server is connected, the virtual sockets can be created using _clientS
 
 ```javascript
     var realSocket = io.connect("http://<my_server_name>:7777");
-    realSocket.on("connect",
-        function() {
-            var socket1 = _clientSocket("localhost", 5555, realSocket); 
-            socket1.on("connect", function() {
-                socket1.emit("msg", "some data here");
-            });
-            var socket2 = _clientSocket("localhost", 1234, realSocket); 
-            socket2.on("connect", function() {
-                socket2.emit("msg", "some other data here");
-            });            
-        });
+
+    var socket1 = _clientSocket("localhost", 5555, realSocket); 
+    socket1.on("connect", function() {
+        socket1.emit("msg", "some data here");
+    });
+    var socket2 = _clientSocket("localhost", 1234, realSocket); 
+    socket2.on("connect", function() {
+        socket2.emit("msg", "some other data here");
+    });            
+
 ```
 
 After that you can use the socket1 and socket2 like normal socket.io sockets (with some limitations)
@@ -610,22 +650,37 @@ if(!_socketIndex[this.socketId]) {
     _socketIndex[this.socketId] = _socketCnt++;
 } 
 
+if(realSocket && !realSocket.connected) {
+    realSocket.on("connect", function() {
+        var openConnection = _tcpEmu(ip, port, "openConnection", "client", realSocket);
+        var connection = _tcpEmu(ip, port, myId, "client", realSocket);
+        
+        connection.on("clientMessage", function(o,v) {
+            if(v.connected) {
+                me._socket = connection;
+                me.trigger("connect", connection);
+            } else {
+                me.trigger(v.name, v.data);
+            }
+        })
+        openConnection.messageTo({
+            socketId : myId
+        })        
+    });
+    return;
+}
+
 var openConnection = _tcpEmu(ip, port, "openConnection", "client", realSocket);
 var connection = _tcpEmu(ip, port, myId, "client", realSocket);
 
-this.socketId = myId;
-
 connection.on("clientMessage", function(o,v) {
-    
     if(v.connected) {
         me._socket = connection;
         me.trigger("connect", connection);
     } else {
         me.trigger(v.name, v.data);
     }
-    
 })
-
 openConnection.messageTo({
     socketId : myId
 });
