@@ -112,6 +112,24 @@
         };
 
         /**
+         * @param float name
+         * @param float fn
+         */
+        _myTrait_.removeListener = function (name, fn) {
+          if (!this._ev) return;
+          if (!this._ev[name]) return;
+
+          var list = this._ev[name];
+
+          for (var i = 0; i < list.length; i++) {
+            if (list[i] == fn) {
+              list.splice(i, 1);
+              return;
+            }
+          }
+        };
+
+        /**
          * triggers event with data and optional function
          * @param string en
          * @param float data
