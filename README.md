@@ -1002,7 +1002,7 @@ if(socket) {
         
 ### <a name="_tcpEmu_memoryPump"></a>_tcpEmu::memoryPump(role)
 
-
+The memory storage transform layer implementation.
 ```javascript
 var me = this;
 var bnTo   = this._dbName+":to";
@@ -1035,7 +1035,7 @@ later().every(1/10,
 
 ### <a name="_tcpEmu_messageFrom"></a>_tcpEmu::messageFrom(msg)
 
-
+Message &quot;from&quot; refers to client getting message from the server. This is the function to be used when a server sends data back to the client.
 ```javascript
 var socket = this._socket;
 if(socket) {
@@ -1053,7 +1053,7 @@ _msgBuffer[bn].push( msg );
 
 ### <a name="_tcpEmu_messageTo"></a>_tcpEmu::messageTo(msg)
 
-
+Message &quot;to&quot; refers to client sending message to server. This is the function to be used when a client socket sends data to the server.
 ```javascript
 
 var socket = this._socket;
@@ -1069,7 +1069,7 @@ _msgBuffer[bn].push( msg );
 
 ### <a name="_tcpEmu_socketPump"></a>_tcpEmu::socketPump(role)
 
-
+The socket transform layer implementation.
 ```javascript
 var me = this;
 

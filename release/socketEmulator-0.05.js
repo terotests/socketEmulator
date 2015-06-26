@@ -613,6 +613,7 @@
         });
 
         /**
+         * The memory storage transform layer implementation.
          * @param float role
          */
         _myTrait_.memoryPump = function (role) {
@@ -644,6 +645,7 @@
         };
 
         /**
+         * Message &quot;from&quot; refers to client getting message from the server. This is the function to be used when a server sends data back to the client.
          * @param float msg
          */
         _myTrait_.messageFrom = function (msg) {
@@ -660,6 +662,7 @@
         };
 
         /**
+         * Message &quot;to&quot; refers to client sending message to server. This is the function to be used when a client socket sends data to the server.
          * @param float msg
          */
         _myTrait_.messageTo = function (msg) {
@@ -675,6 +678,7 @@
         };
 
         /**
+         * The socket transform layer implementation.
          * @param float role
          */
         _myTrait_.socketPump = function (role) {
