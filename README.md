@@ -1,6 +1,17 @@
 # Socket Emulator
 
-Emulates some of the socket.io behaviours so that at least some of the behaviours of the standard socket.io algorithms can be emulated in-browser.
+Emulates some of the socket.io behaviours so that at least some of the behaviours of the standard socket.io algorithms can be emulated in-browser. You can also simulate multiple clients and multiple servers during one browser session.
+
+Alternatively, you can switch to `real socket.io` connection simulate multiple servers or multiple clients on from one server or one client -setup.
+
+# Why?
+
+Algorithms considering multiple clients and multiple servers require some additional overhead in both configuring the servers and configuring the clients. The Socket.io library multiplexes all point-to-point connections through one socket, which is good for production purposes but bad for testing or simulation purposes.
+
+For example, if you have one browser sending requests to socket.io, all the requests will be interpreted as if they were coming from a single client application, even if you create multiple instances of the `socket object`.
+
+Furthermore, the requests originating from the server will all be sent back to all socket instances at the same browser session.
+
 
 Example:
 http://jsfiddle.net/8hyup32t/
