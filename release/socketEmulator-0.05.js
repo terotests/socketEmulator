@@ -382,11 +382,11 @@
 
                   var newSocket = _tcpEmu(ip, port, v.socketId, 'server', socket);
 
-                  var socket = _serverSocketWrap(newSocket, me);
-                  _clients[v.socketId] = socket;
-                  me.trigger('connect', socket);
+                  var wrappedSocket = _serverSocketWrap(newSocket, me);
+                  _clients[v.socketId] = wrappedSocket;
+                  me.trigger('connect', wrappedSocket);
 
-                  if (socket.isConnected()) {
+                  if (wrappedSocket.isConnected()) {
                     console.log('Trying to send the connected message back to client');
                     newSocket.messageFrom({
                       connected: true,
