@@ -45,7 +45,9 @@ At both client and server the socket is created using format
   var clientSocket = _clientSocket("localhost", 1234, <optionalRealSocket>);
   var serverSocket = _serverSocket("localhost", 1234, <optionalIoLib>);
 ```
-The last parameter is optional and decides whether to use real socket.io library or not.
+The last parameter is optional and decides whether to use real socket.io library or not. 
+
+The `localhost", 1234` has to be the same in both client and server, because it acts as a key which connects the client and server together and makes possible simulating several server and client connections with one in-browser or socket.io session.
 
 At the server side you create the real connection like this:
 
