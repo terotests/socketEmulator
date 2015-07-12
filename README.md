@@ -584,6 +584,7 @@ The class has following internal singleton variables:
 this._socket.messageTo( {
     disconnect : true
 });
+me._connected = false;
 ```
 
 ### <a name="_clientSocket_emit"></a>_clientSocket::emit(name, data, callBackFn)
@@ -661,6 +662,7 @@ if(realSocket && !realSocket.connected) {
         connection.on("clientMessage", function(o,v) {
             if(v.connected) {
                 me._socket = connection;
+                me._connected = true;
                 me.trigger("connect", connection);
             } else {
                 me.trigger(v.name, v.data);
@@ -679,6 +681,7 @@ var connection = _tcpEmu(ip, port, myId, "client", realSocket);
 connection.on("clientMessage", function(o,v) {
     if(v.connected) {
         me._socket = connection;
+        me._connected = true;
         me.trigger("connect", connection);
     } else {
         me.trigger(v.name, v.data);
@@ -764,6 +767,10 @@ if(!this._ev) this._ev = {};
 if(!this._ev[en]) this._ev[en] = [];
 
 this._ev[en].push(ef);
+
+if(en == "connect" && this._connected) {
+    ef(this._socket);
+}
 
 return this;
 ```

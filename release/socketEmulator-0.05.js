@@ -108,6 +108,10 @@
 
           this._ev[en].push(ef);
 
+          if (en == 'connect' && this._connected) {
+            ef(this._socket);
+          }
+
           return this;
         };
 
@@ -163,6 +167,7 @@
           this._socket.messageTo({
             disconnect: true
           });
+          me._connected = false;
         };
 
         /**
@@ -239,6 +244,7 @@
               connection.on('clientMessage', function (o, v) {
                 if (v.connected) {
                   me._socket = connection;
+                  me._connected = true;
                   me.trigger('connect', connection);
                 } else {
                   me.trigger(v.name, v.data);
@@ -257,6 +263,7 @@
           connection.on('clientMessage', function (o, v) {
             if (v.connected) {
               me._socket = connection;
+              me._connected = true;
               me.trigger('connect', connection);
             } else {
               me.trigger(v.name, v.data);
