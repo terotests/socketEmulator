@@ -620,7 +620,7 @@ this._socket.messageTo(obj);
 
 The enumerated socket, stating from 1
 ```javascript
-var myId = this.guid();
+var myId = this.socketId;
 
 if(!_socketIndex[myId]) {
     _socketIndex[myId] = _socketCnt++;

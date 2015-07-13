@@ -201,7 +201,7 @@
          * @param float t
          */
         _myTrait_.getEnum = function (t) {
-          var myId = this.guid();
+          var myId = this.socketId;
 
           if (!_socketIndex[myId]) {
             _socketIndex[myId] = _socketCnt++;
