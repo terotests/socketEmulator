@@ -1208,6 +1208,26 @@
           this._userId = userId;
           this._roles = roles;
         };
+
+        /**
+         * @param string roomName
+         */
+        _myTrait_.to = function (roomName) {
+
+          var realRoomName = this._roomPrefix + ':' + roomName;
+
+          return {
+            emit: function emit(name, data) {
+              console.log(' emit called ');
+              if (_rooms && _rooms[realRoomName]) {
+                _rooms[realRoomName].forEach(function (socket) {
+                  console.log(' emit with ', name, data);
+                  socket.emit(name, data);
+                });
+              }
+            }
+          };
+        };
       })(this);
     };
 

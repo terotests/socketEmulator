@@ -451,6 +451,7 @@ The following is automatically created class documentation.
 - [leaveFromRooms](README.md#_serverSocketWrap_leaveFromRooms)
 - [removeListener](README.md#_serverSocketWrap_removeListener)
 - [setAuthInfo](README.md#_serverSocketWrap_setAuthInfo)
+- [to](README.md#_serverSocketWrap_to)
 
 
 
@@ -1602,6 +1603,26 @@ Each socket can have and in many implementations must have some userID and role,
 
 this._userId = userId;
 this._roles = roles;
+```
+
+### <a name="_serverSocketWrap_to"></a>_serverSocketWrap::to(roomName)
+
+
+```javascript
+
+var realRoomName = this._roomPrefix+":"+roomName;
+
+return {
+    emit : function(name, data) {
+        console.log(" emit called ");
+        if(_rooms && _rooms[realRoomName]) {
+            _rooms[realRoomName].forEach( function(socket) {
+                console.log(" emit with ", name, data);
+                socket.emit( name, data );
+            })        
+        }
+    }
+}
 ```
 
 
