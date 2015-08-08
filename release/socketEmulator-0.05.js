@@ -236,12 +236,15 @@
             _socketIndex[this.socketId] = _socketCnt++;
           }
 
-          if (realSocket && !realSocket.connected) {
-            realSocket.on('connect', function () {
+          if (realSocket) {
+
+            var whenConnected = function whenConnected() {
+              console.log('whenConnected called');
               var openConnection = _tcpEmu(ip, port, 'openConnection', 'client', realSocket);
               var connection = _tcpEmu(ip, port, myId, 'client', realSocket);
 
               connection.on('clientMessage', function (o, v) {
+                console.log('clientMessage received ', v);
                 if (v.connected) {
                   me._socket = connection;
                   me._connected = true;
@@ -250,10 +253,21 @@
                   me.trigger(v.name, v.data);
                 }
               });
+              console.log('Sending message to _tcpEmu with real socket ');
               openConnection.messageTo({
                 socketId: myId
               });
-            });
+            };
+
+            if (realSocket.connected) {
+              console.log('realSocket was connected');
+              whenConnected();
+            } else {
+              console.log('realSocket was not connected');
+              realSocket.on('connect', whenConnected);
+            }
+
+            // this._connected
             return;
           }
 
@@ -415,13 +429,23 @@
           if (ioLib) {
             ioLib.on('connection', function (socket) {
 
+              console.log('socket.io got connection');
+              console.log('ip, port', ip, port);
+
               var openConnection = _tcpEmu(ip, port, 'openConnection', 'server', socket);
+
+              var myRealSocket;
+              socket.on('disconnect', function () {
+                console.log('ioLib at server sent disconnect');
+                if (myRealSocket) myRealSocket.close();
+              });
 
               openConnection.on('serverMessage', function (o, v) {
 
                 if (v.socketId) {
 
                   var newSocket = _tcpEmu(ip, port, v.socketId, 'server', socket);
+                  myRealSocket = newSocket;
 
                   var wrappedSocket = _serverSocketWrap(newSocket, me);
                   _clients[v.socketId] = wrappedSocket;
@@ -596,8 +620,16 @@
         var _channelIndex;
         var _rootData;
         var _msgBuffer;
+        var _log;
 
         // Initialize static variables here...
+
+        /**
+         * @param float t
+         */
+        _myTrait_.close = function (t) {
+          this.trigger('disconnect');
+        };
 
         if (_myTrait_.__traitInit && !_myTrait_.hasOwnProperty('__traitInit')) _myTrait_.__traitInit = _myTrait_.__traitInit.slice();
         if (!_myTrait_.__traitInit) _myTrait_.__traitInit = [];
@@ -609,6 +641,17 @@
           this._role = role;
           this._socketId = socketId;
           this._dbName = 'tcp://' + this._server + ':' + this._port + ':' + this._socketId;
+
+          if (!_log) {
+            if (typeof lokki != 'undefined') {
+              _log = lokki('tcp');
+            } else {
+              _log = {
+                log: function log() {},
+                error: function error() {}
+              };
+            }
+          }
 
           if (socket) {
             // "this._dbName" is the message which is listened using socketPump
@@ -632,11 +675,11 @@
           if (!_msgBuffer[bnTo]) _msgBuffer[bnTo] = [];
           if (!_msgBuffer[bnFrom]) _msgBuffer[bnFrom] = [];
 
-          later().every(1 / 10, function () {
+          var _mfn = function _mfn() {
             if (role == 'server') {
-
               var list = _msgBuffer[bnTo].slice();
               list.forEach(function (msg) {
+                _log.log('server got message ', msg);
                 me.trigger('serverMessage', msg);
                 _msgBuffer[bnTo].shift();
               });
@@ -648,7 +691,8 @@
                 _msgBuffer[bnFrom].shift();
               });
             }
-          });
+          };
+          later().every(1 / 10, _mfn);
         };
 
         /**
@@ -676,6 +720,8 @@
 
           var socket = this._socket;
           if (socket) {
+
+            _log.log('_tcpEmu, emitting ', this._dbName, msg);
             socket.emit(this._dbName, msg);
             return;
           }
@@ -693,7 +739,10 @@
 
           var socket = this._socket;
           if (role == 'server') {
+
+            _log.log('initializing the socketPump for server');
             socket.on(this._dbName, function (data) {
+              _log.log('socketPump', me._dbName);
               me.trigger('serverMessage', data);
             });
           }
@@ -1029,16 +1078,24 @@
         _myTrait_.disconnect = function (t) {
           var me = this;
           me._disconnected = true;
+
+          console.log('_serverSocketWrap disconnecting');
+
           me.leaveFromRooms();
+          console.log('_serverSocketWrap left from rooms');
           me.trigger('disconnect', me);
           // Then remove the socket from the listeners...
           me._disconnected = true;
 
+          // TODO: check if the code below could be defined in a cross-platform way
+          /*
           var dbName = this._tcp._dbName;
-
-          _localDB().clearDatabases(function (d) {
-            if (d.name == dbName) return true;
+          if(typeof(_localDB) != "undefined") {
+          _localDB().clearDatabases( function(d) {
+          if(d.name==dbName) return true;
           });
+          }
+          */
 
           return;
         };
@@ -1086,6 +1143,11 @@
           this._roomPrefix = server.getPrefix();
           this._server = server;
           this._tcp = tcpEmu;
+
+          tcpEmu.on('disconnect', function () {
+            console.log('tcpEmu sent disconnect');
+            me.disconnect();
+          });
 
           var disconnected = false;
           tcpEmu.on('serverMessage', function (o, v) {
